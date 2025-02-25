@@ -116,8 +116,8 @@ export default function FeaturedProducts() {
         ))}
       </Swiper>
 
-      <div className="flex justify-between mt-10">
-        <div className="flex gap-4 bg-pink-200 px-4 py-3 rounded-md">
+      <div className="grid grid-cols-1 md:grid-cold-2 lg:grid-cols-3 gap-3 px-2 mt-10">
+        <div className="flex justify-center items-center gap-4 bg-pink-200 px-4 py-3 rounded-md">
           <div className="flex justify-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
@@ -130,7 +130,7 @@ export default function FeaturedProducts() {
             />
           </div>
         </div>
-        <div className="flex gap-4 bg-pink-200 px-5 py-3 rounded-md">
+        <div className="flex justify-center items-center gap-4 bg-pink-200 px-5 py-3 rounded-md">
           <div className="flex justify-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
@@ -143,7 +143,7 @@ export default function FeaturedProducts() {
             />
           </div>
         </div>
-        <div className="flex gap-4 bg-pink-200 px-5 py-3 rounded-md">
+        <div className="flex justify-center items-center gap-4 bg-pink-200 px-5 py-3 rounded-md">
           <div className="flex justify-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
