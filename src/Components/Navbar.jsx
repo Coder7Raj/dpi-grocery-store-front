@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchCart = () => {
+      const storedCart = localStorage.getItem("cart");
+      setCartItems(storedCart ? JSON.parse(storedCart) : []);
+    };
+
+    fetchCart();
+
+    window.addEventListener("storage", fetchCart);
+    window.addEventListener("cartUpdated", fetchCart);
+
+    return () => {
+      window.removeEventListener("storage", fetchCart);
+      window.removeEventListener("cartUpdated", fetchCart);
+    };
+  }, []);
   return (
     <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-md md:max-w-3xl lg:max-w-7xl mx-auto">
       <div className="flex-1">
@@ -44,17 +63,20 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl lg:text-2xl md:text-2xl px-0">
+          <NavLink
+            to="/"
+            className="btn btn-ghost text-xl lg:text-2xl md:text-2xl px-0"
+          >
             GrooFi
-          </a>
+          </NavLink>
         </div>
         <div className="navbar-center hidden md:flex lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 1</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a>Item 3</a>
+              <NavLink to="/cartItems">cartItems</NavLink>
             </li>
             <li>
               <a>Item 1</a>
@@ -83,7 +105,9 @@ export default function Navbar() {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <span className="badge badge-sm indicator-item">
+                {cartItems?.length}
+              </span>
             </div>
           </div>
           <div
@@ -91,7 +115,9 @@ export default function Navbar() {
             className="card card-compact dropdown-content bg-black z-[1] mt-48 w-52 shadow"
           >
             <div className="card-body">
-              <span className="text-lg font-bold">8 Items</span>
+              <span className="text-lg font-bold">
+                {cartItems?.length} Items
+              </span>
               <span className="text-info">Subtotal: $999</span>
               <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
