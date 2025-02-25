@@ -92,7 +92,7 @@ export default function FeaturedProducts() {
   ];
 
   return (
-    <div className="px-6 mt-20">
+    <div className="mt-20">
       <h1 className="text-3xl font-bold mb-8 text-white text-start">
         Our Featured Products
       </h1>

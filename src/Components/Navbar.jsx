@@ -44,7 +44,9 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl px-0">GrooFi </a>
+          <a className="btn btn-ghost text-xl lg:text-2xl md:text-2xl px-0">
+            GrooFi
+          </a>
         </div>
         <div className="navbar-center hidden md:flex lg:flex">
           <ul className="menu menu-horizontal px-1">
