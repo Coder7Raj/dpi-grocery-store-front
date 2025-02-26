@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logo-wev.png";
 
 export default function Navbar() {
   const [cartItems, setCartItems] = useState([]);
@@ -50,10 +51,10 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a>Item 3</a>
+                <NavLink to="/cartItems">cartItems</NavLink>
               </li>
               <li>
                 <a>Item 1</a>
@@ -67,6 +68,11 @@ export default function Navbar() {
             to="/"
             className="btn btn-ghost text-xl lg:text-2xl md:text-2xl px-0"
           >
+            <img
+              className="w-6 md:w-10 lg:w-10 px-0 rounded-full"
+              src={logo}
+              alt="logo"
+            />
             GrooFi
           </NavLink>
         </div>

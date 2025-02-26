@@ -53,7 +53,7 @@ export default function CartItems() {
               className="btn border border-green-600"
               onClick={() => setIsModalOpen(true)}
             >
-              Proceed to Pay for your items
+              Proceed to Pay
             </button>
           </div>
         </ul>
