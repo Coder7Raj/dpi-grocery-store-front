@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 
 export default function CartItems() {
-  const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
-    }
-  }, []);
+  const fetchCart = async () => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  };
+
+  const { data: cartItems = [], refetch } = useQuery({
+    queryKey: ["cart"],
+    queryFn: fetchCart,
+    refetchOnWindowFocus: false,
+  });
 
   const removeFromCart = (index) => {
     const updatedCart = cartItems.filter((_, i) => i !== index);
-    setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event("cartUpdated"));
+    refetch();
   };
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
