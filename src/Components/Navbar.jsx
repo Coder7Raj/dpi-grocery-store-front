@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
 export default function Navbar() {
-  const [cartItems, setCartItems] = useState([]);
+  const fetchCart = async () => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  };
 
-  useEffect(() => {
-    const fetchCart = () => {
-      const storedCart = localStorage.getItem("cart");
-      setCartItems(storedCart ? JSON.parse(storedCart) : []);
-    };
-
-    fetchCart();
-
-    window.addEventListener("storage", fetchCart);
-    window.addEventListener("cartUpdated", fetchCart);
-
-    return () => {
-      window.removeEventListener("storage", fetchCart);
-      window.removeEventListener("cartUpdated", fetchCart);
-    };
-  }, []);
+  const { data: cartItems = [] } = useQuery({
+    queryKey: ["cart"],
+    queryFn: fetchCart,
+  });
   return (
     <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-md md:max-w-3xl lg:max-w-7xl mx-auto">
       <div className="flex-1">
