@@ -1,19 +1,22 @@
+import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { IoCartOutline } from "react-icons/io5";
 
 export default function PopularItems({ item }) {
   const { name, category, image, price, description } = item;
-
+  const queryClient = useQueryClient();
   const addCart = () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    const existingItem = cart.find((cartItem) => cartItem.name === name);
+    // const existingItem = cart.find((cartItem) => cartItem.name === name);
 
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      cart.push({ ...item, quantity: 1 });
-    }
+    // if (existingItem) {
+    //   existingItem.quantity += 1;
+    // } else {
+    //   cart.push({ ...item, quantity: 1 });
+    // }
+
+    queryClient.invalidateQueries(["cart"]);
 
     localStorage.setItem("cart", JSON.stringify(cart));
     alert(`${name} added to cart!`);
