@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   const fetchCart = async () => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   };
@@ -12,8 +14,14 @@ export default function Navbar() {
     queryKey: ["cart"],
     queryFn: fetchCart,
   });
+  //
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  const viewCart = () => {
+    navigate("/cartItems");
+  };
   return (
-    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-md md:max-w-3xl lg:max-w-7xl mx-auto">
+    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-md md:max-w-3xl lg:max-w-[80%] mx-auto">
       <div className="flex-1">
         <div className="navbar-start flex">
           <div className="dropdown">
@@ -48,10 +56,10 @@ export default function Navbar() {
                 <NavLink to="/cartItems">cartItems</NavLink>
               </li>
               <li>
-                <a>Item 1</a>
+                <NavLink to="/about_us">AboutUs</NavLink>
               </li>
               <li>
-                <a>Item 3</a>
+                <NavLink to="/mega_deals">MegaDeals</NavLink>
               </li>
             </ul>
           </div>
@@ -76,10 +84,10 @@ export default function Navbar() {
               <NavLink to="/cartItems">cartItems</NavLink>
             </li>
             <li>
-              <a>Item 1</a>
+              <NavLink to="/about_us">AboutUs</NavLink>
             </li>
             <li>
-              <a>Item 3</a>
+              <NavLink to="/mega_deals">MegaDeals</NavLink>
             </li>
           </ul>
         </div>
@@ -113,11 +121,16 @@ export default function Navbar() {
           >
             <div className="card-body">
               <span className="text-lg font-bold">
-                {cartItems?.length} Items
+                {cartItems?.length} Items Added
               </span>
-              <span className="text-info">Subtotal: $999</span>
+              <span className="text-info">Total: ${totalAmount}</span>
               <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+                <button
+                  onClick={viewCart}
+                  className="btn btn-primary btn-block"
+                >
+                  View cart
+                </button>
               </div>
             </div>
           </div>
