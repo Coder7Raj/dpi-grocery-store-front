@@ -84,27 +84,35 @@ export default function BestDeals() {
     },
   ];
   return (
-    <div className="mt-20 mb-4">
+    <div className="mt-20 mb-4 px-1">
       <h1 className="text-3xl font-bold text-start text-white mb-10">
         Our Best Deals
       </h1>
-      <div className="flex items-center justify-center">
-        <div
+      <div className="md:flex lg:flex items-center h-[400px]">
+        {/* <div
           style={{
             backgroundImage:
               "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKdYN3R-BvNAN7YwhwvJUG_mIQbMAet2l2HkJcjVFXmPUFk2qYodlkM0JB1N3Oxi8ghSk&usqp=CAU')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="h-80 w-[25%] px-6 py-4 space-y-10"
-        >
-          <p className="text-white">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
-            iusto repellendus nostrum nesciunt fuga repellat.
-          </p>
-          <button className="btn">Shop Now!</button>
+          className="h-full w-full md:w-auto lg:w-[25%] lg:flex px-10 py-10 space-y-10"
+        > */}
+        <div className="relative h-full w-full md:w-auto lg:w-[60%] lg:flex space-y-10">
+          <img
+            className="h-full w-full"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKdYN3R-BvNAN7YwhwvJUG_mIQbMAet2l2HkJcjVFXmPUFk2qYodlkM0JB1N3Oxi8ghSk&usqp=CAU"
+            alt=""
+          />
+          <div className="absolute top-0 left-0 flex-col gap-2">
+            <p className="text-white">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Asperiores iusto repellendus nostrum nesciunt fuga repellat.
+            </p>
+            <button className="btn">Shop Now!</button>
+          </div>
         </div>
-        <div className="flex w-[75%] mx-20">
+        <div className="flex h-full w-full mx-2">
           <Swiper
             effect={"coverflow"}
             grabCursor={true}
@@ -119,7 +127,7 @@ export default function BestDeals() {
             }}
             pagination={true}
             modules={[EffectCoverflow, Pagination]}
-            className="mySwiper h-[350px]"
+            className="mySwiper flex h-full"
           >
             {items?.map((item) => (
               <SwiperSlide key={item.id}>
