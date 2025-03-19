@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 
 export default function Root() {
   return (
-    <div className="max-w-[90%] md:max-w-3xl lg:max-w-full mx-auto">
+    <div className="max-w-full md:max-w-3xl lg:max-w-[80%] mx-auto">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

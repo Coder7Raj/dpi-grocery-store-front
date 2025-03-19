@@ -21,7 +21,7 @@ export default function Navbar() {
     navigate("/cartItems");
   };
   return (
-    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-[90%] md:max-w-3xl lg:max-w-full mx-auto">
+    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-full md:max-w-3xl lg:max-w-[80%] mx-auto">
       <div className="flex-1">
         <div className="navbar-start flex">
           <div className="dropdown">

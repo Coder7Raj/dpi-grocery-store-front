@@ -116,41 +116,41 @@ export default function FeaturedProducts() {
         ))}
       </Swiper>
 
-      <div className="grid grid-cols-1 md:grid-cold-2 lg:grid-cols-3 gap-3 px-2 mt-10">
-        <div className="flex justify-center items-center gap-4 bg-pink-200 px-4 py-3 rounded-md">
-          <div className="flex justify-center flex-col gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+        <div className="flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div>
+          <div className="w-[70%]">
             <img
-              className="w-60 h-60 rounded-md"
+              className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
               alt=""
             />
           </div>
         </div>
-        <div className="flex justify-center items-center gap-4 bg-pink-200 px-5 py-3 rounded-md">
-          <div className="flex justify-center flex-col gap-4">
+        <div className="flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div>
+          <div className="w-[70%]">
             <img
-              className="w-60 h-60 rounded-md"
+              className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
               alt=""
             />
           </div>
         </div>
-        <div className="flex justify-center items-center gap-4 bg-pink-200 px-5 py-3 rounded-md">
-          <div className="flex justify-center flex-col gap-4">
+        <div className="hidden lg:flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div>
+          <div className="w-[70%]">
             <img
-              className="w-60 h-60 rounded-md"
+              className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
               alt=""
             />

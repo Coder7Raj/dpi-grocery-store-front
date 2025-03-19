@@ -84,35 +84,26 @@ export default function BestDeals() {
     },
   ];
   return (
-    <div className="mt-20 mb-4 px-1">
+    <div className="mt-20 pb-96 md:pb-0 lg:pb-0 px-1">
       <h1 className="text-3xl font-bold text-start text-white mb-10">
         Our Best Deals
       </h1>
       <div className="md:flex lg:flex items-center h-[400px]">
-        {/* <div
-          style={{
-            backgroundImage:
-              "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKdYN3R-BvNAN7YwhwvJUG_mIQbMAet2l2HkJcjVFXmPUFk2qYodlkM0JB1N3Oxi8ghSk&usqp=CAU')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="h-full w-full md:w-auto lg:w-[25%] lg:flex px-10 py-10 space-y-10"
-        > */}
-        <div className="relative h-full w-full md:w-auto lg:w-[60%] lg:flex space-y-10">
+        <div className="relative h-full w-full md:w-[70%] lg:w-[60%] lg:flex space-y-10">
           <img
             className="h-full w-full"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKdYN3R-BvNAN7YwhwvJUG_mIQbMAet2l2HkJcjVFXmPUFk2qYodlkM0JB1N3Oxi8ghSk&usqp=CAU"
             alt=""
           />
-          <div className="absolute top-0 left-0 flex-col gap-2">
-            <p className="text-white">
+          <div className="absolute top-20 left-20 bg-slate-400 bg-opacity-30 text-opacity-50 flex-col space-y-10 rounded-md">
+            <p className="text-black">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Asperiores iusto repellendus nostrum nesciunt fuga repellat.
             </p>
-            <button className="btn">Shop Now!</button>
+            <button className="btn">Shop 4 Now!</button>
           </div>
         </div>
-        <div className="flex h-full w-full mx-2">
+        <div className="flex h-full w-full mx-1">
           <Swiper
             effect={"coverflow"}
             grabCursor={true}
