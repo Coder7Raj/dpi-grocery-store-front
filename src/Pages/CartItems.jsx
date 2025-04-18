@@ -21,6 +21,7 @@ export default function CartItems() {
   };
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const leastAmount = parseFloat(totalAmount.toFixed(3));
 
   return (
     <div className="pt-20 min-h-screen p-4">
@@ -77,7 +78,7 @@ export default function CartItems() {
               ))}
             </ul>
             <hr className="my-2" />
-            <p className="text-lg font-bold">Total: ${totalAmount}</p>
+            <p className="text-lg font-bold">Total: ${leastAmount}</p>
             <div className="flex justify-end space-x-2 mt-4">
               <button
                 className="btn border border-red-500 text-red-500"

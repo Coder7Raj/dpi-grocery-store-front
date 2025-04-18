@@ -16,12 +16,13 @@ export default function Navbar() {
   });
   //
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const leastAmount = parseFloat(totalAmount.toFixed(3));
 
   const viewCart = () => {
     navigate("/cartItems");
   };
   return (
-    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-full md:max-w-3xl lg:max-w-[80%] mx-auto">
+    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-full md:max-w-3xl lg:max-w-[95%] mx-auto">
       <div className="flex-1">
         <div className="navbar-start flex">
           <div className="dropdown">
@@ -123,7 +124,7 @@ export default function Navbar() {
               <span className="text-lg font-bold">
                 {cartItems?.length} Items Added
               </span>
-              <span className="text-info">Total: ${totalAmount}</span>
+              <span className="text-info">Total: ${leastAmount}</span>
               <div className="card-actions">
                 <button
                   onClick={viewCart}

@@ -39,7 +39,7 @@ export default function PopularItems({ item }) {
         />
       </div>
       <div className="p-4 flex-1">
-        <p className="text-sm">{name}</p>
+        <p className="text-sm text-green-500">{name}</p>
         <p className="text-md font-semibold">{description}</p>
       </div>
       <div className="p-4 flex justify-between items-center gap-4">
