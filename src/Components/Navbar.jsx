@@ -60,7 +60,7 @@ export default function Navbar() {
                 <NavLink to="/about_us">AboutUs</NavLink>
               </li>
               <li>
-                <NavLink to="/mega_deals">MegaDeals</NavLink>
+                <NavLink to="/our_blogs">Blog's</NavLink>
               </li>
             </ul>
           </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
               <NavLink to="/about_us">AboutUs</NavLink>
             </li>
             <li>
-              <NavLink to="/mega_deals">MegaDeals</NavLink>
+              <NavLink to="/our_blogs">Blog's</NavLink>
             </li>
           </ul>
         </div>
