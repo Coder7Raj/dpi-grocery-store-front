@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
@@ -21,6 +22,12 @@ export default function Navbar() {
   const viewCart = () => {
     navigate("/cartItems");
   };
+
+  //  user info
+  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+  console.log(userInfo);
+  console.log(userInfo?.image);
+
   return (
     <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-full md:max-w-3xl lg:max-w-[95%] mx-auto">
       <div className="flex-1">
@@ -90,6 +97,12 @@ export default function Navbar() {
             <li>
               <NavLink to="/our_blogs">Blog's</NavLink>
             </li>
+            <li>
+              <NavLink to="/user_login">login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/user_register">register</NavLink>
+            </li>
           </ul>
         </div>
       </div>
@@ -143,10 +156,14 @@ export default function Navbar() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+              {userInfo ? (
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://i.postimg.cc/g2Wj7pt7/dreamer-stylish-macho-man-gray-suit-hat-glasses-posed-roof-627829-7653.jpg"
+                />
+              ) : (
+                <LuCircleUser />
+              )}
             </div>
           </div>
           <ul
