@@ -9,10 +9,19 @@ import img5 from "../assets/banner/05.png";
 import img6 from "../assets/banner/06.png";
 
 export default function Banner() {
+  const images = [img1, img2, img3, img4, img5, img6];
   return (
     <div>
       <Carousel>
-        <div className="flex justify-center xl:h-[500px] 2xl:h-[700px]">
+        {images.map((img, index) => (
+          <div
+            key={index}
+            className="flex justify-center xl:h-[500px] 2xl:h-[700px]"
+          >
+            <img src={img} />
+          </div>
+        ))}
+        {/* <div className="flex justify-center xl:h-[500px] 2xl:h-[700px]">
           <img src={img1} />
         </div>
         <div className="flex justify-center xl:h-[500px] 2xl:h-[700px]">
@@ -29,7 +38,7 @@ export default function Banner() {
         </div>
         <div className="flex justify-center xl:h-[500px] 2xl:h-[700px]">
           <img src={img6} />
-        </div>
+        </div> */}
       </Carousel>
     </div>
   );
