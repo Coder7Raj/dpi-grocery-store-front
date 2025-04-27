@@ -1,4 +1,5 @@
 import React from "react";
+import MegaDeals from "../Pages/MegaDeals";
 import Banner from "./Banner";
 import BestDeals from "./BestDeals";
 import FeaturedProducts from "./FeaturedProducts";
@@ -12,6 +13,7 @@ export default function Home() {
       <FeaturedProducts></FeaturedProducts>
       <PopularProducts></PopularProducts>
       <BestDeals></BestDeals>
+      <MegaDeals></MegaDeals>
       <Subscribe></Subscribe>
     </div>
   );
