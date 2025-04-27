@@ -25,11 +25,12 @@ export default function Navbar() {
 
   //  user info
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  console.log(userInfo);
-  console.log(userInfo?.image);
 
   return (
-    <div className="navbar fixed z-10 bg-black bg-opacity-35 text-white max-w-full md:max-w-3xl lg:max-w-[95%] mx-auto">
+    <div
+      className="navbar fixed z-10 bg-black bg-opacity-35 text-white min-w-full sm:min-w-md md:min-w-lg lg:min-w-xl xl:min-w-2xl 2xl:min-w-3xl mx-auto
+"
+    >
       <div className="flex-1">
         <div className="navbar-start flex">
           <div className="dropdown">
@@ -112,7 +113,7 @@ export default function Navbar() {
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-[60%] w-[60%]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -124,7 +125,7 @@ export default function Navbar() {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm indicator-item">
+              <span className="badge badge-sm mr-2 indicator-item">
                 {cartItems?.length}
               </span>
             </div>
@@ -162,7 +163,9 @@ export default function Navbar() {
                   src="https://i.postimg.cc/g2Wj7pt7/dreamer-stylish-macho-man-gray-suit-hat-glasses-posed-roof-627829-7653.jpg"
                 />
               ) : (
-                <LuCircleUser />
+                <div className="h-[80%] w-[80%] m-auto">
+                  <LuCircleUser className="h-full w-full" />
+                </div>
               )}
             </div>
           </div>

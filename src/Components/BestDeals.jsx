@@ -86,7 +86,7 @@ export default function BestDeals() {
   return (
     <div className="mt-20 pb-96 md:pb-0 lg:pb-0 px-1">
       <h1 className="text-3xl font-bold text-start text-white mb-10">
-        Our Best Deals
+        Our Top Item's
       </h1>
       <div className="md:flex lg:flex items-center h-[400px]">
         <div className="relative h-full w-full md:w-[70%] lg:w-[60%] lg:flex space-y-10">
