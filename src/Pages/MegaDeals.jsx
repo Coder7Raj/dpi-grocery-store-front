@@ -193,7 +193,7 @@ export default function MegaDeals() {
   const fifthFive = items.slice(15, 20); // id 11-15
 
   return (
-    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 space-y-10 px-16">
+    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-2 space-y-10 px-16">
       {/* First Section */}
       <div>
         <h1 className="text-2xl font-bold mb-4">Trending Products</h1>
