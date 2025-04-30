@@ -7,6 +7,7 @@ import Blogs from "../Pages/Blogs";
 import CartItems from "../Pages/CartItems";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,15 +20,24 @@ const router = createBrowserRouter([
       },
       {
         path: "cartItems",
-        element: <CartItems></CartItems>,
+        element: (
+          <PrivateRoute>
+            <CartItems></CartItems>
+          </PrivateRoute>
+        ),
       },
+
       {
         path: "about_us",
         element: <AboutUs></AboutUs>,
       },
       {
         path: "our_blogs",
-        element: <Blogs></Blogs>,
+        element: (
+          <PrivateRoute>
+            <Blogs></Blogs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "user_login",

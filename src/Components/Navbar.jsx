@@ -98,12 +98,12 @@ export default function Navbar() {
             <li>
               <NavLink to="/our_blogs">Blog's</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/user_login">login</NavLink>
             </li>
             <li>
               <NavLink to="/user_register">register</NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
