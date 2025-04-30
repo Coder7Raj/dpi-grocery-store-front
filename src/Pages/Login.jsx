@@ -1,13 +1,23 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
+  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+
+  const userLogin = (e) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+    if (userInfo?.password && password) {
+      <Navigate to={"/"}></Navigate>;
+    }
+  };
   return (
     <div className="w-full min-h-screen m-auto flex items-center justify-center bg-green-50 px-4">
       <div className="bg-white shadow-2xl rounded-xl w-full max-w-md p-8">
         <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
           Login to Groofi
         </h2>
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={userLogin}>
           <input
             type="email"
             placeholder="Email"

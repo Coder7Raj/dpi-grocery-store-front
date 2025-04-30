@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 export default function Register() {
   const registerUser = (e) => {
@@ -20,7 +21,8 @@ export default function Register() {
 
     localStorage.setItem("registeredUser", JSON.stringify(user_data));
     console.log("registeredUser", user_data);
-    data.reset();
+    // data.reset();
+    <Navigate to={"/"}></Navigate>;
   };
   return (
     <div className="min-h-screen w-full m-auto flex items-center justify-center bg-green-50 px-4">
