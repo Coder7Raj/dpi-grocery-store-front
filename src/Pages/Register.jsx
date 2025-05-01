@@ -1,28 +1,39 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("registeredUser"));
+  const userEmail = user?.userEmail;
+  console.log(userEmail);
+
+  // registered user
   const registerUser = (e) => {
     e.preventDefault();
 
     const data = e.target;
     const name = data.name.value;
     const image = data.image.value;
-    const email = data.email.value;
+    const userEmail = data.email.value;
     const password = data.password.value;
     // console.log(name, email, password);
 
     const user_data = {
       name: name,
       image: image,
-      email: email,
+      userEmail: userEmail,
       password: password,
     };
 
     localStorage.setItem("registeredUser", JSON.stringify(user_data));
     console.log("registeredUser", user_data);
-    // data.reset();
-    <Navigate to={"/"}></Navigate>;
+    data.reset();
+
+    //
+    if (userEmail) {
+      navigate("/");
+    }
   };
   return (
     <div className="min-h-screen w-full m-auto flex items-center justify-center bg-green-50 px-4">
@@ -68,7 +79,7 @@ export default function Register() {
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
           Already have an account?
-          <Link to={"/user_login"} className="text-green-600 hover:underline">
+          <Link to="/user_login" className="text-green-600 hover:underline">
             Login
           </Link>
         </p>

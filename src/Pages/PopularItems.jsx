@@ -7,7 +7,8 @@ export default function PopularItems({ item }) {
   const { name, image, price, description } = item;
 
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  const userEmail = userInfo?.email;
+  const userEmail = userInfo?.userEmail;
+  console.log(userEmail);
 
   // if (!userEmail) {
   //   alert("You must be logged in to add items to the cart.");
@@ -27,8 +28,9 @@ export default function PopularItems({ item }) {
   // adding items to cart
   const addCart = async () => {
     // checking user is logged in or not
-    if (!userEmail) {
-      // alert("You must be logged in to add items to the cart.");
+    if (userEmail) {
+      return;
+    } else {
       toast.warn("You must be logged in !", {
         position: "top-center",
         autoClose: 5000,
@@ -36,7 +38,6 @@ export default function PopularItems({ item }) {
         pauseOnHover: true,
         theme: "colored",
       });
-      return;
     }
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];

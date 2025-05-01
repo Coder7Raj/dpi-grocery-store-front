@@ -1,14 +1,16 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
 
   const userLogin = (e) => {
     e.preventDefault();
     const password = e.target.password.value;
     if (userInfo?.password && password) {
-      <Navigate to={"/"}></Navigate>;
+      navigate("/");
     }
   };
   return (
@@ -39,10 +41,7 @@ export default function Login() {
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
           Don’t have an account?
-          <Link
-            to={"/user_register"}
-            className="text-green-600 hover:underline"
-          >
+          <Link to="/user_register" className="text-green-600 hover:underline">
             Register
           </Link>
         </p>
