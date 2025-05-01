@@ -1,27 +1,55 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { IoCartOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 export default function PopularItems({ item }) {
   const { name, image, price, description } = item;
+
+  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+  const userEmail = userInfo?.email;
+
+  // if (!userEmail) {
+  //   alert("You must be logged in to add items to the cart.");
+  //   return;
+  // }
 
   const fetchCart = async () => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   };
 
+  // using tanstack query to refetch
   const { data: cartItems = [], refetch } = useQuery({
     queryKey: ["cart"],
     queryFn: fetchCart,
   });
 
+  // adding items to cart
   const addCart = async () => {
+    // checking user is logged in or not
+    if (!userEmail) {
+      // alert("You must be logged in to add items to the cart.");
+      toast.warn("You must be logged in !", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: false,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+      return;
+    }
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    const existingItem = cart.find((cartItem) => cartItem.name === name);
+    const existingItem = cart.find(
+      (cartItem) => cartItem.name === name && cartItem.userEmail === userEmail
+    );
+
+    // checking existing item in cart
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      cart.push({ ...item, quantity: 1 });
+      cart.push({ ...item, quantity: 1, userEmail });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));

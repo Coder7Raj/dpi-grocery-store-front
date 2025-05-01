@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export default function Register() {
   const registerUser = (e) => {
@@ -67,10 +67,10 @@ export default function Register() {
           </button>
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
-          Already have an account?{" "}
-          <a href="/user_login" className="text-green-600 hover:underline">
+          Already have an account?
+          <Link to={"/user_login"} className="text-green-600 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

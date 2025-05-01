@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export default function Login() {
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
@@ -38,10 +38,13 @@ export default function Login() {
           </button>
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
-          Don’t have an account?{" "}
-          <a href="/user_register" className="text-green-600 hover:underline">
+          Don’t have an account?
+          <Link
+            to={"/user_register"}
+            className="text-green-600 hover:underline"
+          >
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>

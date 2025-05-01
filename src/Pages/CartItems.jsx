@@ -5,10 +5,22 @@ export default function CartItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCart = async () => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
+    const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+    const userEmail = userInfo?.userEmail;
+
+    if (!userEmail) return [];
+
+    const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Return only items that match the logged-in user
+    return allCartItems.filter((item) => item.userEmail === userEmail);
   };
 
-  const { data: cartItems = [], refetch } = useQuery({
+  const {
+    data: cartItems = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["cart"],
     queryFn: fetchCart,
     refetchOnWindowFocus: false,
@@ -26,7 +38,9 @@ export default function CartItems() {
   return (
     <div className="pt-20 min-h-screen p-4">
       <h2 className="text-2xl text-white font-bold mb-4">Cart Items</h2>
-      {cartItems.length > 0 ? (
+      {isLoading ? (
+        <span className="loading loading-bars loading-lg"></span>
+      ) : cartItems.length > 0 ? (
         <ul className="space-y-4">
           {cartItems.map((item, index) => (
             <li key={index} className="bg-white p-4 rounded-md shadow">
