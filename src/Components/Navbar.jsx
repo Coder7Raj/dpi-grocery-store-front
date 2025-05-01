@@ -158,10 +158,7 @@ export default function Navbar() {
           >
             <div className="w-10 rounded-full">
               {userInfo ? (
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://i.postimg.cc/g2Wj7pt7/dreamer-stylish-macho-man-gray-suit-hat-glasses-posed-roof-627829-7653.jpg"
-                />
+                <img alt="user image" src={userInfo?.image} />
               ) : (
                 <div className="h-[80%] w-[80%] m-auto">
                   <LuCircleUser className="h-full w-full" />
@@ -174,10 +171,13 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
+              {/* <a className="justify-between">
                 Profile
                 <span className="badge">New</span>
-              </a>
+              </a> */}
+              <NavLink to="/user_profile" className="justify-between">
+                Profile
+              </NavLink>
             </li>
             <li>
               <a>Settings</a>

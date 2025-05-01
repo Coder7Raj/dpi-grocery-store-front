@@ -8,7 +8,6 @@ export default function PopularItems({ item }) {
 
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
   const userEmail = userInfo?.userEmail;
-  console.log(userEmail);
 
   // if (!userEmail) {
   //   alert("You must be logged in to add items to the cart.");
