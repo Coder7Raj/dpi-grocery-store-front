@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Register() {
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("registeredUser"));
+  // const user = JSON.parse(localStorage.getItem("registeredUser"));
   // const userEmail = user?.userEmail;
   // console.log(userEmail);
 
@@ -17,16 +17,16 @@ export default function Register() {
     const image = data.image.value;
     const userEmail = data.email.value;
     const password = data.password.value;
-    // console.log(name, email, password);
     const user_data = {
       name: name,
       image: image,
       userEmail: userEmail,
       password: password,
     };
+    console.log(user_data);
 
     localStorage.setItem("registeredUser", JSON.stringify(user_data));
-    localStorage.setItem("isLoggedIn", "false");
+    localStorage.setItem("isLoggedIn", "true");
     // console.log("registeredUser", user_data);
     // data.reset();
 

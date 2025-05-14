@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -8,9 +9,27 @@ export default function Login() {
 
   const userLogin = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
     const password = e.target.password.value;
-    if (userInfo?.password && password) {
+
+    if (userInfo?.userEmail === email && userInfo?.password === password) {
+      localStorage.setItem("isLoggedIn", "true");
+      toast.success("Successfully logged in!", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: false,
+        pauseOnHover: true,
+        theme: "colored",
+      });
       navigate("/");
+    } else {
+      toast.warn("Something went wrong!", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: false,
+        pauseOnHover: true,
+        theme: "colored",
+      });
     }
   };
   return (
@@ -21,12 +40,14 @@ export default function Login() {
         </h2>
         <form className="space-y-5" onSubmit={userLogin}>
           <input
+            name="email"
             type="email"
             placeholder="Email"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 outline-none"
             required
           />
           <input
+            name="password"
             type="password"
             placeholder="Password"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 outline-none"
@@ -40,7 +61,7 @@ export default function Login() {
           </button>
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
-          Don’t have an account?
+          Don't have an account?
           <Link to="/user_register" className="text-green-600 hover:underline">
             Register
           </Link>

@@ -4,7 +4,7 @@ import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
-export default function Navbar({ setCart, setCurrentUser }) {
+export default function Navbar() {
   const navigate = useNavigate();
 
   const fetchCart = async () => {
@@ -24,7 +24,11 @@ export default function Navbar({ setCart, setCurrentUser }) {
   };
 
   //  user data
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const userInfo = isLoggedIn
+    ? JSON.parse(localStorage.getItem("registeredUser"))
+    : null;
+  // const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
   // const cartData = JSON.parse(localStorage.getItem("cart"));
 
   // state
@@ -32,7 +36,11 @@ export default function Navbar({ setCart, setCurrentUser }) {
   // const [cart, setCart] = useState(cartData);
 
   // logged out user
-  const handleUserLogout = () => {};
+  const handleUserLogout = () => {
+    localStorage.setItem("isLoggedIn", "false");
+
+    navigate("/");
+  };
 
   return (
     <div
@@ -109,12 +117,12 @@ export default function Navbar({ setCart, setCurrentUser }) {
             <li>
               <NavLink to="/our_blogs">Blog's</NavLink>
             </li>
-            {/* <li>
+            <li>
               <NavLink to="/user_login">login</NavLink>
             </li>
             <li>
               <NavLink to="/user_register">register</NavLink>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
@@ -168,7 +176,7 @@ export default function Navbar({ setCart, setCurrentUser }) {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              {userInfo ? (
+              {isLoggedIn ? (
                 <img alt="user image" src={userInfo?.image} />
               ) : (
                 <div className="h-[80%] w-[80%] m-auto">
