@@ -28,7 +28,7 @@ export default function PopularItems({ item }) {
   const addCart = async () => {
     // checking user is logged in or not
     if (userEmail) {
-      return;
+      // return;
     } else {
       toast.warn("You must be logged in !", {
         position: "top-center",
@@ -48,6 +48,13 @@ export default function PopularItems({ item }) {
     // checking existing item in cart
     if (existingItem) {
       existingItem.quantity += 1;
+      toast.warn("Product already in cart!", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: false,
+        pauseOnHover: true,
+        theme: "colored",
+      });
     } else {
       cart.push({ ...item, quantity: 1, userEmail });
     }
@@ -59,7 +66,7 @@ export default function PopularItems({ item }) {
 
   return (
     <div className="flex flex-col gap-2 bg-gray-100 rounded-md">
-      <div className="rounded-md self-center pb-4">
+      <div className="h-full w-full rounded-md self-center pb-4">
         <img
           className="h-60 rounded-md w-full object-cover object-center"
           src={image}

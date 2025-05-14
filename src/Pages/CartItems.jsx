@@ -42,7 +42,7 @@ export default function CartItems() {
         <span className="loading loading-bars loading-lg"></span>
       ) : cartItems.length > 0 ? (
         <ul className="space-y-4">
-          {cartItems.map((item, index) => (
+          {cartItems?.map((item, index) => (
             <li key={index} className="bg-white p-4 rounded-md shadow">
               <div className="flex justify-between items-center gap-4">
                 <div className="flex gap-4 items-center">

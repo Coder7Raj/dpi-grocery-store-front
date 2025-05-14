@@ -4,7 +4,7 @@ import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
-export default function Navbar() {
+export default function Navbar({ setCart, setCurrentUser }) {
   const navigate = useNavigate();
 
   const fetchCart = async () => {
@@ -23,8 +23,16 @@ export default function Navbar() {
     navigate("/cartItems");
   };
 
-  //  user info
+  //  user data
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+  // const cartData = JSON.parse(localStorage.getItem("cart"));
+
+  // state
+  // const [currentUser, setCurrentUser] = useState(userInfo);
+  // const [cart, setCart] = useState(cartData);
+
+  // logged out user
+  const handleUserLogout = () => {};
 
   return (
     <div
@@ -88,6 +96,9 @@ export default function Navbar() {
           <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dshy"> All Products</NavLink>
             </li>
             <li>
               <NavLink to="/cartItems">cartItems</NavLink>
@@ -171,10 +182,6 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              {/* <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a> */}
               <NavLink to="/user_profile" className="justify-between">
                 Profile
               </NavLink>
@@ -183,7 +190,7 @@ export default function Navbar() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={handleUserLogout}>Logout</button>
             </li>
           </ul>
         </div>
