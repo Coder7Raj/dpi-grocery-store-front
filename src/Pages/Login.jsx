@@ -5,15 +5,22 @@ import { toast } from "react-toastify";
 export default function Login() {
   const navigate = useNavigate();
 
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+  const userInfo = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
   const userLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if (userInfo?.userEmail === email && userInfo?.password === password) {
+    // Find the user with matching email and password
+    const matchedUser = userInfo.find(
+      (user) => user.userEmail === email && user.password === password
+    );
+    if (matchedUser) {
+      localStorage.setItem("registeredUser", JSON.stringify(matchedUser));
       localStorage.setItem("isLoggedIn", "true");
+      console.log("first");
+
       toast.success("Successfully logged in!", {
         position: "top-center",
         autoClose: 5000,
@@ -21,8 +28,11 @@ export default function Login() {
         pauseOnHover: true,
         theme: "colored",
       });
+
       navigate("/");
     } else {
+      console.log("second");
+
       toast.warn("Something went wrong!", {
         position: "top-center",
         autoClose: 5000,
@@ -32,6 +42,7 @@ export default function Login() {
       });
     }
   };
+
   return (
     <div className="w-full min-h-screen m-auto flex items-center justify-center bg-green-50 px-4">
       <div className="bg-white shadow-2xl rounded-xl w-full max-w-md p-8">

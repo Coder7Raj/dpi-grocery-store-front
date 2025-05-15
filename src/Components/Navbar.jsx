@@ -28,8 +28,6 @@ export default function Navbar() {
   const userInfo = isLoggedIn
     ? JSON.parse(localStorage.getItem("registeredUser"))
     : null;
-  console.log(userInfo);
-  console.log(userInfo?.image);
 
   // logged out user
   const handleUserLogout = () => {
