@@ -6,13 +6,15 @@ import { toast } from "react-toastify";
 export default function PopularItems({ item }) {
   const { name, image, price, description } = item;
 
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  const userEmail = userInfo?.userEmail;
+  // cart data
+  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // if (!userEmail) {
-  //   alert("You must be logged in to add items to the cart.");
-  //   return;
-  // }
+  // logged in user data
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const userInfo = isLoggedIn
+    ? JSON.parse(localStorage.getItem("registeredUser"))
+    : null;
+  const email = userInfo?.userEmail;
 
   const fetchCart = async () => {
     return JSON.parse(localStorage.getItem("cart")) || [];
@@ -24,30 +26,22 @@ export default function PopularItems({ item }) {
     queryFn: fetchCart,
   });
 
-  // adding items to cart
   const addCart = async () => {
-    // checking user is logged in or not
-    if (userEmail) {
-      // return;
-    } else {
-      toast.warn("You must be logged in !", {
+    if (!email) {
+      toast.warn("Login first!", {
         position: "top-center",
         autoClose: 5000,
         closeOnClick: false,
         pauseOnHover: true,
         theme: "colored",
       });
+      return;
     }
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // checking the item is exist or not
+    const exist = cartData.find((cartItem) => cartItem.id === item.id);
 
-    const existingItem = cart.find(
-      (cartItem) => cartItem.name === name && cartItem.userEmail === userEmail
-    );
-
-    // checking existing item in cart
-    if (existingItem) {
-      existingItem.quantity += 1;
+    if (exist) {
       toast.warn("Product already in cart!", {
         position: "top-center",
         autoClose: 5000,
@@ -55,13 +49,20 @@ export default function PopularItems({ item }) {
         pauseOnHover: true,
         theme: "colored",
       });
-    } else {
-      cart.push({ ...item, quantity: 1, userEmail });
+      return;
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-
+    // adding data
+    cartData.push({ ...item, quantity: 1, email });
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    // refetching
     await refetch();
+
+    toast.success("Product added to cart!", {
+      position: "top-center",
+      autoClose: 3000,
+      theme: "colored",
+    });
   };
 
   return (

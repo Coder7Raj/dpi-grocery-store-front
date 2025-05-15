@@ -28,12 +28,8 @@ export default function Navbar() {
   const userInfo = isLoggedIn
     ? JSON.parse(localStorage.getItem("registeredUser"))
     : null;
-  // const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  // const cartData = JSON.parse(localStorage.getItem("cart"));
-
-  // state
-  // const [currentUser, setCurrentUser] = useState(userInfo);
-  // const [cart, setCart] = useState(cartData);
+  console.log(userInfo);
+  console.log(userInfo?.image);
 
   // logged out user
   const handleUserLogout = () => {

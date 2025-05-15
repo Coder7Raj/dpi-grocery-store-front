@@ -4,10 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Register() {
   const navigate = useNavigate();
 
-  // const user = JSON.parse(localStorage.getItem("registeredUser"));
-  // const userEmail = user?.userEmail;
-  // console.log(userEmail);
-
   // registered user
   const registerUser = (e) => {
     e.preventDefault();
@@ -17,24 +13,34 @@ export default function Register() {
     const image = data.image.value;
     const userEmail = data.email.value;
     const password = data.password.value;
-    const user_data = {
-      name: name,
-      image: image,
-      userEmail: userEmail,
-      password: password,
+
+    const newUser = {
+      name,
+      image,
+      userEmail,
+      password,
     };
-    console.log(user_data);
 
-    localStorage.setItem("registeredUser", JSON.stringify(user_data));
+    const existingUsers =
+      JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
+    const alreadyExists = existingUsers.find(
+      (user) => user.userEmail === userEmail
+    );
+    if (alreadyExists) {
+      alert("User with this email already exists!");
+      return;
+    }
+
+    // add new user
+    existingUsers.push(newUser);
+    localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
     localStorage.setItem("isLoggedIn", "true");
-    // console.log("registeredUser", user_data);
-    // data.reset();
+    localStorage.setItem("registeredUser", JSON.stringify(newUser));
 
-    //
-    // if (userEmail) {
     navigate("/");
-    // }
   };
+
   return (
     <div className="min-h-screen w-full m-auto flex items-center justify-center bg-green-50 px-4">
       <div className="bg-white shadow-2xl rounded-xl w-full max-w-md p-8">
