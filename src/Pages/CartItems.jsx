@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function CartItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -8,12 +8,10 @@ export default function CartItems() {
     const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
     const userEmail = userInfo?.userEmail;
 
-    if (!userEmail) return [];
-
     const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
     // Return only items that match the logged-in user
-    return allCartItems.filter((item) => item.userEmail === userEmail);
+    return allCartItems.filter((item) => item.email === userEmail);
   };
 
   const {

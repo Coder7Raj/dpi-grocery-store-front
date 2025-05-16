@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
