@@ -4,6 +4,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
 export default function Navbar() {
+  // const [mail, setMail] = useState();
+  // console.log(mail);
+
   const navigate = useNavigate();
 
   const fetchCart = async () => {
@@ -15,19 +18,32 @@ export default function Navbar() {
     queryFn: fetchCart,
   });
   //
-  const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
-  const leastAmount = parseFloat(totalAmount.toFixed(3));
+  // const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
+  // const leastAmount = parseFloat(totalAmount.toFixed(3));
 
   const viewCart = () => {
     navigate("/cartItems");
   };
 
-  //  user data
+  //  user data _&_ logged in or not
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const userInfo = isLoggedIn
     ? JSON.parse(localStorage.getItem("registeredUser"))
     : null;
 
+  // Get all cart items
+  const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Filter cart items for the logged-in user only
+  const filteredCartItems = allCartItems.filter(
+    (item) => item.email === userInfo?.userEmail
+  );
+
+  const totalAmount = filteredCartItems.reduce(
+    (sum, item) => sum + item.price,
+    0
+  );
+  const leastAmount = parseFloat(totalAmount.toFixed(3));
   // logged out user
   const handleUserLogout = () => {
     localStorage.setItem("isLoggedIn", "false");
@@ -138,7 +154,9 @@ export default function Navbar() {
                 />
               </svg>
               <span className="badge badge-sm mr-2 indicator-item">
-                {cartItems?.length}
+                {isLoggedIn && filteredCartItems
+                  ? filteredCartItems?.length
+                  : 0}
               </span>
             </div>
           </div>
@@ -148,9 +166,14 @@ export default function Navbar() {
           >
             <div className="card-body">
               <span className="text-lg font-bold">
-                {cartItems?.length} Items Added
+                {isLoggedIn && filteredCartItems
+                  ? filteredCartItems?.length
+                  : 0}
+                Items Added
               </span>
-              <span className="text-info">Total: ${leastAmount}</span>
+              <span className="text-info">
+                Total: ${isLoggedIn && filteredCartItems ? leastAmount : 0}
+              </span>
               <div className="card-actions">
                 <button
                   onClick={viewCart}
