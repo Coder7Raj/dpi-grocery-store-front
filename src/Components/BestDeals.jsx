@@ -1,7 +1,10 @@
 import Marquee from "react-fast-marquee";
+import { useNavigate } from "react-router-dom";
 import Deals from "./Deals";
 
 export default function BestDeals() {
+  const navigate = useNavigate();
+  //
   const items = [
     {
       id: 1,
@@ -188,6 +191,11 @@ export default function BestDeals() {
     },
   ];
 
+  //
+  const toAllPro = () => {
+    navigate("/all_products");
+  };
+
   return (
     <div className="mt-20 px-1">
       <h1 className="text-2xl md:text-3xl font-bold text-black mb-4">
@@ -204,10 +212,13 @@ export default function BestDeals() {
           />
           <div className="h-full w-full flex flex-col text-center justify-center items-center absolute top-0 left-0 bg-slate-300 backdrop-blur-sm bg-opacity-30 text-opacity-90 font-semibold text-xl text-black space-y-4 rounded-md">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Asperiores iusto repellendus nostrum nesciunt fuga repellat.
+              We have our best Deals for anyone, anywhere, anytime. We love our
+              customer, We respect our customer.
             </p>
-            <button className="bg-green-600 text-lg text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+            <button
+              onClick={toAllPro}
+              className="bg-green-600 text-lg text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+            >
               Shop Now!
             </button>
           </div>

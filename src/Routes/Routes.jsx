@@ -6,6 +6,7 @@ import Root from "../Components/Root";
 import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
 import CartItems from "../Pages/CartItems";
+import Error from "../Pages/Error";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
