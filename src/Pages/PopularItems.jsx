@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
@@ -14,6 +13,7 @@ export default function PopularItems({ item }) {
   const userInfo = isLoggedIn
     ? JSON.parse(localStorage.getItem("registeredUser"))
     : null;
+
   const email = userInfo?.userEmail;
 
   const fetchCart = async () => {
@@ -39,7 +39,9 @@ export default function PopularItems({ item }) {
     }
 
     // checking the item is exist or not
-    const exist = cartData.find((cartItem) => cartItem.id === item.id);
+    const exist = cartData.find(
+      (cartItem) => cartItem?.id === item?.id && cartItem?.email === email
+    );
 
     if (exist) {
       toast.warn("Product already in cart!", {
