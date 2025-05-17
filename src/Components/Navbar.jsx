@@ -50,6 +50,10 @@ export default function Navbar() {
 
     navigate("/");
   };
+  // login user
+  const userLogin = () => {
+    navigate("/user_login");
+  };
 
   return (
     <div
@@ -87,7 +91,10 @@ export default function Navbar() {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/cartItems">cartItems</NavLink>
+                <NavLink to="/all_products"> AllProducts</NavLink>
+              </li>
+              <li>
+                <NavLink to="/cartItems">CartItems</NavLink>
               </li>
               <li>
                 <NavLink to="/about_us">AboutUs</NavLink>
@@ -115,22 +122,16 @@ export default function Navbar() {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/dshy"> All Products</NavLink>
+              <NavLink to="/all_products"> AllProducts</NavLink>
             </li>
             <li>
-              <NavLink to="/cartItems">cartItems</NavLink>
+              <NavLink to="/cartItems">CartItems</NavLink>
             </li>
             <li>
               <NavLink to="/about_us">AboutUs</NavLink>
             </li>
             <li>
               <NavLink to="/our_blogs">Blog's</NavLink>
-            </li>
-            <li>
-              <NavLink to="/user_login">login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/user_register">register</NavLink>
             </li>
           </ul>
         </div>
@@ -162,14 +163,14 @@ export default function Navbar() {
           </div>
           <div
             tabIndex={0}
-            className="card card-compact dropdown-content bg-black z-[1] mt-48 w-52 shadow"
+            className="card card-compact dropdown-content bg-green-50 text-black z-40 mt-48 w-52 shadow"
           >
             <div className="card-body">
               <span className="text-lg font-bold">
                 {isLoggedIn && filteredCartItems
                   ? filteredCartItems?.length
                   : 0}
-                Items Added
+                _Items Added
               </span>
               <span className="text-info">
                 Total: ${isLoggedIn && filteredCartItems ? leastAmount : 0}
@@ -177,9 +178,9 @@ export default function Navbar() {
               <div className="card-actions">
                 <button
                   onClick={viewCart}
-                  className="btn btn-primary btn-block"
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
                 >
-                  View cart
+                  View Cart
                 </button>
               </div>
             </div>
@@ -203,7 +204,7 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-green-50 space-y-2 text-black rounded-box z-40 mt-3 w-52 p-2 shadow"
           >
             <li>
               <NavLink to="/user_profile" className="justify-between">
@@ -211,10 +212,21 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <button onClick={handleUserLogout}>Logout</button>
+              {isLoggedIn ? (
+                <button
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                  onClick={handleUserLogout}
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                  onClick={userLogin}
+                >
+                  Login
+                </button>
+              )}
             </li>
           </ul>
         </div>

@@ -205,7 +205,7 @@ export default function MegaDeals() {
               key={item.id}
               className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <Link>
+              <Link to={"/all_products"}>
                 <img
                   src={item.image}
                   alt={item.name}
@@ -232,7 +232,7 @@ export default function MegaDeals() {
               key={item.id}
               className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <Link>
+              <Link to={"/all_products"}>
                 <img
                   src={item.image}
                   alt={item.name}
@@ -257,7 +257,7 @@ export default function MegaDeals() {
               key={item.id}
               className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <Link>
+              <Link to={"/all_products"}>
                 <img
                   src={item.image}
                   alt={item.name}
@@ -281,7 +281,7 @@ export default function MegaDeals() {
               key={item.id}
               className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <Link>
+              <Link to={"/all_products"}>
                 <img
                   src={item.image}
                   alt={item.name}

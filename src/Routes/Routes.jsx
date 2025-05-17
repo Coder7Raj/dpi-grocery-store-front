@@ -1,5 +1,5 @@
-import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AllProducts from "../Components/AllProducts";
 import Home from "../Components/Home";
 import Profile from "../Components/Profile";
 import Root from "../Components/Root";
@@ -45,6 +45,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "all_products",
+        element: (
+          <PrivateRoute>
+            <AllProducts></AllProducts>
           </PrivateRoute>
         ),
       },
