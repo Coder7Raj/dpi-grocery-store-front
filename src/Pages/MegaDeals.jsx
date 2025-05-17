@@ -191,7 +191,7 @@ export default function MegaDeals() {
   const fifthFive = items.slice(15, 20); // id 11-15
 
   return (
-    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-7 px-1">
+    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-7 pt-[400px] md:pt-0 px-1">
       {/* First Section */}
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-2xl flex items-start justify-start font-bold mb-4">
@@ -265,7 +265,7 @@ export default function MegaDeals() {
         </div>
       </div>
       {/* Fourth Section */}
-      <div className="flex flex-col justify-center items-center">
+      <div className="lg:hidden xl:flex flex flex-col justify-center items-center">
         <h1 className="text-2xl text-start font-bold mb-4">Best Products</h1>
         <div className="grid grid-cols-1 gap-4">
           {fifthFive.map((item) => (

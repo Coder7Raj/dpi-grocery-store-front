@@ -91,7 +91,7 @@ export default function FeaturedProducts() {
   ];
 
   return (
-    <div>
+    <div className="mt-10">
       <h1 className="text-2xl lg:text-3xl font-bold mb-2 text-black text-start">
         Our Featured Products
       </h1>
@@ -117,11 +117,11 @@ export default function FeaturedProducts() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 px-1">
         <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
-          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
+          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div className="w-[70%]">
+          <div className="w-[60%] h-full">
             <img
               className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
@@ -130,11 +130,11 @@ export default function FeaturedProducts() {
           </div>
         </div>
         <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
-          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
+          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div className="w-[70%]">
+          <div className="w-[60%] h-full">
             <img
               className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
@@ -142,12 +142,12 @@ export default function FeaturedProducts() {
             />
           </div>
         </div>
-        <div className="hidden lg:flex justify-center shadow-md hover:shadow-lg shadow-slate-300 items-center gap-1 bg-pink-200 rounded-md">
-          <div className="w-[30%] flex justify-center items-center flex-col gap-4">
+        <div className="hidden lg:flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
+          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
           </div>
-          <div className="w-[70%]">
+          <div className="w-[60%] h-full">
             <img
               className="w-full h-full rounded-md"
               src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"

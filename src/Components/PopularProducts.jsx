@@ -1,4 +1,3 @@
-import React from "react";
 import PopularItems from "../Pages/PopularItems";
 
 export default function PopularProducts() {
@@ -81,7 +80,7 @@ export default function PopularProducts() {
   return (
     <div className="mt-20 mb-4">
       <div>
-        <h1 className="text-3xl font-bold text-start mb-10 text-white">
+        <h1 className="text-2xl md:text-3xl font-bold text-start mb-4 text-black">
           Popular Products
         </h1>
       </div>
