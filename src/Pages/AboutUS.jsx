@@ -1,8 +1,8 @@
 export default function AboutUs() {
   return (
-    <div className="bg-white text-gray-800">
+    <div className="text-gray-800">
       {/* Hero */}
-      <section className="bg-green-100 py-16 px-6 text-center">
+      <section className="py-16 px-6 text-center">
         <h1 className="text-4xl font-bold mb-4 text-green-700">About Groofi</h1>
         <p className="text-lg max-w-3xl mx-auto">
           Welcome to <span className="font-semibold">Groofi</span> – your go-to
@@ -33,7 +33,7 @@ export default function AboutUs() {
       </section>
 
       {/* Our Mission */}
-      <section className="bg-green-50 py-12 px-6 text-center">
+      <section className="py-12 px-6 text-center">
         <h2 className="text-3xl font-semibold mb-4 text-green-700">
           Our Mission
         </h2>
@@ -81,9 +81,9 @@ export default function AboutUs() {
       </section>
 
       {/* Footer Quote */}
-      <section className="bg-green-100 py-8 px-6 text-center">
+      <section className="py-8 px-6 text-center">
         <p className="italic text-green-700 text-lg">
-          "At Groofi, we don’t just deliver food – we deliver joy and
+          "At Groofi, we don't just deliver food - we deliver joy and
           freshness."
         </p>
       </section>

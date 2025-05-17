@@ -116,45 +116,65 @@ export default function FeaturedProducts() {
       </Swiper>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 px-1">
-        <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
-          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
-            <h1 className="text-black">Hello World</h1>
-            <button className="btn">Shop Now!</button>
-          </div>
-          <div className="w-[60%] h-full">
-            <img
-              className="w-full h-full rounded-md"
-              src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
-          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
-            <h1 className="text-black">Hello World</h1>
-            <button className="btn">Shop Now!</button>
-          </div>
-          <div className="w-[60%] h-full">
-            <img
-              className="w-full h-full rounded-md"
-              src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
-              alt=""
-            />
+        {/*  */}
+        <div className="relative w-full h-[300px] shadow-md hover:shadow-lg shadow-slate-300 bg-pink-200 rounded-md overflow-hidden">
+          <img
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://themepanthers.com/wp/nest/d1/wp-content/uploads/2022/05/banner-1.png"
+            alt=""
+          />
+
+          <div className="absolute left-0 top-0 h-full flex items-center pl-10 z-10">
+            <div className="w-[45%] flex flex-col gap-4 p-6 rounded-lg">
+              <h1 className="text-black text-2xl font-bold">
+                Everyday fresh & clean with our products
+              </h1>
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                Shop Now!
+              </button>
+            </div>
           </div>
         </div>
-        <div className="hidden lg:flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
-          <div className="w-[40%] flex justify-center items-center flex-col gap-4">
-            <h1 className="text-black">Hello World</h1>
-            <button className="btn">Shop Now!</button>
-          </div>
-          <div className="w-[60%] h-full">
-            <img
-              className="w-full h-full rounded-md"
-              src="https://t4.ftcdn.net/jpg/02/35/42/23/360_F_235422372_f5WdBridmfhzRXzcMr5kKKZYfbJYoqvK.jpg"
-              alt=""
-            />
+
+        {/*  */}
+        <div className="relative w-full h-[300px] shadow-md hover:shadow-lg shadow-slate-300 bg-pink-200 rounded-md overflow-hidden">
+          <img
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://themepanthers.com/wp/nest/d1/wp-content/uploads/2022/05/banner-2.png"
+            alt=""
+          />
+
+          <div className="absolute left-0 top-0 h-full flex items-center pl-10 z-10">
+            <div className="w-[45%] flex flex-col gap-4 p-6 rounded-lg">
+              <h1 className="text-black text-2xl font-bold">
+                Make your Lunch Healthy and Easy
+              </h1>
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                Shop Now!
+              </button>
+            </div>
           </div>
         </div>
+        {/*  */}
+        <div className="relative w-full h-[300px] shadow-md hover:shadow-lg shadow-slate-300 bg-pink-200 rounded-md overflow-hidden">
+          <img
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://themepanthers.com/wp/nest/d1/wp-content/uploads/2022/05/banner-3.png"
+            alt=""
+          />
+
+          <div className="absolute left-0 top-0 h-full flex items-center pl-10 z-10">
+            <div className="w-[45%] flex flex-col gap-4 p-6 rounded-lg">
+              <h1 className="text-black text-2xl font-bold">
+                The best Organic Prducts Online
+              </h1>
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                Shop Now!
+              </button>
+            </div>
+          </div>
+        </div>
+        {/*  */}
       </div>
     </div>
   );

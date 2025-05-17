@@ -77,7 +77,7 @@ export default function Blogs() {
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] py-16 px-6">
+    <div className="min-h-screen py-16 px-6">
       <h1 className="text-4xl font-bold text-center text-green-700 mb-12">
         Groofi Blog
       </h1>
@@ -86,7 +86,7 @@ export default function Blogs() {
         {blogs?.map((blog) => (
           <div
             key={blog.id}
-            className="max-w-sm rounded-lg shadow-md hover:shadow-xl transition duration-300 overflow-hidden border"
+            className="max-w-sm rounded-lg bg-white shadow-md hover:shadow-xl transition duration-300 overflow-hidden border"
           >
             {/* Header */}
             <div className="flex items-center p-4">

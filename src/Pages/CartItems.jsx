@@ -21,7 +21,7 @@ export default function CartItems() {
   } = useQuery({
     queryKey: ["cart"],
     queryFn: fetchCart,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 
   const removeFromCart = (index) => {
@@ -35,11 +35,11 @@ export default function CartItems() {
 
   return (
     <div className="pt-20 min-h-screen p-4">
-      <h2 className="text-2xl text-white font-bold mb-4">Cart Items</h2>
+      <h2 className="text-2xl text-green-700 font-bold mb-4">Cart Items</h2>
       {isLoading ? (
         <span className="loading loading-bars loading-lg"></span>
       ) : cartItems.length > 0 ? (
-        <ul className="space-y-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {cartItems?.map((item, index) => (
             <li key={index} className="bg-white p-4 rounded-md shadow">
               <div className="flex justify-between items-center gap-4">
@@ -73,7 +73,9 @@ export default function CartItems() {
           </div>
         </ul>
       ) : (
-        <p className="text-white">No items in the cart.</p>
+        <p className="text-xl md:text-2xl text-green-700">
+          No items in the cart !
+        </p>
       )}
 
       {/* Payment Modal */}

@@ -82,7 +82,10 @@ export default function PopularItems({ item }) {
       </div>
       <div className="p-4 flex justify-between items-center gap-4">
         <p>${price}</p>
-        <button onClick={addCart} className="btn border border-green-400">
+        <button
+          onClick={addCart}
+          className="flex gap-2 items-center bg-green-600 text-md text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+        >
           <IoCartOutline /> Add
         </button>
       </div>

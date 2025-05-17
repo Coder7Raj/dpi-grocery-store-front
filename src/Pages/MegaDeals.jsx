@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function MegaDeals() {
   const items = [
     {
@@ -201,13 +203,15 @@ export default function MegaDeals() {
           {firstFive.map((item) => (
             <div
               key={item.id}
-              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-24 rounded-md object-cover border"
-              />
+              <Link>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-24 rounded-md object-cover border"
+                />
+              </Link>
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
@@ -226,13 +230,15 @@ export default function MegaDeals() {
           {secondFive.map((item) => (
             <div
               key={item.id}
-              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-24 rounded-md object-cover border"
-              />
+              <Link>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-24 rounded-md object-cover border"
+                />
+              </Link>
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
@@ -249,13 +255,15 @@ export default function MegaDeals() {
           {thirdFive.map((item) => (
             <div
               key={item.id}
-              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-24 rounded-md object-cover border"
-              />
+              <Link>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-24 rounded-md object-cover border"
+                />
+              </Link>
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
@@ -271,13 +279,15 @@ export default function MegaDeals() {
           {fifthFive.map((item) => (
             <div
               key={item.id}
-              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white rounded-md"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-24 rounded-md object-cover border"
-              />
+              <Link>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-24 rounded-md object-cover border"
+                />
+              </Link>
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
