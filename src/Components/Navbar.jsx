@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
+import { useAmount } from "./Custom/AmountContext";
 
 export default function Navbar() {
-  // const [mail, setMail] = useState();
-  // console.log(mail);
-
+  const { amount, setAmount } = useAmount();
+  const [showModal, setShowModal] = useState(false);
+  const [newAmount, setNewAmount] = useState(amount);
+  //
   const navigate = useNavigate();
 
   const fetchCart = async () => {
@@ -18,8 +22,6 @@ export default function Navbar() {
     queryFn: fetchCart,
   });
   //
-  // const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
-  // const leastAmount = parseFloat(totalAmount.toFixed(3));
 
   const viewCart = () => {
     navigate("/cartItems");
@@ -44,6 +46,27 @@ export default function Navbar() {
     0
   );
   const leastAmount = parseFloat(totalAmount.toFixed(3));
+  //
+  //
+  //
+  const handleOpenModal = () => {
+    setNewAmount(amount);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+
+  const handleUpdateAmount = () => {
+    if (newAmount <= 70000) {
+      setAmount(newAmount);
+    } else {
+      alert("Amount cannot exceed 70000!");
+    }
+    setShowModal(false);
+  };
+
+  //
+  //
   // logged out user
   const handleUserLogout = () => {
     localStorage.setItem("isLoggedIn", "false");
@@ -137,7 +160,50 @@ export default function Navbar() {
         </div>
       </div>
       <div className="flex-none">
-        <div className="dropdown dropdown-end flex items-center">
+        <div className="md:mr-2">
+          <button
+            onClick={handleOpenModal}
+            className="flex items-center gap-1 outline-none border-none text-white px-3 py-1 rounded-lg hover:bg-green-700 transition"
+          >
+            <span className="text-md md:text-lg">
+              {amount.toLocaleString()}
+            </span>
+            <span className="text-md md:text-lg text-white">
+              <FaSackDollar />
+            </span>
+          </button>
+
+          {showModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="bg-green-50 p-4 rounded-md shadow-md w-80">
+                <h2 className="text-lg text-green-500 font-bold mb-2">
+                  Update Amount
+                </h2>
+                <input
+                  type="number"
+                  value={newAmount}
+                  onChange={(e) => setNewAmount(Number(e.target.value))}
+                  className="w-full text-black outline-none border-none p-2 rounded-md mb-3"
+                />
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={handleCloseModal}
+                    className="px-3 py-1 bg-gray-500 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleUpdateAmount}
+                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="dropdown dropdown-end flex items-center mr-2">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg

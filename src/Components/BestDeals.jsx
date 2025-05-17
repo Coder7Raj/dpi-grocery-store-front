@@ -199,8 +199,8 @@ export default function BestDeals() {
         <div className="relative h-full w-full md:w-[40%] lg:w-[35%]">
           <img
             className="h-full w-full object-cover rounded"
-            src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/04/Cobb-Salad-main.jpg"
-            alt="Top Deals"
+            src="https://i.postimg.cc/YSzKLpCQ/Cobb-Salad-main.jpg"
+            alt="salad"
           />
           <div className="h-full w-full flex flex-col text-center justify-center items-center absolute top-0 left-0 bg-slate-300 backdrop-blur-sm bg-opacity-30 text-opacity-90 font-semibold text-xl text-black space-y-4 rounded-md">
             <p>

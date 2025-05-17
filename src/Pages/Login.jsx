@@ -18,7 +18,6 @@ export default function Login() {
     if (matchedUser) {
       localStorage.setItem("registeredUser", JSON.stringify(matchedUser));
       localStorage.setItem("isLoggedIn", "true");
-      console.log("first");
 
       toast.success("Successfully logged in!", {
         position: "top-center",
@@ -30,9 +29,7 @@ export default function Login() {
 
       navigate("/");
     } else {
-      console.log("second");
-
-      toast.warn("Something went wrong!", {
+      toast.error("Something went wrong!", {
         position: "top-center",
         autoClose: 5000,
         closeOnClick: false,

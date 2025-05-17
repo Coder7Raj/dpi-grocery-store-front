@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useAmount } from "../Components/Custom/AmountContext";
 
 export default function CartItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { amount, setAmount } = useAmount();
 
   const fetchCart = async () => {
     const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
@@ -32,6 +35,33 @@ export default function CartItems() {
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
   const leastAmount = parseFloat(totalAmount.toFixed(3));
+
+  //
+  //
+  const handlePay = () => {
+    if (amount >= leastAmount) {
+      setAmount(amount - leastAmount);
+
+      // Remove only the logged-in user's cart items
+      const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
+      const userEmail = userInfo?.userEmail;
+
+      const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const updatedCart = allCartItems.filter(
+        (item) => item.email !== userEmail
+      );
+
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      toast.success("Payment successful!");
+      setIsModalOpen(false);
+
+      // Refetch to update the UI
+      refetch();
+    } else {
+      toast.error("Not enough balance to complete payment!");
+    }
+  };
 
   return (
     <div className="pt-20 min-h-screen p-4">
@@ -100,7 +130,12 @@ export default function CartItems() {
               >
                 Close
               </button>
-              <button className="btn border border-green-600">Pay</button>
+              <button
+                onClick={handlePay}
+                className="btn border border-green-600"
+              >
+                Pay
+              </button>
             </div>
           </div>
         </div>

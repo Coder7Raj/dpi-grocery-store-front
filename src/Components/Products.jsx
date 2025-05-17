@@ -28,7 +28,7 @@ export default function Products({ item }) {
 
   const addCart = async () => {
     if (!email) {
-      toast.warn("Login first!", {
+      toast.warn("Please Login First!", {
         position: "top-center",
         autoClose: 5000,
         closeOnClick: false,
