@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FeaturedItems from "../Pages/FeaturedItems";
 
@@ -107,7 +106,7 @@ export default function FeaturedProducts() {
         grabCursor={true}
         pagination={{ clickable: true }}
         modules={[Pagination]}
-        className="mySwiper"
+        className="mySwiper p-20"
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
@@ -116,8 +115,8 @@ export default function FeaturedProducts() {
         ))}
       </Swiper>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        <div className="flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 px-1">
+        <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
           <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
@@ -130,7 +129,7 @@ export default function FeaturedProducts() {
             />
           </div>
         </div>
-        <div className="flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+        <div className="flex justify-center items-center shadow-md hover:shadow-lg shadow-slate-300 gap-1 bg-pink-200 rounded-md">
           <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>
@@ -143,7 +142,7 @@ export default function FeaturedProducts() {
             />
           </div>
         </div>
-        <div className="hidden lg:flex justify-center items-center gap-1 bg-pink-200 rounded-md">
+        <div className="hidden lg:flex justify-center shadow-md hover:shadow-lg shadow-slate-300 items-center gap-1 bg-pink-200 rounded-md">
           <div className="w-[30%] flex justify-center items-center flex-col gap-4">
             <h1 className="text-black">Hello World</h1>
             <button className="btn">Shop Now!</button>

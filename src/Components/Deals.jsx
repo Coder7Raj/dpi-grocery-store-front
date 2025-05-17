@@ -1,12 +1,6 @@
-import React from "react";
-
 export default function Deals({ item }) {
   const { name, image } = item;
   return (
-    // <div
-    //   className="flex items-start bg-cover bg-center w-full h-full text-white"
-    //   style={{ backgroundImage: `url(${image})` }}
-    // >
     <div className="flex relative h-full">
       <img
         className="w-full md:w-[90%] lg:w-[80%] h-full"

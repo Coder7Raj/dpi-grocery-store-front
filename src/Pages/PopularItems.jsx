@@ -68,7 +68,7 @@ export default function PopularItems({ item }) {
   };
 
   return (
-    <div className="flex flex-col gap-2 bg-gray-100 rounded-md">
+    <div className="flex flex-col gap-2 shadow-md shadow-slate-300 hover:shadow-xl rounded-md">
       <div className="h-full w-full rounded-md self-center pb-4">
         <img
           className="h-60 rounded-md w-full object-cover object-center"

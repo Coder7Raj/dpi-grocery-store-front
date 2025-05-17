@@ -1,10 +1,8 @@
-import React from "react";
-
 export default function FeaturedItems({ item }) {
   const { name, category, image } = item;
 
   return (
-    <div className="h-60 flex flex-col justify-center items-center bg-sky-100 rounded-lg shadow-lg">
+    <div className="h-60 flex flex-col justify-center items-center bg-sky-100 rounded-lg shadow-lg hover:shadow-xl shadow-slate-300">
       <img
         className="w-full h-40 object-cover rounded-md"
         src={image}
