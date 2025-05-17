@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function MegaDeals() {
   const items = [
     {
@@ -193,20 +191,22 @@ export default function MegaDeals() {
   const fifthFive = items.slice(15, 20); // id 11-15
 
   return (
-    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-2 space-y-10 px-16">
+    <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-7 px-1">
       {/* First Section */}
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Trending Products</h1>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-2xl flex items-start justify-start font-bold mb-4">
+          Trending Products
+        </h1>
         <div className="grid grid-cols-1 gap-4">
           {firstFive.map((item) => (
             <div
               key={item.id}
-              className="flex justify-start items-center gap-2"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-32 h-24 rounded-md object-cover mb-2"
+                className="w-32 h-24 rounded-md object-cover border"
               />
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
@@ -218,18 +218,20 @@ export default function MegaDeals() {
       </div>
 
       {/* Second Section */}
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Top Selling Products</h1>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-2xl text-start font-bold mb-4">
+          Top Selling Products
+        </h1>
         <div className="grid grid-cols-1 gap-4">
           {secondFive.map((item) => (
             <div
               key={item.id}
-              className="flex justify-start items-center gap-2"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-32 h-24 rounded-md object-cover mb-2"
+                className="w-32 h-24 rounded-md object-cover border"
               />
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
@@ -241,18 +243,18 @@ export default function MegaDeals() {
       </div>
 
       {/* Third Section */}
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Best Products</h1>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-2xl text-start font-bold mb-4">Best Products</h1>
         <div className="grid grid-cols-1 gap-4">
           {thirdFive.map((item) => (
             <div
               key={item.id}
-              className="flex justify-start items-center gap-2"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-32 h-24 rounded-md object-cover mb-2"
+                className="w-32 h-24 rounded-md object-cover border"
               />
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
@@ -263,18 +265,18 @@ export default function MegaDeals() {
         </div>
       </div>
       {/* Fourth Section */}
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Best Products</h1>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-2xl text-start font-bold mb-4">Best Products</h1>
         <div className="grid grid-cols-1 gap-4">
           {fifthFive.map((item) => (
             <div
               key={item.id}
-              className="flex justify-start items-center gap-2"
+              className="w-[320px] flex justify-start items-center gap-2 shadow-md hover:shadow-xl bg-white"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-32 h-24 rounded-md object-cover mb-2"
+                className="w-32 h-24 rounded-md object-cover border"
               />
               <div>
                 <h2 className="font-semibold">{item.name}</h2>

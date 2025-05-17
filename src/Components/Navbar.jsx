@@ -62,7 +62,7 @@ export default function Navbar() {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost px-0 md:hidden lg:hidden"
+              className="btn btn-ghost px-0 md:flex lg:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-green-50 text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -109,7 +109,7 @@ export default function Navbar() {
             GrooFi
           </NavLink>
         </div>
-        <div className="navbar-center hidden md:flex lg:flex">
+        <div className="navbar-center hidden md:hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink to="/">Home</NavLink>

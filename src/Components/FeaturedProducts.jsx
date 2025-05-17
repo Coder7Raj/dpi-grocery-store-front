@@ -91,8 +91,8 @@ export default function FeaturedProducts() {
   ];
 
   return (
-    <div className="mt-20">
-      <h1 className="text-3xl font-bold mb-8 text-white text-start">
+    <div>
+      <h1 className="text-2xl lg:text-3xl font-bold mb-2 text-black text-start">
         Our Featured Products
       </h1>
 
