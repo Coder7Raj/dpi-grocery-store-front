@@ -49,10 +49,10 @@ If you have any suggestions or improvements, feel free to open an issue or submi
 
 ---
 
-📍 Live Demo
+📍 Live Demo - [https://jocular-tarsier-de827f.netlify.app/]
 
 
-## 📂 GitHub
+## 📂 GitHub - [https://github.com/Coder7Raj/dpi-grocery-store-front]
 
 
 Made with ❤️ by Md.Owarasur Rahman Raj
