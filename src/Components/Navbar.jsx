@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../assets/logo-wev.png";
 import { useAmount } from "./Custom/AmountContext";
 
@@ -60,7 +61,7 @@ export default function Navbar() {
     if (newAmount <= 70000) {
       setAmount(newAmount);
     } else {
-      alert("Amount cannot exceed 70000!");
+      toast.warn("Amount cannot exceed 70000!");
     }
     setShowModal(false);
   };
@@ -183,7 +184,7 @@ export default function Navbar() {
                   type="number"
                   value={newAmount}
                   onChange={(e) => setNewAmount(Number(e.target.value))}
-                  className="w-full text-black outline-none border-none p-2 rounded-md mb-3"
+                  className="w-full text-black bg-white outline-none border-none p-2 rounded-md mb-3"
                 />
                 <div className="flex justify-end gap-2">
                   <button
@@ -220,7 +221,7 @@ export default function Navbar() {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm mr-2 indicator-item">
+              <span className="badge bg-white text-black border-none outline-none badge-sm mr-2 indicator-item">
                 {isLoggedIn && filteredCartItems
                   ? filteredCartItems?.length
                   : 0}
@@ -280,14 +281,14 @@ export default function Navbar() {
             <li>
               {isLoggedIn ? (
                 <button
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
                   onClick={handleUserLogout}
                 >
                   Logout
                 </button>
               ) : (
                 <button
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
                   onClick={userLogin}
                 >
                   Login

@@ -197,7 +197,7 @@ export default function MegaDeals() {
     <div className="mt-16 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-8 gap-7 pt-[400px] md:pt-0 px-1">
       {/* First Section */}
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl flex items-start justify-start font-bold mb-4">
+        <h1 className="text-2xl text-black flex items-start justify-start font-bold mb-4">
           Trending Products
         </h1>
         <div className="grid grid-cols-1 gap-4">
@@ -213,7 +213,7 @@ export default function MegaDeals() {
                   className="w-32 h-24 rounded-md object-cover border"
                 />
               </Link>
-              <div>
+              <div className="text-black">
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
               </div>
@@ -224,7 +224,7 @@ export default function MegaDeals() {
 
       {/* Second Section */}
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl text-start font-bold mb-4">
+        <h1 className="text-2xl text-black text-start font-bold mb-4">
           Top Selling Products
         </h1>
         <div className="grid grid-cols-1 gap-4">
@@ -240,7 +240,7 @@ export default function MegaDeals() {
                   className="w-32 h-24 rounded-md object-cover border"
                 />
               </Link>
-              <div>
+              <div className="text-black">
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
               </div>
@@ -251,7 +251,9 @@ export default function MegaDeals() {
 
       {/* Third Section */}
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl text-start font-bold mb-4">Best Products</h1>
+        <h1 className="text-2xl text-black text-start font-bold mb-4">
+          Best Products
+        </h1>
         <div className="grid grid-cols-1 gap-4">
           {thirdFive.map((item) => (
             <div
@@ -265,7 +267,7 @@ export default function MegaDeals() {
                   className="w-32 h-24 rounded-md object-cover border"
                 />
               </Link>
-              <div>
+              <div className="text-black">
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
               </div>
@@ -275,7 +277,9 @@ export default function MegaDeals() {
       </div>
       {/* Fourth Section */}
       <div className="lg:hidden xl:flex flex flex-col justify-center items-center">
-        <h1 className="text-2xl text-start font-bold mb-4">Best Products</h1>
+        <h1 className="text-2xl text-black text-start font-bold mb-4">
+          Best Products
+        </h1>
         <div className="grid grid-cols-1 gap-4">
           {fifthFive.map((item) => (
             <div
@@ -289,7 +293,7 @@ export default function MegaDeals() {
                   className="w-32 h-24 rounded-md object-cover border"
                 />
               </Link>
-              <div>
+              <div className="text-black">
                 <h2 className="font-semibold">{item.name}</h2>
                 <p className="text-sm text-gray-600">${item.price}</p>
               </div>

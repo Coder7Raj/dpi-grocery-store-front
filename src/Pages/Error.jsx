@@ -8,7 +8,7 @@ export default function Error() {
     navigate("/");
   };
   return (
-    <div className="flex flex-col justify-center items-center lg:max-w-[800px] h-[500px] md:max-w-[600px] max-w-[425px] mx-auto mb-8 mt-8">
+    <div className="flex flex-col justify-center items-center lg:max-w-[800px] h-[510px] md:max-w-[600px] max-w-[425px] mx-auto mb-8 pt-10">
       <Lottie
         loop
         animationData={error}

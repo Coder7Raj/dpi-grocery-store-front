@@ -10,74 +10,76 @@ export default function Blogs() {
         "Discover the benefits of including these powerful foods in your daily meals.",
       full: "Superfoods like kale, berries, and chia seeds are loaded with nutrients. They boost immunity, support brain health, and more. Incorporate them in smoothies, salads, and snacks for a healthier lifestyle.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
+        "https://domf5oio6qrcr.cloudfront.net/medialibrary/9545/conversions/healthy-superfoods-thumb.jpg",
       date: "April 15, 2025",
     },
     {
       id: 2,
-      title: "How to Keep Your Vegetables Fresher for Longer",
+      title: "The Health Benefits of Leafy Greens",
       summary:
-        "Simple storage hacks that help reduce waste and keep your veggies crisp.",
-      full: "Store leafy greens with paper towels, keep tomatoes at room temperature, and don’t mix fruits with veggies to reduce spoilage gases. These habits make a big difference in preserving freshness.",
+        "Learn why vegetables like spinach, kale, and Swiss chard are must-haves in your diet.",
+      full: "Leafy greens are rich in vitamins A, C, and K, as well as fiber and antioxidants. Regular consumption helps reduce the risk of heart disease and supports bone health.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "April 10, 2025",
+        "https://domf5oio6qrcr.cloudfront.net/medialibrary/5260/h0918g16207257581285.jpg",
+      date: "March 12, 2025",
     },
     {
       id: 3,
-      title: "Why Local Produce Is Better for You and the Planet",
+      title: "Creative Ways to Cook with Broccoli",
       summary:
-        "Learn how buying local supports your health and your community.",
-      full: "Local produce travels less, retains more nutrients, and supports community farmers. It reduces your carbon footprint and ensures seasonal freshness. Choosing local is a win for you and the planet.",
+        "Transform this humble vegetable into tasty meals your whole family will love.",
+      full: "Broccoli is a powerhouse of nutrients. Roast it, stir-fry with garlic, blend into soups, or add it to pasta for delicious and healthy options.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "April 5, 2025",
+        "https://www.soulfullymade.com/wp-content/uploads/2024/05/roasted-broccoli-recipe-sq-1-500x500.jpg",
+      date: "May 1, 2025",
     },
     {
       id: 4,
-      title: "5 Quick and Healthy Breakfast Ideas",
-      summary: "Busy mornings? Try these easy, nutritious breakfast options.",
-      full: "Avocado toast, overnight oats, smoothies, Greek yogurt with fruit, and boiled eggs with toast are fast, healthy, and delicious. Start your day energized and ready to go!",
+      title: "Why You Should Eat More Root Vegetables",
+      summary:
+        "Carrots, beets, and sweet potatoes offer surprising health benefits.",
+      full: "Root vegetables are packed with vitamins and minerals. They're excellent sources of fiber and help support digestion, boost energy, and improve skin health.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "March 29, 2025",
+        "https://restaurantclicks.com/wp-content/uploads/2022/10/Types-Of-Root-Vegetables.jpg",
+      date: "February 22, 2025",
     },
     {
       id: 5,
-      title: "The Science Behind Grocery Expiration Dates",
+      title: "Juicing for Better Health: Best Fruits & Veggies to Use",
       summary:
-        "Understand 'Best Before' and 'Use By' labels to reduce food waste.",
-      full: "‘Best Before’ labels mean quality may decline after the date, while ‘Use By’ indicates food safety. Knowing the difference helps you reduce waste and shop smarter.",
+        "Fuel your body with fresh, nutrient-dense juices from your kitchen.",
+      full: "Juicing carrots, cucumbers, beets, and leafy greens can improve digestion, detoxify your body, and provide a quick vitamin boost. Perfect for busy lifestyles.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "March 20, 2025",
+        "https://www.dietitianshreya.com/wp-content/uploads/2020/01/Fruite-Veg..jpg",
+      date: "January 18, 2025",
     },
     {
       id: 6,
-      title: "The Science Behind Grocery Expiration Dates",
+      title: "Eating Seasonal Vegetables: A Smart & Tasty Choice",
       summary:
-        "Understand 'Best Before' and 'Use By' labels to reduce food waste.",
-      full: "‘Best Before’ labels mean quality may decline after the date, while ‘Use By’ indicates food safety. Knowing the difference helps you reduce waste and shop smarter.",
+        "Discover the advantages of eating what's in season throughout the year.",
+      full: "Seasonal vegetables are fresher, more nutritious, and environmentally friendly. Learn which veggies to choose each season and how to prepare them.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "March 20, 2025",
+        "https://promisecare.com/wp-content/uploads/sites/44/2024/03/PromiseCare-benefits-of-eating-seasonal-produce.jpg",
+
+      date: "March 28, 2025",
     },
     {
       id: 7,
-      title: "The Science Behind Grocery Expiration Dates",
+      title: "The Truth About Organic vs. Non-Organic Produce",
       summary:
-        "Understand 'Best Before' and 'Use By' labels to reduce food waste.",
-      full: "‘Best Before’ labels mean quality may decline after the date, while ‘Use By’ indicates food safety. Knowing the difference helps you reduce waste and shop smarter.",
+        "Are organic fruits and vegetables really better for your health?",
+      full: "Organic produce contains fewer pesticides and is often fresher. While it's more expensive, it may offer benefits in terms of environmental sustainability and taste.",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/049/584/608/small_2x/happy-young-business-team-in-formalwear-looking-at-camera-while-standing-on-beige-background-photo.jpg",
-      date: "March 20, 2025",
+        "https://hips.hearstapps.com/hmg-prod/images/versus6-1-1559152957.jpg",
+      date: "May 10, 2025",
     },
   ];
 
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   return (
-    <div className="min-h-screen py-16 px-6">
+    <div className="min-h-screen py-20 px-6">
       <h1 className="text-4xl font-bold text-center text-green-700 mb-12">
         Groofi Blog
       </h1>

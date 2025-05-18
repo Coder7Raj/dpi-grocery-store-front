@@ -76,12 +76,12 @@ export default function PopularItems({ item }) {
           alt={name}
         />
       </div>
-      <div className="p-4 flex-1">
+      <div className="p-4 text-black flex-1">
         <p className="text-sm text-green-500">{name}</p>
         <p className="text-md font-semibold">{description}</p>
       </div>
       <div className="p-4 flex justify-between items-center gap-4">
-        <p>${price}</p>
+        <p className="text-black">${price}</p>
         <button
           onClick={addCart}
           className="flex gap-2 items-center bg-green-600 text-md text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"

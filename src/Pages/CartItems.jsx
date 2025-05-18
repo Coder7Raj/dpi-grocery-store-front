@@ -80,7 +80,9 @@ export default function CartItems() {
                     alt={item.name}
                   />
                   <div className="flex flex-col justify-start items-start">
-                    <p className="text-lg font-semibold">{item.name}</p>
+                    <p className="text-black text-lg font-semibold">
+                      {item.name}
+                    </p>
                     <p className="text-gray-600">Price: ${item.price}</p>
                   </div>
                 </div>
@@ -95,7 +97,7 @@ export default function CartItems() {
           ))}
           <div>
             <button
-              className="btn border border-green-600"
+              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
               onClick={() => setIsModalOpen(true)}
             >
               Proceed to Pay
@@ -112,17 +114,21 @@ export default function CartItems() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+            <h2 className="text-xl text-green-600 font-bold mb-4">
+              Order Summary
+            </h2>
             <ul className="space-y-2 mb-4">
               {cartItems.map((item, index) => (
                 <li key={index} className="flex justify-between">
-                  <span>{item.name}</span>
-                  <span>${item.price}</span>
+                  <span className="text-black">{item.name}</span>
+                  <span className="text-black">${item.price}</span>
                 </li>
               ))}
             </ul>
             <hr className="my-2" />
-            <p className="text-lg font-bold">Total: ${leastAmount}</p>
+            <p className="text-lg text-black font-bold">
+              Total: ${leastAmount}
+            </p>
             <div className="flex justify-end space-x-2 mt-4">
               <button
                 className="btn border border-red-500 text-red-500"
@@ -132,7 +138,7 @@ export default function CartItems() {
               </button>
               <button
                 onClick={handlePay}
-                className="btn border border-green-600"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
               >
                 Pay
               </button>
