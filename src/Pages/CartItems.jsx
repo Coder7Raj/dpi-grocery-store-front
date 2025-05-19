@@ -1,7 +1,9 @@
+import { pdf } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAmount } from "../Components/Custom/AmountContext";
+import BillDocument from "../Components/Custom/BillDocument";
 
 export default function CartItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +40,7 @@ export default function CartItems() {
 
   //
   //
-  const handlePay = () => {
+  const handlePay = async () => {
     if (amount >= leastAmount) {
       setAmount(amount - leastAmount);
 
@@ -50,6 +52,28 @@ export default function CartItems() {
       const updatedCart = allCartItems.filter(
         (item) => item.email !== userEmail
       );
+
+      //
+      // download the bill document in pdf
+
+      // Get current user's cart items
+      const userCartItems = allCartItems.filter(
+        (item) => item.email === userEmail
+      );
+
+      // Generate PDF blob
+      const blob = await pdf(
+        <BillDocument cartItems={userCartItems} totalAmount={leastAmount} />
+      ).toBlob();
+
+      // Trigger download
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "order_summary.pdf";
+      link.click();
+      URL.revokeObjectURL(url);
+      //
 
       localStorage.setItem("cart", JSON.stringify(updatedCart));
 
@@ -115,7 +139,7 @@ export default function CartItems() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-xl text-green-600 font-bold mb-4">
-              Order Summary
+              GrooFi Payment Summary
             </h2>
             <ul className="space-y-2 mb-4">
               {cartItems.map((item, index) => (
