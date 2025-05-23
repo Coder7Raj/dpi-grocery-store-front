@@ -102,7 +102,7 @@ export default function PopularProducts() {
           Popular Products
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:px-1 px-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:px-1 px-2">
         {items?.map((item) => (
           <PopularItems key={item.id} item={item}></PopularItems>
         ))}

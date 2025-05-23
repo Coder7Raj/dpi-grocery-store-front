@@ -81,7 +81,7 @@ export default function Navbar() {
 
   return (
     <div
-      className="navbar fixed z-10 bg-black bg-opacity-35 text-white min-w-full sm:min-w-md md:min-w-lg lg:min-w-xl xl:min-w-2xl 2xl:min-w-3xl mx-auto
+      className="navbar fixed z-10 bg-black bg-opacity-35 text-white min-w-full
 "
     >
       <div className="flex-1">
