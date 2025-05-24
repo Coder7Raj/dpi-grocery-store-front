@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PopularItems from "../Pages/PopularItems";
 
 export default function PopularProducts() {
@@ -95,17 +96,63 @@ export default function PopularProducts() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+
+  const uniqueCategories = [...new Set(items.map((item) => item.category))];
+
+  const filteredItems = items.filter((item) => {
+    const matchesSearch = item.category
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesFilter = filterCategory
+      ? item.category === filterCategory
+      : true;
+    return matchesSearch && matchesFilter;
+  });
+
   return (
     <div className="mt-20 mb-4">
-      <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-start mb-4 text-black">
+      <div className="mb-4 px-2">
+        <h1 className="text-2xl md:text-3xl font-bold text-start mb-4 text-green-600">
           Popular Products
         </h1>
+
+        {/* Search Bar */}
+        <input
+          type="text"
+          placeholder="Search by category..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full md:w-1/2 p-2 border border-gray-300 outline-none rounded mb-3"
+        />
+
+        {/* Filter Dropdown */}
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          className="w-full md:w-1/4 p-2 border border-gray-300 outline-none rounded"
+        >
+          <option value="">All Categories</option>
+          {uniqueCategories.map((cat, index) => (
+            <option key={index} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
+
+      {/* Items Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:px-1 px-2">
-        {items?.map((item) => (
-          <PopularItems key={item.id} item={item}></PopularItems>
-        ))}
+        {filteredItems?.length > 0 ? (
+          filteredItems?.map((item) => (
+            <PopularItems key={item.id} item={item}></PopularItems>
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-600">
+            No items found.
+          </p>
+        )}
       </div>
     </div>
   );
