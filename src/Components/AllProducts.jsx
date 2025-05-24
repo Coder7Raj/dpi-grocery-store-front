@@ -11,6 +11,7 @@ export default function AllProducts() {
       description:
         "Classic Italian pizza topped with fresh mozzarella, basil, and tomato sauce.",
       image: "https://i.postimg.cc/YC6kwNYr/Margherita-Pizza-HEADER.jpg",
+      quantity: 13,
     },
     {
       id: 2,
@@ -20,6 +21,7 @@ export default function AllProducts() {
       description:
         "Grilled beef patty with cheese, lettuce, tomato, and onion in a soft bun.",
       image: "https://i.postimg.cc/tCHpvmnS/Great-American-Burger.jpg",
+      quantity: 14,
     },
     {
       id: 3,
@@ -30,6 +32,7 @@ export default function AllProducts() {
         "Crispy breaded chicken bites served with your choice of dipping sauce.",
       image:
         "https://i.postimg.cc/65Hb48Kr/20240130210635-frozen-chicken-nuggets.jpg",
+      quantity: 12,
     },
     {
       id: 4,
@@ -39,6 +42,7 @@ export default function AllProducts() {
       description:
         "Grilled sausage in a soft bun, topped with ketchup and mustard.",
       image: "https://i.postimg.cc/5t8mg0hk/Cheeseburger-Hot-Dog2.jpg",
+      quantity: 10,
     },
     {
       id: 5,
@@ -47,6 +51,7 @@ export default function AllProducts() {
       price: 2.99,
       description: "Golden and crispy potato fries, lightly salted.",
       image: "https://i.postimg.cc/0QQbQX0d/french-fries.jpg",
+      quantity: 15,
     },
     {
       id: 6,
@@ -56,6 +61,7 @@ export default function AllProducts() {
       description:
         "Crispy and juicy deep-fried chicken pieces seasoned with spices.",
       image: "https://i.postimg.cc/FHrf8KkB/Fried-Chicken.jpg",
+      quantity: 12,
     },
     {
       id: 7,
@@ -65,6 +71,7 @@ export default function AllProducts() {
       description:
         "Whole wheat wrap filled with grilled veggies, hummus, and fresh greens.",
       image: "https://i.postimg.cc/7YDbJL9Z/wrap2-2000-1125.jpg",
+      quantity: 11,
     },
     {
       id: 8,
@@ -74,6 +81,7 @@ export default function AllProducts() {
       description:
         "Thin crust pizza topped with mozzarella and spicy pepperoni slices.",
       image: "https://i.postimg.cc/52KtrSVX/Pepp-Pizza-600.jpg",
+      quantity: 14,
     },
     {
       id: 9,
@@ -83,6 +91,7 @@ export default function AllProducts() {
       description:
         "Spiced grilled chicken wrapped in pita bread with garlic sauce and veggies.",
       image: "https://i.postimg.cc/1XKmrpB5/Chicken-shawarma-4.jpg",
+      quantity: 10,
     },
     {
       id: 10,
@@ -92,6 +101,7 @@ export default function AllProducts() {
       description:
         "Crunchy corn tortillas filled with beef, cheese, lettuce, and salsa.",
       image: "https://i.postimg.cc/bN3YG9dm/Beef-Tacos.jpg",
+      quantity: 13,
     },
     {
       id: 11,
@@ -100,6 +110,7 @@ export default function AllProducts() {
       price: 12.99,
       description: "Tender grilled salmon fillet served with lemon and herbs.",
       image: "https://i.postimg.cc/hjWKFC3t/featured-grilled-salmon-recipe.jpg",
+      quantity: 11,
     },
     {
       id: 12,
@@ -110,6 +121,7 @@ export default function AllProducts() {
         "Romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
       image:
         "https://i.postimg.cc/brLPtqYZ/NCG-Dennis-Becker-Classic-Caesar-Salad-715-x-477.jpg",
+      quantity: 15,
     },
     {
       id: 13,
@@ -119,6 +131,7 @@ export default function AllProducts() {
       description: "Assorted vegetables sautéed with soy sauce and garlic.",
       image:
         "https://i.postimg.cc/Pq6FYN1s/Thai-Vegetable-Stir-Fry-with-Lime-and-Ginger-done.png",
+      quantity: 13,
     },
     {
       id: 14,
@@ -128,6 +141,7 @@ export default function AllProducts() {
       description:
         "Cottage cheese cubes in creamy tomato gravy with Indian spices.",
       image: "https://i.postimg.cc/mrT070qM/1-500x375.jpg",
+      quantity: 12,
     },
     {
       id: 15,
@@ -138,6 +152,7 @@ export default function AllProducts() {
         "Fresh cucumbers, tomatoes, olives, and feta cheese in olive oil.",
       image:
         "https://i.postimg.cc/4xXg17Hm/20240905221054-pk-greek-salad-0214-min.jpg",
+      quantity: 11,
     },
     {
       id: 16,
@@ -148,6 +163,7 @@ export default function AllProducts() {
         "Hearty soup made from lentils, vegetables, and mild spices.",
       image:
         "https://i.postimg.cc/cHtyJf25/Instant-Pot-Lentil-Soup-FI-1200.jpg",
+      quantity: 14,
     },
     {
       id: 17,
@@ -158,6 +174,7 @@ export default function AllProducts() {
         "Chickpeas tossed with onions, tomatoes, cucumber, and lemon juice.",
       image:
         "https://i.postimg.cc/3rpQ5Cgk/Mediterranean-Chickpea-Salad-F-500x500.jpg",
+      quantity: 10,
     },
     {
       id: 18,
@@ -167,6 +184,7 @@ export default function AllProducts() {
       description: "Creamy mashed potatoes with butter and a hint of garlic.",
       image:
         "https://i.postimg.cc/vZYJVJCn/10cs-thanksgiving2-potatoes2-bcpv-super-Jumbo.jpg",
+      quantity: 13,
     },
     {
       id: 19,
@@ -176,6 +194,7 @@ export default function AllProducts() {
       description:
         "Bowl filled with grilled seasonal vegetables, quinoa, and a tangy dressing.",
       image: "https://i.postimg.cc/PfbVQ6WQ/Roasted-Chickpea-Veggie-Bowl.jpg",
+      quantity: 14,
     },
     {
       id: 20,
@@ -185,8 +204,10 @@ export default function AllProducts() {
       description:
         "Spiced spinach-based curry with herbs and garlic, served hot.",
       image: "https://i.postimg.cc/XYPsYtW4/chickpea-spinach-curry-2.jpg",
+      quantity: 12,
     },
   ];
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
 
