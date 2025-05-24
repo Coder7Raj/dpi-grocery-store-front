@@ -224,7 +224,7 @@ export default function AllProducts() {
   });
 
   return (
-    <div className="pt-16 mb-4">
+    <div className="pt-20 mb-10">
       <div className="mb-4 px-2">
         <h1 className="text-2xl md:text-3xl font-bold text-start mb-4 text-green-600">
           All Products
@@ -236,14 +236,14 @@ export default function AllProducts() {
           placeholder="Search by category..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full md:w-1/2 p-2 border border-gray-300 outline-none rounded mb-3"
+          className="w-full bg-green-50 md:w-1/2 p-2 border border-green-300 outline-none rounded mb-3"
         />
 
         {/* Filter Dropdown */}
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="w-full md:w-1/4 p-2 border border-gray-300 outline-none rounded"
+          className="w-full bg-green-50 md:w-1/4 p-2 border border-green-300 outline-none rounded"
         >
           <option value="">All Categories</option>
           {uniqueCategories.map((cat, index) => (

@@ -43,7 +43,7 @@ export default function Navbar() {
   );
 
   const totalAmount = filteredCartItems.reduce(
-    (sum, item) => sum + item.price,
+    (sum, item) => sum + item.price * item.quantity,
     0
   );
   const leastAmount = parseFloat(totalAmount.toFixed(3));
@@ -58,10 +58,10 @@ export default function Navbar() {
   const handleCloseModal = () => setShowModal(false);
 
   const handleUpdateAmount = () => {
-    if (newAmount <= 70000) {
+    if (newAmount <= 2000) {
       setAmount(newAmount);
     } else {
-      toast.warn("Amount cannot exceed 70000!");
+      toast.warn("Amount cannot exceed 2000!");
     }
     setShowModal(false);
   };

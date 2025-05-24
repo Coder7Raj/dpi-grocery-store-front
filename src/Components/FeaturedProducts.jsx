@@ -143,7 +143,7 @@ export default function FeaturedProducts() {
             alt="image 1"
           />
 
-          <div className="absolute left-0 top-0 w-full h-full flex items-center z-10">
+          <div className="absolute left-0 top-0 w-full h-full flex items-center">
             <div className="w-[45%] flex flex-col gap-4 pl-1 rounded-lg">
               <h1 className="text-black text-xl md:text-2xl font-bold">
                 Everyday fresh & clean with our products
@@ -166,7 +166,7 @@ export default function FeaturedProducts() {
             alt="image 2"
           />
 
-          <div className="absolute left-0 top-0 w-full h-full flex items-center z-10">
+          <div className="absolute left-0 top-0 w-full h-full flex items-center">
             <div className="w-[45%] flex flex-col gap-4 pl-1 rounded-lg">
               <h1 className="text-black text-xl md:text-2xl font-bold">
                 Make your Lunch Healthy and Easy
@@ -189,7 +189,7 @@ export default function FeaturedProducts() {
             alt="image 3"
           />
 
-          <div className="absolute left-0 top-0 w-full h-full flex items-center z-10">
+          <div className="absolute left-0 top-0 w-full h-full flex items-center">
             <div className="w-[45%] flex flex-col gap-4 pl-1 rounded-lg">
               <h1 className="text-black text-xl md:text-2xl font-bold">
                 The best Organic Prducts Online

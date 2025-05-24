@@ -163,14 +163,14 @@ export default function PopularProducts() {
           placeholder="Search by category..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full md:w-1/2 p-2 border border-gray-300 outline-none rounded mb-3"
+          className="w-full bg-green-50 md:w-1/2 p-2 border border-green-300 outline-none rounded mb-3"
         />
 
         {/* Filter Dropdown */}
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="w-full md:w-1/4 p-2 border border-gray-300 outline-none rounded"
+          className="w-full bg-green-50 md:w-1/4 p-2 border border-green-300 outline-none rounded"
         >
           <option value="">All Categories</option>
           {uniqueCategories.map((cat, index) => (
@@ -188,7 +188,7 @@ export default function PopularProducts() {
             <PopularItems key={item.id} item={item}></PopularItems>
           ))
         ) : (
-          <p className="text-center col-span-full text-gray-600">
+          <p className="text-center col-span-full text-green-600">
             No items found.
           </p>
         )}
