@@ -49,7 +49,7 @@ If you have any suggestions or improvements, feel free to open an issue or submi
 
 ---
 
-📍 Live Demo - [https://aquamarine-meringue-55b60b.netlify.app/]
+📍 Live Demo - [https://effulgent-palmier-93c65c.netlify.app/]
 
 
 ## 📂 GitHub - [https://github.com/Coder7Raj/dpi-grocery-store-front]
