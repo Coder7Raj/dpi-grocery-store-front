@@ -198,7 +198,7 @@ export default function BestDeals() {
 
   return (
     <div className="mt-20 px-1">
-      <h1 className="text-2xl md:text-3xl font-bold text-black mb-4">
+      <h1 className="text-2xl md:text-3xl font-bold text-green-600 mb-4">
         Our Top Item's
       </h1>
 

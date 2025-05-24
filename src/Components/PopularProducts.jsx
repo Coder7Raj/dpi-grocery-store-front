@@ -11,7 +11,7 @@ export default function PopularProducts() {
       description:
         "Classic Italian pizza topped with fresh mozzarella, basil, and tomato sauce.",
       image: "https://i.postimg.cc/YC6kwNYr/Margherita-Pizza-HEADER.jpg",
-      quantity: 13,
+      maxQuantity: 13,
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ export default function PopularProducts() {
       description:
         "Grilled beef patty with cheese, lettuce, tomato, and onion in a soft bun.",
       image: "https://i.postimg.cc/tCHpvmnS/Great-American-Burger.jpg",
-      quantity: 14,
+      maxQuantity: 14,
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export default function PopularProducts() {
         "Crispy breaded chicken bites served with your choice of dipping sauce.",
       image:
         "https://i.postimg.cc/65Hb48Kr/20240130210635-frozen-chicken-nuggets.jpg",
-      quantity: 12,
+      maxQuantity: 12,
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ export default function PopularProducts() {
       description:
         "Grilled sausage in a soft bun, topped with ketchup and mustard.",
       image: "https://i.postimg.cc/5t8mg0hk/Cheeseburger-Hot-Dog2.jpg",
-      quantity: 10,
+      maxQuantity: 10,
     },
     {
       id: 5,
@@ -51,7 +51,7 @@ export default function PopularProducts() {
       price: 2.99,
       description: "Golden and crispy potato fries, lightly salted.",
       image: "https://i.postimg.cc/0QQbQX0d/french-fries.jpg",
-      quantity: 15,
+      maxQuantity: 15,
     },
     {
       id: 6,
@@ -61,7 +61,7 @@ export default function PopularProducts() {
       description:
         "Crispy and juicy deep-fried chicken pieces seasoned with spices.",
       image: "https://i.postimg.cc/FHrf8KkB/Fried-Chicken.jpg",
-      quantity: 12,
+      maxQuantity: 12,
     },
     {
       id: 7,
@@ -71,7 +71,7 @@ export default function PopularProducts() {
       description:
         "Whole wheat wrap filled with grilled veggies, hummus, and fresh greens.",
       image: "https://i.postimg.cc/7YDbJL9Z/wrap2-2000-1125.jpg",
-      quantity: 11,
+      maxQuantity: 11,
     },
     {
       id: 8,
@@ -81,7 +81,7 @@ export default function PopularProducts() {
       description:
         "Thin crust pizza topped with mozzarella and spicy pepperoni slices.",
       image: "https://i.postimg.cc/52KtrSVX/Pepp-Pizza-600.jpg",
-      quantity: 14,
+      maxQuantity: 14,
     },
     {
       id: 9,
@@ -91,7 +91,7 @@ export default function PopularProducts() {
       description:
         "Spiced grilled chicken wrapped in pita bread with garlic sauce and veggies.",
       image: "https://i.postimg.cc/1XKmrpB5/Chicken-shawarma-4.jpg",
-      quantity: 10,
+      maxQuantity: 10,
     },
     {
       id: 10,
@@ -101,7 +101,7 @@ export default function PopularProducts() {
       description:
         "Crunchy corn tortillas filled with beef, cheese, lettuce, and salsa.",
       image: "https://i.postimg.cc/bN3YG9dm/Beef-Tacos.jpg",
-      quantity: 13,
+      maxQuantity: 13,
     },
     {
       id: 11,
@@ -110,7 +110,7 @@ export default function PopularProducts() {
       price: 12.99,
       description: "Tender grilled salmon fillet served with lemon and herbs.",
       image: "https://i.postimg.cc/hjWKFC3t/featured-grilled-salmon-recipe.jpg",
-      quantity: 11,
+      maxQuantity: 11,
     },
     {
       id: 12,
@@ -121,7 +121,7 @@ export default function PopularProducts() {
         "Romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
       image:
         "https://i.postimg.cc/brLPtqYZ/NCG-Dennis-Becker-Classic-Caesar-Salad-715-x-477.jpg",
-      quantity: 15,
+      maxQuantity: 15,
     },
     {
       id: 13,
@@ -131,7 +131,7 @@ export default function PopularProducts() {
       description: "Assorted vegetables sautéed with soy sauce and garlic.",
       image:
         "https://i.postimg.cc/Pq6FYN1s/Thai-Vegetable-Stir-Fry-with-Lime-and-Ginger-done.png",
-      quantity: 13,
+      maxQuantity: 13,
     },
   ];
 
