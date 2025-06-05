@@ -66,7 +66,7 @@ export default function Profile() {
       {/* Sidebar */}
       {showSidebar && (
         <aside
-          className={`min-h-screen bg-white shadow-lg p-4 space-y-6 ${
+          className={`h-screen bg-white shadow-lg p-4 space-y-6 ${
             collapseSidebar ? "w-20" : "w-56"
           } fixed md:static z-30 h-full`}
         >
@@ -141,9 +141,10 @@ export default function Profile() {
         </header>
 
         {/* Main Content */}
-        <main className="p-4">
+        <main className="p-4 h-screen overflow-auto">
           <Outlet />
         </main>
+
         <footer className="my-8">
           <marquee behavior="alternate" direction="left">
             Welcome {name} to your dashboard

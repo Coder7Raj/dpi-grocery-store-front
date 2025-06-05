@@ -107,6 +107,15 @@ export default function UserBasics() {
           how many products are added to the cart right now it's number and some
           other info
         </div>
+        {/* products purchase num: */}
+        <div className="p-20 bg-white rounded-2xl shadow-md">
+          How many products that i purchased it's number and some other info.
+        </div>
+        {/* products added to cart num: */}
+        <div className="p-20 bg-white rounded-2xl shadow-md">
+          how many products are added to the cart right now it's number and some
+          other info
+        </div>
       </div>
     </>
   );
