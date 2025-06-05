@@ -11,7 +11,7 @@ export default function UserBasics() {
   return (
     <>
       {/* Center Content */}
-      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-md p-6">
           <div className="flex flex-col items-center text-center">
@@ -38,7 +38,7 @@ export default function UserBasics() {
           </div>
         </div>
         {/* user accounts and bills */}
-        <div className="flex flex-col gap-4 items-center justify-around">
+        <div className="flex flex-col gap-3 items-center justify-around">
           {/* xPay Accounts */}
           <div className="w-full h-full bg-white rounded-2xl shadow-md p-6 space-y-4">
             <div className="flex justify-between items-center">
