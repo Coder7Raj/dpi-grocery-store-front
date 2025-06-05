@@ -3,6 +3,7 @@ import AllProducts from "../Components/AllProducts";
 import Home from "../Components/Home";
 import Profile from "../Components/Profile";
 import Root from "../Components/Root";
+import UserBasics from "../Components/UserData/UserBasics";
 import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
 import CartItems from "../Pages/CartItems";
@@ -12,6 +13,7 @@ import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
+  // ByDefaultObject
   {
     path: "/",
     element: <Root></Root>,
@@ -49,6 +51,13 @@ const router = createBrowserRouter([
             <Profile></Profile>
           </PrivateRoute>
         ),
+        // user profile object
+        children: [
+          {
+            path: "",
+            element: <UserBasics></UserBasics>,
+          },
+        ],
       },
       {
         path: "all_products",
