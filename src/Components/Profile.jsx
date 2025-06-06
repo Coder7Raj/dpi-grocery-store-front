@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaCommentDots,
-  FaHeadset,
-  FaMobileAlt,
   FaMoneyCheckAlt,
   FaUser,
   FaWallet,
 } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { IoIosArrowDown } from "react-icons/io";
+import { ImBlogger2 } from "react-icons/im";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbArrowBack } from "react-icons/tb";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
 export default function Profile() {
@@ -33,7 +32,7 @@ export default function Profile() {
         setCollapseSidebar(false); // no collapse mode on mobile
         setShowSidebar(false); // hide sidebar on mobile by default
       } else {
-        setShowSidebar(true); // show sidebar on large devices
+        setShowSidebar(true); // show sidebar on md to all devices
       }
     };
     window.addEventListener("resize", handleResize);
@@ -52,17 +51,29 @@ export default function Profile() {
   };
 
   const navItems = [
-    { icon: <FaUser />, label: "My dashboard" },
-    { icon: <FaWallet />, label: "Accounts" },
-    { icon: <FaMobileAlt />, label: "Mobile" },
-    { icon: <FaMoneyCheckAlt />, label: "Payments" },
-    { icon: <FaCommentDots />, label: "Complaints" },
-    { icon: <FaHeadset />, label: "Supports" },
+    { icon: <FaUser />, label: "My dashboard", to: "" },
+    { icon: <FaWallet />, label: "Accounts", to: "user_accounts" },
+    { icon: <ImBlogger2 />, label: "Blogs", to: "user_blogs" },
+    { icon: <FaMoneyCheckAlt />, label: "Payments", to: "user_payments" },
+    { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },
   ];
+  //
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
+  // Close dropdown on click outside the link
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
-    <div className="flex min-h-screen">
+    <div className="flex">
       {/* Sidebar */}
       {showSidebar && (
         <aside
@@ -86,22 +97,29 @@ export default function Profile() {
               src={logo}
               alt="logo"
             />
-            {!collapseSidebar && <h1 className="font-bold text-lg">GooFi</h1>}
+            {!collapseSidebar && <h1 className="font-bold text-lg">GrooFi</h1>}
           </div>
 
           <nav className="flex flex-col space-y-4 text-sm text-gray-700">
             {navItems.map((item, index) => {
-              const LinkTag = item.to ? Link : "div";
+              // const LinkTag = item.to ? Link : "div";
               const props = item.to ? { to: item.to } : {};
               return (
-                <LinkTag
+                <NavLink
                   key={index}
                   {...props}
-                  className="flex items-center space-x-2 hover:text-red-500"
+                  // className="flex items-center space-x-2 py-4 border outline-none bg-red-500 text-black border-gray-600 rounded-md hover:text-white"
+                  className={({ isActive }) =>
+                    `flex items-center space-x-2 py-4 border rounded-md ${
+                      isActive
+                        ? "outline-none bg-green-500 text-black border-gray-600 hover:text-white"
+                        : "text-gray-700 border-transparent hover:bg-gray-100"
+                    }`
+                  }
                 >
                   {item.icon}
                   {!collapseSidebar && <span>{item.label}</span>}
-                </LinkTag>
+                </NavLink>
               );
             })}
           </nav>
@@ -129,24 +147,42 @@ export default function Profile() {
               </div>
             )}
           </div>
-          <div className="flex items-center space-x-2">
-            <img
-              src={image}
-              alt="User"
-              className="w-8 h-8 rounded-full object-cover"
-            />
-            <span className="font-medium"> {name?.split(" ")[0]}</span>
-            <IoIosArrowDown />
+          {/*  */}
+          <div className="dropdown dropdown-end relative" ref={dropdownRef}>
+            <div
+              onClick={() => setIsOpen((prev) => !prev)}
+              role="button"
+              tabIndex={0}
+              className="px-2 py-3 flex items-center space-x-2 hover:bg-green-500 border-none outline-none rounded-md cursor-pointer"
+            >
+              <img
+                src={image}
+                alt="User"
+                className="w-8 h-8 rounded-full object-cover"
+              />
+              <span className="font-medium">{name?.split(" ")[0]}</span>
+              {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+
+            {isOpen && (
+              <ul className="menu absolute right-0 mt-2 bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li>
+                  <button className="px-4 py-2 rounded-md hover:bg-green-400 outline-none border border-gray-500 my-2 w-full">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="p-4 h-screen overflow-auto">
+        <main className="p-4 h-[calc(100vh-185px)] overflow-auto">
           <Outlet />
         </main>
 
         <footer className="my-8">
-          <marquee behavior="alternate" direction="left">
+          <marquee behavior="scroll" direction="left">
             Welcome {name} to your dashboard
           </marquee>
         </footer>

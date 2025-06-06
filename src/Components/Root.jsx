@@ -7,7 +7,9 @@ import Navbar from "./Navbar";
 export default function Root() {
   const location = useLocation();
 
-  const isUserProfilePage = location.pathname === "/user_profile";
+  const userRootPath = "/user_profile";
+
+  const isUserProfilePage = location.pathname.startsWith(userRootPath);
   return (
     <>
       {!isUserProfilePage && <Navbar />}
