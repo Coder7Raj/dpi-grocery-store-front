@@ -275,7 +275,10 @@ export default function Navbar() {
           >
             <li>
               <NavLink to="/user_profile" className="justify-between">
-                Dahsboard
+                User Dahsboard
+              </NavLink>
+              <NavLink to="/admin_profile" className="justify-between">
+                Admin Dahsboard
               </NavLink>
             </li>
             <li>

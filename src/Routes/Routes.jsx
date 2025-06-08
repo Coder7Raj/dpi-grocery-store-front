@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminProfile from "../Components/AdmonDashboard/AdminProfile";
 import AllProducts from "../Components/AllProducts";
 import Home from "../Components/Home";
-import Profile from "../Components/Profile";
 import Root from "../Components/Root";
 import UserAccounts from "../Components/UserDashboardData/UserAccounts";
 import UserBasics from "../Components/UserDashboardData/UserBasics";
 import UserBlogs from "../Components/UserDashboardData/UserBlogs";
 import UserComplaints from "../Components/UserDashboardData/UserComplaints";
 import UserPayments from "../Components/UserDashboardData/UserPayments";
+import UserProfile from "../Components/UserDashboardData/UserProfile";
 import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
 import CartItems from "../Pages/CartItems";
@@ -49,10 +50,19 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "all_products",
+        element: (
+          <PrivateRoute>
+            <AllProducts></AllProducts>
+          </PrivateRoute>
+        ),
+      },
+      // User Credentials
+      {
         path: "user_profile",
         element: (
           <PrivateRoute>
-            <Profile></Profile>
+            <UserProfile></UserProfile>
           </PrivateRoute>
         ),
         // user profile object
@@ -79,13 +89,13 @@ const router = createBrowserRouter([
           },
         ],
       },
+
+      // Admin Credentials
       {
-        path: "all_products",
-        element: (
-          <PrivateRoute>
-            <AllProducts></AllProducts>
-          </PrivateRoute>
-        ),
+        path: "admin_profile",
+        element: <AdminProfile></AdminProfile>,
+        // admin profile object
+        children: [],
       },
       {
         path: "user_login",

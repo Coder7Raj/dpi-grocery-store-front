@@ -10,9 +10,9 @@ import { ImBlogger2 } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbArrowBack } from "react-icons/tb";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import logo from "../assets/logo-wev.png";
+import logo from "../../assets/logo-wev.png";
 
-export default function Profile() {
+export default function UserProfile() {
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
   const name = userInfo?.name;
   const image = userInfo?.image;
