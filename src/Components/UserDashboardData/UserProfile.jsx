@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  FaCommentDots,
-  FaMoneyCheckAlt,
-  FaUser,
-  FaWallet,
-} from "react-icons/fa";
+import { FaCommentDots, FaMoneyCheckAlt } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { ImBlogger2 } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { MdDashboardCustomize } from "react-icons/md";
+import { RiAccountBoxFill } from "react-icons/ri";
 import { TbArrowBack } from "react-icons/tb";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import logo from "../../assets/logo-wev.png";
@@ -53,11 +50,11 @@ export default function UserProfile() {
   };
 
   const navItems = [
-    { icon: <FaUser />, label: "My dashboard", to: "" },
-    { icon: <FaWallet />, label: "Accounts", to: "user_accounts" },
+    { icon: <MdDashboardCustomize />, label: "My dashboard", to: "" },
+    { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
     { icon: <ImBlogger2 />, label: "Blogs", to: "user_blogs" },
     { icon: <FaMoneyCheckAlt />, label: "Payments", to: "user_payments" },
-    { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
+    { icon: <FaCommentDots />, label: "Complaint", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },
   ];
   //
@@ -111,7 +108,7 @@ export default function UserProfile() {
                 <NavLink
                   key={index}
                   to={item.to}
-                  className={`flex items-center space-x-2 py-4 border rounded-md ${
+                  className={`flex items-center px-4 space-x-2 py-4 border rounded-md ${
                     isActive
                       ? "outline-none bg-green-500 text-black border-gray-600 hover:text-white"
                       : "text-gray-700 border-transparent hover:bg-gray-100"
