@@ -9,13 +9,15 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { ImBlogger2 } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbArrowBack } from "react-icons/tb";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import logo from "../assets/logo-wev.png";
 
 export default function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
   const name = userInfo?.name;
   const image = userInfo?.image;
+
+  const location = useLocation();
 
   const mobile = window.innerWidth < 768;
 
@@ -102,20 +104,18 @@ export default function Profile() {
 
           <nav className="flex flex-col space-y-4 text-sm text-gray-700">
             {navItems.map((item, index) => {
-              // const LinkTag = item.to ? Link : "div";
-              const props = item.to ? { to: item.to } : {};
+              const fullPath = "/user_profile" + (item.to ? `/${item.to}` : "");
+              const isActive = location.pathname === fullPath;
+
               return (
                 <NavLink
                   key={index}
-                  {...props}
-                  // className="flex items-center space-x-2 py-4 border outline-none bg-red-500 text-black border-gray-600 rounded-md hover:text-white"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 py-4 border rounded-md ${
-                      isActive
-                        ? "outline-none bg-green-500 text-black border-gray-600 hover:text-white"
-                        : "text-gray-700 border-transparent hover:bg-gray-100"
-                    }`
-                  }
+                  to={item.to}
+                  className={`flex items-center space-x-2 py-4 border rounded-md ${
+                    isActive
+                      ? "outline-none bg-green-500 text-black border-gray-600 hover:text-white"
+                      : "text-gray-700 border-transparent hover:bg-gray-100"
+                  }`}
                 >
                   {item.icon}
                   {!collapseSidebar && <span>{item.label}</span>}

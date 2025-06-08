@@ -275,7 +275,7 @@ export default function Navbar() {
           >
             <li>
               <NavLink to="/user_profile" className="justify-between">
-                Profile
+                Dahsboard
               </NavLink>
             </li>
             <li>
