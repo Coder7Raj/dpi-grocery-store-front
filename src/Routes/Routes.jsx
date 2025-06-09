@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminBasics from "../Components/AdmonDashboard/AdminBasics";
 import AdminProfile from "../Components/AdmonDashboard/AdminProfile";
 import AllProducts from "../Components/AllProducts";
+import Login from "../Components/Auth/Login";
+import Register from "../Components/Auth/Register";
 import Home from "../Components/Home";
 import Root from "../Components/Root";
 import UserAccounts from "../Components/UserDashboardData/UserAccounts";
@@ -13,8 +16,6 @@ import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
 import CartItems from "../Pages/CartItems";
 import Error from "../Pages/Error";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -95,7 +96,12 @@ const router = createBrowserRouter([
         path: "admin_profile",
         element: <AdminProfile></AdminProfile>,
         // admin profile object
-        children: [],
+        children: [
+          {
+            path: "",
+            element: <AdminBasics></AdminBasics>,
+          },
+        ],
       },
       {
         path: "user_login",

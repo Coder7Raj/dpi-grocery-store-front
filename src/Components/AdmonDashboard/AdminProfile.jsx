@@ -50,7 +50,7 @@ export default function AdminProfile() {
   };
 
   const navItems = [
-    { icon: <MdDashboardCustomize />, label: "My dashboard", to: "" },
+    { icon: <MdDashboardCustomize />, label: "My Dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
     { icon: <FaSitemap />, label: "Manage Products", to: "user_blogs" },
     { icon: <FaUsersGear />, label: "Manage Users", to: "user_payments" },
@@ -90,7 +90,7 @@ export default function AdminProfile() {
             </button>
           )}
 
-          <div className="flex items-center space-x-2 mt-2">
+          <div className="flex items-center space-x-2 mt-2 border-b-2 border-gray-500">
             <img
               className="w-6 md:w-10 lg:w-10 px-0 rounded-full"
               src={logo}
@@ -138,7 +138,7 @@ export default function AdminProfile() {
               </div>
             ) : (
               <div>
-                <h2 className="text-xl font-semibold">My Dashboard</h2>
+                <h2 className="text-xl font-semibold">Admin Dashboard</h2>
                 <p className="text-sm text-gray-400">
                   Welcome to GrooFi portal
                 </p>

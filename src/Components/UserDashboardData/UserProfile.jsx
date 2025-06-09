@@ -90,7 +90,7 @@ export default function UserProfile() {
             </button>
           )}
 
-          <div className="flex items-center space-x-2 mt-2">
+          <div className="flex items-center space-x-2 mt-2 border-b-2 border-gray-500">
             <img
               className="w-6 md:w-10 lg:w-10 px-0 rounded-full"
               src={logo}
