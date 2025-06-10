@@ -52,7 +52,7 @@ export default function AdminProfile() {
   const navItems = [
     { icon: <MdDashboardCustomize />, label: "My Dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
-    { icon: <FaSitemap />, label: "Manage Products", to: "user_blogs" },
+    { icon: <FaSitemap />, label: "Manage Products", to: "manage_products" },
     { icon: <FaUsersGear />, label: "Manage Users", to: "user_payments" },
     { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },

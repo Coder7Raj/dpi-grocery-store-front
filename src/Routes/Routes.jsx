@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminBasics from "../Components/AdmonDashboard/AdminBasics";
 import AdminProfile from "../Components/AdmonDashboard/AdminProfile";
+import ProductManage from "../Components/AdmonDashboard/ProductManage";
+import UpdateProduct from "../Components/AdmonDashboard/UpdateProduct";
 import AllProducts from "../Components/AllProducts";
 import Login from "../Components/Auth/Login";
 import Register from "../Components/Auth/Register";
@@ -100,6 +102,14 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <AdminBasics></AdminBasics>,
+          },
+          {
+            path: "manage_products",
+            element: <ProductManage></ProductManage>,
+          },
+          {
+            path: "update_product/:id",
+            element: <UpdateProduct></UpdateProduct>,
           },
         ],
       },
