@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function ProductManage() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [showFormModal, setShowFormModal] = useState(false);
   const navigate = useNavigate();
 
+  // open form function
+  const openFormModal = () => {
+    setShowFormModal(true);
+  };
+
+  // close form function
+  const closeFormModal = () => {
+    setShowFormModal(false);
+  };
+  //
   const items = [
     {
       id: 1,
@@ -138,20 +151,112 @@ export default function ProductManage() {
       maxQuantity: 13,
     },
   ];
+  //
+
+  // products add function for to save in DB
+  const handleAddProduct = (e) => {
+    e.preventDefault();
+
+    const title = e.target.title.value;
+    const category = e.target.category.value;
+    const price = e.target.price.value;
+    const image = e.target.image.value;
+    const description = e.target.description.value;
+    const stock = e.target.stock.value;
+
+    // console.log(name, category, price, image, description, maxQuantity);
+
+    const productData = {
+      title,
+      description,
+      price,
+      image,
+      category,
+      stock,
+    };
+    // add product to database
+
+    fetch("http://localhost:5000/api/product/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to add car");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.product && data.product._id) {
+          toast.success("Product added");
+          e.target.reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding car:", error);
+      });
+
+    //
+    // Close modal
+    closeFormModal();
+  };
+  //
+
+  // fetching data from DB to show the products
+  useEffect(() => {
+    fetch("http://localhost:5000/api/product/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log("STATUS:", res.status);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("DATA RECEIVED:", data);
+        setProducts(data.products);
+      })
+      .catch((err) => console.log("FETCH ERROR:", err.message));
+  }, []);
+  //
 
   const handleUpdate = (item) => {
     navigate(`/update_product/${item.id}`, { state: item });
   };
 
+  // delete function for products delete
   const handleDelete = (id) => {
-    console.log("Delete clicked for ID:", id);
+    console.log(id);
+    fetch(`http://localhost:5000/api/product/delete/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Product deleted successfully") {
+          toast.success(data.message);
+          const remainingProducts = products.filter(
+            (product) => product._id !== id
+          );
+          setProducts(remainingProducts);
+        } else {
+          toast.error(data.message || "Failed to delete product");
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
 
+  // description function
   const handleShowDescription = (item) => {
     setSelectedItem(item);
     setShowModal(true);
   };
 
+  // modal function
   const closeModal = () => {
     setShowModal(false);
     setSelectedItem(null);
@@ -159,10 +264,18 @@ export default function ProductManage() {
 
   return (
     <>
+      <button
+        onClick={openFormModal}
+        className="btn btn-primary btn-outline mb-16"
+      >
+        Add Products
+      </button>
+      <p className="text-3xl text-red-700">hello_-{products?.length}</p>
+
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items?.map((item) => (
+        {products?.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="flex flex-col bg-white gap-2 shadow-md shadow-slate-300 hover:shadow-xl rounded-md"
           >
             <div className="h-full w-full rounded-md self-center pb-4">
@@ -193,7 +306,7 @@ export default function ProductManage() {
                   Update
                 </button>
                 <button
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(item._id)}
                   className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
                 >
                   Delete
@@ -216,6 +329,67 @@ export default function ProductManage() {
             >
               Close
             </button>
+          </div>
+        </div>
+      )}
+      {/*  */}
+      {/* form modal */}
+      {showFormModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">Add New Product</h2>
+            <form onSubmit={handleAddProduct}>
+              <input
+                type="text"
+                name="title"
+                placeholder="Name"
+                className="w-full mb-2 p-2 border rounded"
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Category"
+                className="w-full mb-2 p-2 border rounded"
+              />
+              <input
+                type="number"
+                name="price"
+                placeholder="Price"
+                className="w-full mb-2 p-2 border rounded"
+              />
+              <input
+                type="url"
+                name="image"
+                placeholder="Image URL"
+                className="w-full mb-2 p-2 border rounded"
+              />
+              <textarea
+                name="description"
+                placeholder="Description"
+                className="w-full mb-2 p-2 border rounded"
+              ></textarea>
+              <input
+                type="number"
+                name="stock"
+                placeholder="Max stock"
+                className="w-full mb-4 p-2 border rounded"
+              />
+              {/*  */}
+              <div className="flex justify-between">
+                <button
+                  type="submit"
+                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                  Add
+                </button>
+                <button
+                  onClick={closeFormModal}
+                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
