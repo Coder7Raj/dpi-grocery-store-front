@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function ProductManage() {
@@ -214,20 +214,16 @@ export default function ProductManage() {
       },
     })
       .then((res) => {
-        console.log("STATUS:", res.status);
+        // console.log("STATUS:", res.status);
         return res.json();
       })
       .then((data) => {
-        console.log("DATA RECEIVED:", data);
+        // console.log("DATA RECEIVED:", data);
         setProducts(data.products);
       })
       .catch((err) => console.log("FETCH ERROR:", err.message));
   }, []);
   //
-
-  const handleUpdate = (item) => {
-    navigate(`/update_product/${item.id}`, { state: item });
-  };
 
   // delete function for products delete
   const handleDelete = (id) => {
@@ -250,13 +246,13 @@ export default function ProductManage() {
       .catch((err) => console.log(err.message));
   };
 
-  // description function
+  // description show in modal function
   const handleShowDescription = (item) => {
     setSelectedItem(item);
     setShowModal(true);
   };
 
-  // modal function
+  // modal close function
   const closeModal = () => {
     setShowModal(false);
     setSelectedItem(null);
@@ -270,7 +266,7 @@ export default function ProductManage() {
       >
         Add Products
       </button>
-      <p className="text-3xl text-red-700">hello_-{products?.length}</p>
+      <p className="text-3xl text-red-700">length-{products?.length}</p>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {products?.map((item) => (
@@ -299,12 +295,12 @@ export default function ProductManage() {
                 Description
               </button>
               <div className="flex gap-2">
-                <button
-                  onClick={() => handleUpdate(item)}
+                <Link
+                  to={`/admin_profile/update_product/${item._id}`}
                   className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition"
                 >
                   Update
-                </button>
+                </Link>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
@@ -321,8 +317,30 @@ export default function ProductManage() {
       {showModal && selectedItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg max-w-md w-full shadow-lg">
-            <h2 className="text-xl font-bold mb-2">{selectedItem.name}</h2>
-            <p className="mb-4 text-gray-700">{selectedItem.description}</p>
+            <h2 className="text-xl font-bold mb-2">{selectedItem.title}</h2>
+
+            <img
+              src={selectedItem.image}
+              alt={selectedItem.title}
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Category:</span>{" "}
+              {selectedItem.category}
+            </p>
+
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Price:</span> $
+              {selectedItem.price}
+            </p>
+
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Stock:</span> {selectedItem.stock}
+            </p>
+
+            <p className="text-gray-700 mb-4">{selectedItem.description}</p>
+
             <button
               onClick={closeModal}
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -332,6 +350,7 @@ export default function ProductManage() {
           </div>
         </div>
       )}
+
       {/*  */}
       {/* form modal */}
       {showFormModal && (

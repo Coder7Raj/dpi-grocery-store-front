@@ -110,6 +110,13 @@ const router = createBrowserRouter([
           {
             path: "update_product/:id",
             element: <UpdateProduct></UpdateProduct>,
+            loader: async ({ params }) => {
+              const res = await fetch(
+                `http://localhost:5000/api/product/${params.id}`
+              );
+              const data = await res.json();
+              return data; // or data.product or data.data based on API
+            },
           },
         ],
       },

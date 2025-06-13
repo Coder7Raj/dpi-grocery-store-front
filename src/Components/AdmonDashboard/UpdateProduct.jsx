@@ -1,84 +1,131 @@
-import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function UpdateProduct() {
-  const { state } = useLocation(); // 👈 Get passed item
-  const { id } = useParams();
-
-  const [formData, setFormData] = useState({
-    name: state?.name || "",
-    category: state?.category || "",
-    price: state?.price || "",
-    description: state?.description || "",
-    image: state?.image || "",
-    maxQuantity: state?.maxQuantity || "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const {
+    product: { _id, title, description, price, image, category, stock },
+  } = useLoaderData();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Updated data:", formData); // replace this with real update logic
-  };
 
+    const updatedProduct = {
+      title: e.target.title.value,
+      category: e.target.category.value,
+      image: e.target.image.value,
+      price: e.target.price.value,
+      description: e.target.description.value,
+      stock: e.target.stock.value,
+    };
+
+    try {
+      const result = await Swal.fire({
+        title: "Save changes?",
+        showDenyButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: "Don't save",
+      });
+
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/api/product/update/${_id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedProduct),
+          }
+        );
+
+        const data = await response.json();
+        if (response.ok && data.product) {
+          const result = await Swal.fire(
+            "Saved!",
+            "Your product has been updated.",
+            "success"
+          );
+
+          if (result.isConfirmed) {
+            navigate("/admin_profile/manage_products");
+          }
+        } else {
+          Swal.fire("Info", "No changes were made.", "info");
+        }
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      Swal.fire(
+        "Error!",
+        "Failed to update the product. Try again later.",
+        "error"
+      );
+    }
+  };
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Update Product (ID: {id})</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Product Name"
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          placeholder="Category"
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          placeholder="Price"
-          type="number"
-          className="w-full p-2 border rounded"
-        />
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Description"
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          placeholder="Image URL"
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="maxQuantity"
-          value={formData.maxQuantity}
-          onChange={handleChange}
-          placeholder="Max Quantity"
-          type="number"
-          className="w-full p-2 border rounded"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
+    <>
+      <div className="max-w-xl mx-auto mt-10 p-8 bg-white rounded-2xl shadow-lg border border-gray-200">
+        <h2 className="text-2xl font-bold text-center mb-6 text-blue-600">
           Update Product
-        </button>
-      </form>
-    </div>
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="title"
+            placeholder="Product Name"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={title || ""}
+          />
+          <input
+            name="category"
+            placeholder="Category"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={category || ""}
+          />
+          <input
+            name="price"
+            placeholder="Price"
+            type="number"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={price || ""}
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={description || ""}
+          />
+          <input
+            name="image"
+            placeholder="Image URL"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={image || ""}
+          />
+          <input
+            name="stock"
+            placeholder="Max Quantity"
+            type="number"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            defaultValue={stock || ""}
+          />
+
+          <div className="flex justify-between pt-4">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+            >
+              Update Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
