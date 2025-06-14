@@ -53,7 +53,7 @@ export default function AdminProfile() {
     { icon: <MdDashboardCustomize />, label: "My Dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
     { icon: <FaSitemap />, label: "Manage Products", to: "manage_products" },
-    { icon: <FaUsersGear />, label: "Manage Users", to: "user_payments" },
+    { icon: <FaUsersGear />, label: "Manage Users", to: "manage_users" },
     { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },
   ];
@@ -175,7 +175,7 @@ export default function AdminProfile() {
         </header>
 
         {/* Main Content */}
-        <main className="p-4 h-[calc(100vh-185px)] overflow-auto">
+        <main className="p-1 h-[calc(100vh-183px)] overflow-auto">
           <Outlet />
         </main>
 

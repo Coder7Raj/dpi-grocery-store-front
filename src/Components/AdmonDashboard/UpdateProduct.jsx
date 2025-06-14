@@ -6,6 +6,8 @@ export default function UpdateProduct() {
   const {
     product: { _id, title, description, price, image, category, stock },
   } = useLoaderData();
+
+  // product update function
   const handleSubmit = async (e) => {
     e.preventDefault();
 

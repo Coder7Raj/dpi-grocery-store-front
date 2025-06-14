@@ -3,6 +3,7 @@ import AdminBasics from "../Components/AdmonDashboard/AdminBasics";
 import AdminProfile from "../Components/AdmonDashboard/AdminProfile";
 import ProductManage from "../Components/AdmonDashboard/ProductManage";
 import UpdateProduct from "../Components/AdmonDashboard/UpdateProduct";
+import UserManage from "../Components/AdmonDashboard/UserManage";
 import AllProducts from "../Components/AllProducts";
 import Login from "../Components/Auth/Login";
 import Register from "../Components/Auth/Register";
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
           {
             path: "manage_products",
             element: <ProductManage></ProductManage>,
+          },
+          {
+            path: "manage_users",
+            element: <UserManage></UserManage>,
           },
           {
             path: "update_product/:id",
