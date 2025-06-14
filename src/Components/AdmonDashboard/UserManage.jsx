@@ -10,7 +10,10 @@ export default function UserManage() {
   const fetchAllUsers = () => {
     fetch(`http://localhost:5000/api/user/alluser`)
       .then((res) => res.json())
-      .then((data) => setUsers(data))
+      .then((data) => {
+        setUsers(data);
+        setSearch("");
+      })
       .catch((err) => console.log(err.message));
   };
 
@@ -33,7 +36,6 @@ export default function UserManage() {
           setUsers(data);
         } else {
           setUsers([]);
-          toast.info("No users found");
         }
       })
       .catch((err) => {
@@ -42,7 +44,7 @@ export default function UserManage() {
       });
   };
 
-  // Delete user
+  // Delete user function for admin
   const deleteUser = (id) => {
     fetch(`http://localhost:5000/api/user/${id}`, {
       method: "DELETE",
@@ -90,11 +92,11 @@ export default function UserManage() {
       {/* Table */}
       <div className="overflow-x-auto bg-white rounded-lg shadow-md">
         <table className="table table-zebra w-full text-sm md:text-base">
-          <thead className="bg-gray-100 text-gray-700">
+          <thead className="bg-gray-100 text-gray-700 uppercase text-left">
             <tr>
-              <th>Name</th>
-              <th>Balance</th>
-              <th>Action</th>
+              <th className="px-6 py-4">Name</th>
+              <th className="px-6 py-4">Balance</th>
+              <th className="px-6 py-4 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -112,7 +114,7 @@ export default function UserManage() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <FaUser className="text-gray-500 text-3xl flex w-full items-center justify-center self-center" />
+                            <FaUser className="text-gray-500 text-2xl flex w-full items-center justify-center self-center mt-2" />
                           )}
                         </div>
                       </div>

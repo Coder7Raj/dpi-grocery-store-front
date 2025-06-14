@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function ProductManage() {
@@ -7,7 +8,9 @@ export default function ProductManage() {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [showFormModal, setShowFormModal] = useState(false);
-  const navigate = useNavigate();
+  const [isBroken, setIsBroken] = useState(true);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // open form function
   const openFormModal = () => {
@@ -18,139 +21,7 @@ export default function ProductManage() {
   const closeFormModal = () => {
     setShowFormModal(false);
   };
-  //
-  const items = [
-    {
-      id: 1,
-      name: "Margherita Pizza",
-      category: "Fast Food",
-      price: 8.99,
-      description:
-        "Classic Italian pizza topped with fresh mozzarella, basil, and tomato sauce.",
-      image: "https://i.postimg.cc/YC6kwNYr/Margherita-Pizza-HEADER.jpg",
-      maxQuantity: 13,
-    },
-    {
-      id: 2,
-      name: "Cheeseburger",
-      category: "Fast Food",
-      price: 6.49,
-      description:
-        "Grilled beef patty with cheese, lettuce, tomato, and onion in a soft bun.",
-      image: "https://i.postimg.cc/tCHpvmnS/Great-American-Burger.jpg",
-      maxQuantity: 14,
-    },
-    {
-      id: 3,
-      name: "Chicken Nuggets",
-      category: "Fast Food",
-      price: 5.25,
-      description:
-        "Crispy breaded chicken bites served with your choice of dipping sauce.",
-      image:
-        "https://i.postimg.cc/65Hb48Kr/20240130210635-frozen-chicken-nuggets.jpg",
-      maxQuantity: 12,
-    },
-    {
-      id: 4,
-      name: "Hot Dog",
-      category: "Fast Food",
-      price: 4.0,
-      description:
-        "Grilled sausage in a soft bun, topped with ketchup and mustard.",
-      image: "https://i.postimg.cc/5t8mg0hk/Cheeseburger-Hot-Dog2.jpg",
-      maxQuantity: 10,
-    },
-    {
-      id: 5,
-      name: "French Fries",
-      category: "Fast Food",
-      price: 2.99,
-      description: "Golden and crispy potato fries, lightly salted.",
-      image: "https://i.postimg.cc/0QQbQX0d/french-fries.jpg",
-      maxQuantity: 15,
-    },
-    {
-      id: 6,
-      name: "Fried Chicken",
-      category: "Fast Food",
-      price: 7.99,
-      description:
-        "Crispy and juicy deep-fried chicken pieces seasoned with spices.",
-      image: "https://i.postimg.cc/FHrf8KkB/Fried-Chicken.jpg",
-      maxQuantity: 12,
-    },
-    {
-      id: 7,
-      name: "Veggie Wrap",
-      category: "Fast Food",
-      price: 5.5,
-      description:
-        "Whole wheat wrap filled with grilled veggies, hummus, and fresh greens.",
-      image: "https://i.postimg.cc/7YDbJL9Z/wrap2-2000-1125.jpg",
-      maxQuantity: 11,
-    },
-    {
-      id: 8,
-      name: "Pepperoni Pizza",
-      category: "Fast Food",
-      price: 9.25,
-      description:
-        "Thin crust pizza topped with mozzarella and spicy pepperoni slices.",
-      image: "https://i.postimg.cc/52KtrSVX/Pepp-Pizza-600.jpg",
-      maxQuantity: 14,
-    },
-    {
-      id: 9,
-      name: "Chicken Shawarma",
-      category: "Fast Food",
-      price: 6.75,
-      description:
-        "Spiced grilled chicken wrapped in pita bread with garlic sauce and veggies.",
-      image: "https://i.postimg.cc/1XKmrpB5/Chicken-shawarma-4.jpg",
-      maxQuantity: 10,
-    },
-    {
-      id: 10,
-      name: "Tacos",
-      category: "Fast Food",
-      price: 5.99,
-      description:
-        "Crunchy corn tortillas filled with beef, cheese, lettuce, and salsa.",
-      image: "https://i.postimg.cc/bN3YG9dm/Beef-Tacos.jpg",
-      maxQuantity: 13,
-    },
-    {
-      id: 11,
-      name: "Grilled Salmon",
-      category: "Dinner",
-      price: 12.99,
-      description: "Tender grilled salmon fillet served with lemon and herbs.",
-      image: "https://i.postimg.cc/hjWKFC3t/featured-grilled-salmon-recipe.jpg",
-      maxQuantity: 11,
-    },
-    {
-      id: 12,
-      name: "Caesar Salad",
-      category: "Salad",
-      price: 6.25,
-      description:
-        "Romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
-      image:
-        "https://i.postimg.cc/brLPtqYZ/NCG-Dennis-Becker-Classic-Caesar-Salad-715-x-477.jpg",
-      maxQuantity: 15,
-    },
-    {
-      id: 13,
-      name: "Vegetable Stir Fry",
-      category: "Lunch",
-      price: 7.5,
-      description: "Assorted vegetables sautéed with soy sauce and garlic.",
-      image:
-        "https://i.postimg.cc/Pq6FYN1s/Thai-Vegetable-Stir-Fry-with-Lime-and-Ginger-done.png",
-      maxQuantity: 13,
-    },
-  ];
+
   //
 
   // products add function for to save in DB
@@ -258,60 +129,169 @@ export default function ProductManage() {
     setSelectedItem(null);
   };
 
+  //
+  // Function to fetch all products
+
+  const fetchAllProducts = () => {
+    setLoading(true);
+    fetch(`http://localhost:5000/api/product/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.products || []);
+        setSearch("");
+      })
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
+  };
+
+  // Load products initially
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  // Search handler for products
+  const handleSearch = () => {
+    if (!search.trim()) {
+      toast.error("Please enter a name to search.");
+      return;
+    }
+
+    fetch(`http://localhost:5000/api/product/search?q=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          setProducts(data);
+        } else {
+          setProducts([]);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error("Failed to search users");
+      });
+  };
+
   return (
     <>
-      <button
-        onClick={openFormModal}
-        className="btn btn-primary btn-outline mb-16"
-      >
-        Add Products
-      </button>
-      <p className="text-3xl text-red-700">length-{products?.length}</p>
-
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products?.map((item) => (
-          <div
-            key={item._id}
-            className="flex flex-col bg-white gap-2 shadow-md shadow-slate-300 hover:shadow-xl rounded-md"
-          >
-            <div className="h-full w-full rounded-md self-center pb-4">
-              <img
-                className="h-60 rounded-md w-full object-cover object-center"
-                src={item.image}
-                alt={item.name}
-              />
-            </div>
-            <div className="p-4 text-black flex-1">
-              <p className="text-sm text-green-500">{item.name}</p>
-              <p className="text-md font-semibold line-clamp-2">
-                {item.description}
-              </p>
-            </div>
-            <div className="px-4 pb-4 flex flex-col gap-2">
-              <button
-                onClick={() => handleShowDescription(item)}
-                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-              >
-                Description
-              </button>
-              <div className="flex gap-2">
-                <Link
-                  to={`/admin_profile/update_product/${item._id}`}
-                  className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition"
-                >
-                  Update
-                </Link>
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+      <section className="flex gap-2 mx-4 my-6">
+        <h1>Add Product:</h1>
+        <button
+          onClick={openFormModal}
+          className="btn btn-primary btn-outline mb-16"
+        >
+          Add Product
+        </button>
       </section>
+      <div className="flex flex-col md:flex-row justify-center items-center mb-6">
+        <div className="flex gap-2 mb-2 md:m-0">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2 w-64 focus:outline-none focus:ring focus:ring-blue-300"
+          />
+          <button
+            onClick={handleSearch}
+            className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Search
+          </button>
+        </div>
+        <button
+          onClick={fetchAllProducts}
+          className="w-72 flex items-center justify-center md:w-auto ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+        >
+          Reset
+        </button>
+      </div>
+      <div className="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-200 mt-6">
+        <table className="min-w-full text-sm md:text-base table-auto">
+          <thead className="bg-gray-100 text-gray-700 uppercase text-left">
+            <tr>
+              <th className="px-6 py-4">Title</th>
+              <th className="px-6 py-4">Stock</th>
+              <th className="px-6 py-4 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan="3" className="text-center py-6 text-blue-500">
+                  <span className="loading loading-bars loading-lg"></span>
+                </td>
+              </tr>
+            ) : products.length > 0 ? (
+              products.map((item) => (
+                <tr
+                  key={item._id}
+                  className="border-t hover:bg-gray-50 transition"
+                >
+                  <td className="px-1 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12 bg-gray-200 flex items-center justify-center overflow-hidden">
+                          {!isBroken && item.image ? (
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover"
+                              onError={() => setIsBroken(false)}
+                            />
+                          ) : (
+                            <IoFastFoodSharp className="text-gray-500 text-2xl flex w-full items-center justify-center self-center mt-3" />
+                          )}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-semibold text-gray-800">
+                          {item?.title?.split(" ")[0]}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {item.category}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="px-2 py-4 font-mono text-gray-800">
+                    {item.stock}
+                  </td>
+
+                  <td className="px-1 py-4 text-center">
+                    <div className="flex flex-col md:flex-row justify-center gap-2">
+                      <button
+                        onClick={() => handleShowDescription(item)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                      >
+                        Details
+                      </button>
+                      <Link
+                        to={`/admin_profile/update_product/${item._id}`}
+                        className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
+                      >
+                        Update
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="text-center py-6 text-gray-500">
+                  No products to display.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {/* Modal */}
       {showModal && selectedItem && (
