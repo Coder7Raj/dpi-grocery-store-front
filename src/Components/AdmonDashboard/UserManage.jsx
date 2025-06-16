@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function UserManage() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Function to fetch all users
   const fetchAllUsers = () => {
+    setLoading(true);
     fetch(`http://localhost:5000/api/user/alluser`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
         setSearch("");
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
   };
 
   // Load users initially
@@ -45,21 +51,44 @@ export default function UserManage() {
   };
 
   // Delete user function for admin
-  const deleteUser = (id) => {
-    fetch(`http://localhost:5000/api/user/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "User deleted successfully") {
-          toast.success(data.message);
+  const deleteUser = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure you want to delete this user?",
+        icon: "warning",
+        showDenyButton: true,
+        confirmButtonText: "Yes, delete",
+        denyButtonText: "Cancel",
+      });
+
+      if (result.isConfirmed) {
+        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+          method: "DELETE",
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.user) {
+          await Swal.fire(
+            "Deleted!",
+            "User has been deleted successfully.",
+            "success"
+          );
+
+          // Update UI after deletion
           const remainingUsers = users.filter((user) => user._id !== id);
           setUsers(remainingUsers);
+          navigate("/admin_profile");
         } else {
-          toast.error(data.message || "Failed to delete user");
+          Swal.fire("Error", data.message || "Failed to delete user", "error");
         }
-      })
-      .catch((err) => console.log(err.message));
+      } else if (result.isDenied) {
+        Swal.fire("Cancelled", "User was not deleted.", "info");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      Swal.fire("Error!", "Failed to delete user. Try again later.", "error");
+    }
   };
 
   return (
@@ -95,12 +124,17 @@ export default function UserManage() {
           <thead className="bg-gray-100 text-gray-700 uppercase text-left">
             <tr>
               <th className="px-6 py-4">Name</th>
-              <th className="px-6 py-4">Balance</th>
-              <th className="px-6 py-4 text-center">Action</th>
+              <th className="px-6 py-4">Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.length > 0 ? (
+            {loading ? (
+              <tr>
+                <td colSpan="3" className="text-center py-6 text-blue-500">
+                  <span className="loading loading-bars loading-lg"></span>
+                </td>
+              </tr>
+            ) : users.length > 0 ? (
               users.map((user) => (
                 <tr key={user._id}>
                   <td className="px-1">
@@ -127,10 +161,6 @@ export default function UserManage() {
                         </div>
                       </div>
                     </div>
-                  </td>
-
-                  <td className="font-mono text-gray-800 px-1">
-                    {user.walletBalance}
                   </td>
                   <td className="px-1">
                     <button

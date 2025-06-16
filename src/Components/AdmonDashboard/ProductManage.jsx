@@ -2,79 +2,14 @@ import { useEffect, useState } from "react";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function ProductManage() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
-  const [showFormModal, setShowFormModal] = useState(false);
-  const [isBroken, setIsBroken] = useState(true);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-
-  // open form function
-  const openFormModal = () => {
-    setShowFormModal(true);
-  };
-
-  // close form function
-  const closeFormModal = () => {
-    setShowFormModal(false);
-  };
-
-  //
-
-  // products add function for to save in DB
-  const handleAddProduct = (e) => {
-    e.preventDefault();
-
-    const title = e.target.title.value;
-    const category = e.target.category.value;
-    const price = e.target.price.value;
-    const image = e.target.image.value;
-    const description = e.target.description.value;
-    const stock = e.target.stock.value;
-
-    // console.log(name, category, price, image, description, maxQuantity);
-
-    const productData = {
-      title,
-      description,
-      price,
-      image,
-      category,
-      stock,
-    };
-    // add product to database
-
-    fetch("http://localhost:5000/api/product/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productData),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to add car");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data.product && data.product._id) {
-          toast.success("Product added");
-          e.target.reset();
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding car:", error);
-      });
-
-    //
-    // Close modal
-    closeFormModal();
-  };
-  //
 
   // fetching data from DB to show the products
   useEffect(() => {
@@ -94,17 +29,29 @@ export default function ProductManage() {
       })
       .catch((err) => console.log("FETCH ERROR:", err.message));
   }, []);
-  //
 
   // delete function for products delete
-  const handleDelete = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/api/product/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Product deleted successfully") {
+  const handleDelete = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure you want to delete this product?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it",
+        cancelButtonText: "Cancel",
+      });
+
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/api/product/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.ok && data.message === "Product deleted successfully") {
           toast.success(data.message);
           const remainingProducts = products.filter(
             (product) => product._id !== id
@@ -113,8 +60,13 @@ export default function ProductManage() {
         } else {
           toast.error(data.message || "Failed to delete product");
         }
-      })
-      .catch((err) => console.log(err.message));
+      } else {
+        await Swal.fire("Cancelled", "Product was not deleted.", "info");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      toast.error("Something went wrong. Try again.");
+    }
   };
 
   // description show in modal function
@@ -129,9 +81,7 @@ export default function ProductManage() {
     setSelectedItem(null);
   };
 
-  //
   // Function to fetch all products
-
   const fetchAllProducts = () => {
     setLoading(true);
     fetch(`http://localhost:5000/api/product/all`)
@@ -173,16 +123,7 @@ export default function ProductManage() {
 
   return (
     <>
-      <section className="flex gap-2 mx-4 my-6">
-        <h1>Add Product:</h1>
-        <button
-          onClick={openFormModal}
-          className="btn btn-primary btn-outline mb-16"
-        >
-          Add Product
-        </button>
-      </section>
-      <div className="flex flex-col md:flex-row justify-center items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-center items-center my-6">
         <div className="flex gap-2 mb-2 md:m-0">
           <input
             type="text"
@@ -231,12 +172,11 @@ export default function ProductManage() {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12 bg-gray-200 flex items-center justify-center overflow-hidden">
-                          {!isBroken && item.image ? (
+                          {item.image ? (
                             <img
                               src={item.image}
                               alt={item.title}
                               className="w-full h-full object-cover"
-                              onError={() => setIsBroken(false)}
                             />
                           ) : (
                             <IoFastFoodSharp className="text-gray-500 text-2xl flex w-full items-center justify-center self-center mt-3" />
@@ -327,68 +267,6 @@ export default function ProductManage() {
             >
               Close
             </button>
-          </div>
-        </div>
-      )}
-
-      {/*  */}
-      {/* form modal */}
-      {showFormModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Add New Product</h2>
-            <form onSubmit={handleAddProduct}>
-              <input
-                type="text"
-                name="title"
-                placeholder="Name"
-                className="w-full mb-2 p-2 border rounded"
-              />
-              <input
-                type="text"
-                name="category"
-                placeholder="Category"
-                className="w-full mb-2 p-2 border rounded"
-              />
-              <input
-                type="number"
-                name="price"
-                placeholder="Price"
-                className="w-full mb-2 p-2 border rounded"
-              />
-              <input
-                type="url"
-                name="image"
-                placeholder="Image URL"
-                className="w-full mb-2 p-2 border rounded"
-              />
-              <textarea
-                name="description"
-                placeholder="Description"
-                className="w-full mb-2 p-2 border rounded"
-              ></textarea>
-              <input
-                type="number"
-                name="stock"
-                placeholder="Max stock"
-                className="w-full mb-4 p-2 border rounded"
-              />
-              {/*  */}
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-                >
-                  Add
-                </button>
-                <button
-                  onClick={closeFormModal}
-                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       )}

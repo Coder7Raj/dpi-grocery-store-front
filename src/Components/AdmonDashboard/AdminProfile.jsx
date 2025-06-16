@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { BiSolidCartAdd } from "react-icons/bi";
 import { FaCommentDots, FaSitemap } from "react-icons/fa";
 import { FaUsersGear } from "react-icons/fa6";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
@@ -52,6 +53,7 @@ export default function AdminProfile() {
   const navItems = [
     { icon: <MdDashboardCustomize />, label: "My Dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
+    { icon: <BiSolidCartAdd />, label: "Add Product", to: "add_product" },
     { icon: <FaSitemap />, label: "Manage Products", to: "manage_products" },
     { icon: <FaUsersGear />, label: "Manage Users", to: "manage_users" },
     { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
