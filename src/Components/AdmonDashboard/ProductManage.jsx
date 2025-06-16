@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ export default function ProductManage() {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   // fetching data from DB to show the products
   useEffect(() => {
@@ -121,30 +123,67 @@ export default function ProductManage() {
       });
   };
 
+  // Filter by price for products
+
+  const handleFilter = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/product/sort?order=${sortOrder}`
+      );
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    handleFilter();
+  }, [sortOrder]);
+
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center items-center my-6">
-        <div className="flex gap-2 mb-2 md:m-0">
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border border-gray-300 rounded px-4 py-2 w-64 focus:outline-none focus:ring focus:ring-blue-300"
-          />
+      <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 my-6">
+        {/* Search Input with Icon Button */}
+        <div className="flex gap-3 px-2 w-auto">
+          <div className="relative w-64">
+            <input
+              type="text"
+              placeholder="Search by name"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="border border-gray-300 rounded px-4 py-2 w-full pr-10 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+            <button
+              onClick={handleSearch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500 hover:text-blue-600"
+            >
+              <FaSearch />
+            </button>
+          </div>
+
+          {/* Reset Button */}
           <button
-            onClick={handleSearch}
-            className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={fetchAllProducts}
+            className="md:w-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
           >
-            Search
+            Reset
           </button>
         </div>
-        <button
-          onClick={fetchAllProducts}
-          className="w-72 flex items-center justify-center md:w-auto ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-        >
-          Reset
-        </button>
+        {/* Filter by Price */}
+        <div className="flex gap-2 mt-2 md:mt-0 md:ml-4 items-center">
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value);
+              handleFilter();
+            }}
+            className="border border-gray-300 outline-none rounded px-3 py-2"
+          >
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
       </div>
       <div className="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-200 mt-6">
         <table className="min-w-full text-sm md:text-base table-auto">
@@ -188,7 +227,8 @@ export default function ProductManage() {
                           {item?.title?.split(" ")[0]}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {item.category}
+                          {item.category} <br />
+                          Price:{item.price}
                         </div>
                       </div>
                     </div>

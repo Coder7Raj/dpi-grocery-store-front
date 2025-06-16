@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useAmount } from "../Components/Custom/AmountContext";
 import BillDocument from "../Components/Custom/BillDocument";
 
-export default function CartItems() {
+export default function UserCartItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { amount, setAmount } = useAmount();
   const [localCartItems, setLocalCartItems] = useState([]);

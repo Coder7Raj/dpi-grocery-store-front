@@ -18,8 +18,8 @@ import UserPayments from "../Components/UserDashboardData/UserPayments";
 import UserProfile from "../Components/UserDashboardData/UserProfile";
 import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
-import CartItems from "../Pages/CartItems";
 import Error from "../Pages/Error";
+import UserCartItems from "../Pages/UserCartItems";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: "cartItems",
         element: (
           <PrivateRoute>
-            <CartItems></CartItems>
+            <UserCartItems></UserCartItems>
           </PrivateRoute>
         ),
       },
