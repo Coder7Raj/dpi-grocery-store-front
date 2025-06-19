@@ -1,47 +1,46 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // registered user
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
 
     const data = e.target;
     const name = data.name.value;
-    const image = data.image.value;
-    const userEmail = data.email.value;
+    const email = data.email.value;
     const password = data.password.value;
 
     const newUser = {
       name,
-      image,
-      userEmail,
+      email,
       password,
     };
+    console.log(newUser);
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(newUser),
+      });
 
-    const existingUsers =
-      JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText);
+      }
 
-    const alreadyExists = existingUsers.find(
-      (user) => user.userEmail === userEmail
-    );
-    if (alreadyExists) {
-      toast.error("User with this email already exists!");
-      return;
+      const data = await res.json();
+      console.log("Registration successful:", data);
+      // Optional: Save to localStorage or redirect
+    } catch (err) {
+      console.error("Registration failed:", err.message);
     }
-
-    // add new user
-    existingUsers.push(newUser);
-    localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("registeredUser", JSON.stringify(newUser));
-
-    navigate("/");
   };
 
   const togglePassword = () => setShowPassword(!showPassword);
@@ -60,13 +59,13 @@ export default function Register() {
             className="w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 bg-white outline-none"
             required
           />
-          <input
+          {/* <input
             type="text"
             name="image"
             placeholder="Image Link"
             className="w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 bg-white outline-none"
             required
-          />
+          /> */}
           <input
             type="email"
             name="email"

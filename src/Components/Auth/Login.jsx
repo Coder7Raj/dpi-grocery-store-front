@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,36 +8,36 @@ export default function Login() {
 
   const userInfo = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
-  const userLogin = (e) => {
+  const userLogin = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
-    // Find the user with matching email and password
-    const matchedUser = userInfo.find(
-      (user) => user.userEmail === email && user.password === password
-    );
-    if (matchedUser) {
-      localStorage.setItem("registeredUser", JSON.stringify(matchedUser));
-      localStorage.setItem("isLoggedIn", "true");
+    const data = e.target;
+    const email = data.email.value;
+    const password = data.password.value;
 
-      toast.success("Successfully logged in!", {
-        position: "top-center",
-        autoClose: 5000,
-        closeOnClick: false,
-        pauseOnHover: true,
-        theme: "colored",
+    const loginUser = {
+      email,
+      password,
+    };
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(loginUser),
       });
 
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText);
+      }
+
+      const data = await res.json();
+      console.log("Registration successful:", data);
       navigate("/");
-    } else {
-      toast.error("Something went wrong!", {
-        position: "top-center",
-        autoClose: 5000,
-        closeOnClick: false,
-        pauseOnHover: true,
-        theme: "colored",
-      });
+    } catch {
+      (err) => console.error("Registration failed:", err.message);
     }
   };
 
