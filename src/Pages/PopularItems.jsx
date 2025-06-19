@@ -3,7 +3,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 export default function PopularItems({ item }) {
-  const { name, image, price, description } = item;
+  const { title, image, price, description } = item;
 
   // cart data
   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
@@ -73,11 +73,11 @@ export default function PopularItems({ item }) {
         <img
           className="h-60 rounded-md w-full object-cover object-center"
           src={image}
-          alt={name}
+          alt={title}
         />
       </div>
       <div className="p-4 text-black flex-1">
-        <p className="text-sm text-green-500">{name}</p>
+        <p className="text-sm text-green-500">{title}</p>
         <p className="text-md font-semibold">{description}</p>
       </div>
       <div className="p-4 flex justify-between items-center gap-4">

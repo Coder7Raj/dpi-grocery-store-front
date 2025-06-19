@@ -145,18 +145,18 @@ export default function ProductManage() {
     <>
       <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 my-6">
         {/* Search Input with Icon Button */}
-        <div className="flex gap-3 px-2 w-auto">
+        <div className="flex gap-1 px-2 w-auto">
           <div className="relative w-64">
             <input
               type="text"
               placeholder="Search by name"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="border border-gray-300 rounded px-4 py-2 w-full pr-10 focus:outline-none focus:ring focus:ring-blue-300"
+              className="border border-gray-300 rounded px-4 py-2 w-full pr-10 focus:outline-none focus:ring focus:ring-green-300"
             />
             <button
               onClick={handleSearch}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500 hover:text-blue-600"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 pl-4 border-l-2 rounded-md border-green-700 text-green-500 hover:text-green-600"
             >
               <FaSearch />
             </button>
@@ -197,7 +197,7 @@ export default function ProductManage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="3" className="text-center py-6 text-blue-500">
+                <td colSpan="3" className="text-center py-6 text-green-500">
                   <span className="loading loading-bars loading-lg"></span>
                 </td>
               </tr>
@@ -242,7 +242,7 @@ export default function ProductManage() {
                     <div className="flex flex-col md:flex-row justify-center gap-2">
                       <button
                         onClick={() => handleShowDescription(item)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
                       >
                         Details
                       </button>

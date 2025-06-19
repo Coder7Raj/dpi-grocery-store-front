@@ -1,198 +1,130 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import { toast } from "react-toastify";
 import PopularItems from "../Pages/PopularItems";
 
 export default function PopularProducts() {
-  const items = [
-    {
-      id: 1,
-      name: "Margherita Pizza",
-      category: "Fast Food",
-      price: 8.99,
-      description:
-        "Classic Italian pizza topped with fresh mozzarella, basil, and tomato sauce.",
-      image: "https://i.postimg.cc/YC6kwNYr/Margherita-Pizza-HEADER.jpg",
-      maxQuantity: 13,
-    },
-    {
-      id: 2,
-      name: "Cheeseburger",
-      category: "Fast Food",
-      price: 6.49,
-      description:
-        "Grilled beef patty with cheese, lettuce, tomato, and onion in a soft bun.",
-      image: "https://i.postimg.cc/tCHpvmnS/Great-American-Burger.jpg",
-      maxQuantity: 14,
-    },
-    {
-      id: 3,
-      name: "Chicken Nuggets",
-      category: "Fast Food",
-      price: 5.25,
-      description:
-        "Crispy breaded chicken bites served with your choice of dipping sauce.",
-      image:
-        "https://i.postimg.cc/65Hb48Kr/20240130210635-frozen-chicken-nuggets.jpg",
-      maxQuantity: 12,
-    },
-    {
-      id: 4,
-      name: "Hot Dog",
-      category: "Fast Food",
-      price: 4.0,
-      description:
-        "Grilled sausage in a soft bun, topped with ketchup and mustard.",
-      image: "https://i.postimg.cc/5t8mg0hk/Cheeseburger-Hot-Dog2.jpg",
-      maxQuantity: 10,
-    },
-    {
-      id: 5,
-      name: "French Fries",
-      category: "Fast Food",
-      price: 2.99,
-      description: "Golden and crispy potato fries, lightly salted.",
-      image: "https://i.postimg.cc/0QQbQX0d/french-fries.jpg",
-      maxQuantity: 15,
-    },
-    {
-      id: 6,
-      name: "Fried Chicken",
-      category: "Fast Food",
-      price: 7.99,
-      description:
-        "Crispy and juicy deep-fried chicken pieces seasoned with spices.",
-      image: "https://i.postimg.cc/FHrf8KkB/Fried-Chicken.jpg",
-      maxQuantity: 12,
-    },
-    {
-      id: 7,
-      name: "Veggie Wrap",
-      category: "Fast Food",
-      price: 5.5,
-      description:
-        "Whole wheat wrap filled with grilled veggies, hummus, and fresh greens.",
-      image: "https://i.postimg.cc/7YDbJL9Z/wrap2-2000-1125.jpg",
-      maxQuantity: 11,
-    },
-    {
-      id: 8,
-      name: "Pepperoni Pizza",
-      category: "Fast Food",
-      price: 9.25,
-      description:
-        "Thin crust pizza topped with mozzarella and spicy pepperoni slices.",
-      image: "https://i.postimg.cc/52KtrSVX/Pepp-Pizza-600.jpg",
-      maxQuantity: 14,
-    },
-    {
-      id: 9,
-      name: "Chicken Shawarma",
-      category: "Fast Food",
-      price: 6.75,
-      description:
-        "Spiced grilled chicken wrapped in pita bread with garlic sauce and veggies.",
-      image: "https://i.postimg.cc/1XKmrpB5/Chicken-shawarma-4.jpg",
-      maxQuantity: 10,
-    },
-    {
-      id: 10,
-      name: "Tacos",
-      category: "Fast Food",
-      price: 5.99,
-      description:
-        "Crunchy corn tortillas filled with beef, cheese, lettuce, and salsa.",
-      image: "https://i.postimg.cc/bN3YG9dm/Beef-Tacos.jpg",
-      maxQuantity: 13,
-    },
-    {
-      id: 11,
-      name: "Grilled Salmon",
-      category: "Dinner",
-      price: 12.99,
-      description: "Tender grilled salmon fillet served with lemon and herbs.",
-      image: "https://i.postimg.cc/hjWKFC3t/featured-grilled-salmon-recipe.jpg",
-      maxQuantity: 11,
-    },
-    {
-      id: 12,
-      name: "Caesar Salad",
-      category: "Salad",
-      price: 6.25,
-      description:
-        "Romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
-      image:
-        "https://i.postimg.cc/brLPtqYZ/NCG-Dennis-Becker-Classic-Caesar-Salad-715-x-477.jpg",
-      maxQuantity: 15,
-    },
-    {
-      id: 13,
-      name: "Vegetable Stir Fry",
-      category: "Lunch",
-      price: 7.5,
-      description: "Assorted vegetables sautéed with soy sauce and garlic.",
-      image:
-        "https://i.postimg.cc/Pq6FYN1s/Thai-Vegetable-Stir-Fry-with-Lime-and-Ginger-done.png",
-      maxQuantity: 13,
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("asc");
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterCategory, setFilterCategory] = useState("");
+  // Function to fetch all products
+  const fetchAllProducts = () => {
+    setLoading(true);
+    fetch(`http://localhost:5000/api/product/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.products || []);
+        setSearch("");
+      })
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
+  };
 
-  const uniqueCategories = [...new Set(items.map((item) => item.category))];
+  // Load products initially
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
-  const filteredItems = items.filter((item) => {
-    const matchesSearch = item.category
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesFilter = filterCategory
-      ? item.category === filterCategory
-      : true;
-    return matchesSearch && matchesFilter;
-  });
+  // Search handler for products
+  const handleSearch = () => {
+    if (!search.trim()) {
+      toast.error("Please enter a name to search.");
+      return;
+    }
 
+    fetch(`http://localhost:5000/api/product/search?q=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          setProducts(data);
+        } else {
+          setProducts([]);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error("Failed to search users");
+      });
+  };
+
+  // Filter by price for products
+
+  const handleFilter = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/product/sort?order=${sortOrder}`
+      );
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
   return (
-    <div className="mt-20 mb-4">
-      <div className="mb-4 px-2">
-        <h1 className="text-2xl md:text-3xl font-bold text-start mb-4 text-green-600">
-          Popular Products
-        </h1>
+    <>
+      <div className="mt-20 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 my-6">
+        {/* Search Input with Icon Button */}
+        <div className="flex gap-1 px-2 w-auto">
+          <div className="relative w-64">
+            <input
+              type="text"
+              placeholder="Search by name"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="border border-gray-300 rounded px-4 py-2 w-full pr-10 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+            <button
+              onClick={handleSearch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500 hover:text-blue-600"
+            >
+              <FaSearch />
+            </button>
+          </div>
 
-        {/* Search Bar */}
-        <input
-          type="text"
-          placeholder="Search by category..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-green-50 md:w-1/2 p-2 border border-green-300 outline-none rounded mb-3"
-        />
-
-        {/* Filter Dropdown */}
-        <select
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
-          className="w-full bg-green-50 md:w-1/4 p-2 border border-green-300 outline-none rounded"
-        >
-          <option value="">All Categories</option>
-          {uniqueCategories.map((cat, index) => (
-            <option key={index} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+          {/* Reset Button */}
+          <button
+            onClick={fetchAllProducts}
+            className="md:w-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+          >
+            Reset
+          </button>
+        </div>
+        {/* Filter by Price */}
+        <div className="flex gap-2 mt-2 md:mt-0 md:ml-4 items-center">
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value);
+              handleFilter();
+            }}
+            className="border border-gray-300 outline-none rounded px-3 py-2"
+          >
+            <option value="desc">Price: Low to High</option>
+            <option value="asc">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
-      {/* Items Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:px-1 px-2">
-        {filteredItems?.length > 0 ? (
-          filteredItems?.map((item) => (
-            <PopularItems key={item.id} item={item}></PopularItems>
-          ))
-        ) : (
-          <p className="text-center col-span-full text-green-600">
-            No items found.
-          </p>
-        )}
+      <div className="mb-4">
+        {/* Items Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:px-1 px-2">
+          {loading ? (
+            <div className="col-span-full flex justify-center items-center min-h-[200px]">
+              <span className="loading loading-bars loading-lg text-green-500"></span>
+            </div>
+          ) : products?.length > 0 ? (
+            products?.map((item) => (
+              <PopularItems key={item._id} item={item}></PopularItems>
+            ))
+          ) : (
+            <p className="text-center col-span-full text-green-600">
+              No items found.
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
