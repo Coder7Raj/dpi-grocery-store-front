@@ -29,15 +29,23 @@ export default function Register() {
         credentials: "include",
         body: JSON.stringify(newUser),
       });
+      console.log("Response received:", res);
 
       if (!res.ok) {
         const errorText = await res.text();
+        console.error("Error response text:", errorText);
         throw new Error(errorText);
       }
 
-      const data = await res.json();
-      console.log("Registration successful:", data);
-      // Optional: Save to localStorage or redirect
+      const result = await res.json();
+      console.log("Parsed result:", result);
+
+      localStorage.setItem(
+        "registeredUser",
+        JSON.stringify({ name, email, password })
+      );
+      console.log("Registration successful:", result.user);
+      navigate("/");
     } catch (err) {
       console.error("Registration failed:", err.message);
     }

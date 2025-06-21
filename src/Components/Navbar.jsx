@@ -1,16 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo from "../assets/logo-wev.png";
+import { useAuth } from "./Auth/AuthContext";
 import { useAmount } from "./Custom/AmountContext";
 
 export default function Navbar() {
+  const { user } = useAuth();
+  console.log(user);
   const { amount, setAmount } = useAmount();
   const [showModal, setShowModal] = useState(false);
   const [newAmount, setNewAmount] = useState(amount);
+  //
+  const [users, setUser] = useState();
+
+  //
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/user/alluser`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
   //
   const navigate = useNavigate();
 
@@ -28,28 +44,28 @@ export default function Navbar() {
     navigate("/cartItems");
   };
 
-  //  user data _&_ logged in or not
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const userInfo = isLoggedIn
-    ? JSON.parse(localStorage.getItem("registeredUser"))
-    : null;
+  // //  user data _&_ logged in or not
+  // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  // const userInfo = isLoggedIn
+  //   ? JSON.parse(localStorage.getItem("registeredUser"))
+  //   : null;
 
-  // Get all cart items
-  const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  // // Get all cart items
+  // const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Filter cart items for the logged-in user only
-  const filteredCartItems = allCartItems.filter(
-    (item) => item.email === userInfo?.userEmail
-  );
+  // // Filter cart items for the logged-in user only
+  // const filteredCartItems = allCartItems.filter(
+  //   (item) => item.email === userInfo?.userEmail
+  // );
 
-  const totalAmount = filteredCartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-  const leastAmount = parseFloat(totalAmount.toFixed(3));
+  // const totalAmount = filteredCartItems.reduce(
+  //   (sum, item) => sum + item.price * item.quantity,
+  //   0
+  // );
+  // const leastAmount = parseFloat(totalAmount.toFixed(3));
   //
   //
-  //
+  // account money function
   const handleOpenModal = () => {
     setNewAmount(amount);
     setShowModal(true);
@@ -69,11 +85,24 @@ export default function Navbar() {
   //
   //
   // logged out user
-  const handleUserLogout = () => {
-    localStorage.setItem("isLoggedIn", "false");
+  const handleUserLogout = async () => {
+    console.log("clicked");
 
-    navigate("/");
+    try {
+      await fetch("http://localhost:5000/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
+
   // login user
   const userLogin = () => {
     navigate("/user_login");
@@ -222,9 +251,10 @@ export default function Navbar() {
                 />
               </svg>
               <span className="badge bg-white text-black border-none outline-none badge-sm mr-2 indicator-item">
-                {isLoggedIn && filteredCartItems
+                {/* {isLoggedIn && filteredCartItems
                   ? filteredCartItems?.length
-                  : 0}
+                  : 0} */}
+                item.length
               </span>
             </div>
           </div>
@@ -234,13 +264,14 @@ export default function Navbar() {
           >
             <div className="card-body">
               <span className="text-lg font-bold">
-                {isLoggedIn && filteredCartItems
+                {/* {isLoggedIn && filteredCartItems
                   ? filteredCartItems?.length
-                  : 0}
+                  : 0} */}
                 _Items Added
               </span>
               <span className="text-info">
-                Total: ${isLoggedIn && filteredCartItems ? leastAmount : 0}
+                {/* Total: ${isLoggedIn && filteredCartItems ? leastAmount : 0} */}
+                price
               </span>
               <div className="card-actions">
                 <button
@@ -260,8 +291,8 @@ export default function Navbar() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              {isLoggedIn ? (
-                <img alt="user image" src={userInfo?.image} />
+              {user?.email && user.image?.trim() ? (
+                <img alt="user image" src={user.image} />
               ) : (
                 <div className="h-[80%] w-[80%] m-auto">
                   <LuCircleUser className="h-full w-full" />
@@ -282,7 +313,7 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li>
-              {isLoggedIn ? (
+              {user?.email ? (
                 <button
                   className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
                   onClick={handleUserLogout}

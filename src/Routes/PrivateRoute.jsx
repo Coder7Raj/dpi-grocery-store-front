@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Components/Auth/AuthContext";
 
 export default function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  console.log(user);
   const navigate = useNavigate();
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    if (!isLoggedIn) {
+    if (!user) {
       navigate("/user_login");
     } else {
       setIsAuthChecked(true);

@@ -1,12 +1,15 @@
+import axios from "axios";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 export default function Login() {
+  const { setUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const userInfo = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+  // const userInfo = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
   const userLogin = async (e) => {
     e.preventDefault();
@@ -15,18 +18,19 @@ export default function Login() {
     const email = data.email.value;
     const password = data.password.value;
 
-    const loginUser = {
-      email,
-      password,
-    };
-
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(loginUser),
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        { email, password },
+        { withCredentials: true }
+      );
+      console.log(res.status);
+      console.log(res.data.user);
+      if (res.data.user) {
+        setUser(res.data.user);
+        navigate("/");
+        console.log("user,", user);
+      }
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -34,8 +38,12 @@ export default function Login() {
       }
 
       const data = await res.json();
-      console.log("Registration successful:", data);
       navigate("/");
+      if (res.status == 200) {
+        // login(data.user);
+        console.log(res);
+      }
+      console.log("Registration successful:", data);
     } catch {
       (err) => console.error("Registration failed:", err.message);
     }

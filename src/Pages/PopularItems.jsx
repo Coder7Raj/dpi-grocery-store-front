@@ -3,7 +3,7 @@ import { IoCartOutline } from "react-icons/io5";
 
 export default function PopularItems({ item }) {
   const { _id, title, image, stock, price, description } = item;
-  console.log(item);
+  // console.log(item);
 
   // cart data
   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
@@ -67,9 +67,9 @@ export default function PopularItems({ item }) {
   //     theme: "colored",
   //   });
   // };
-  const addCart = async (id) => {
+  const addCart = async (productId) => {
     // console.log(id);
-    const details = { id, quantity: 1 };
+    const details = { productId, quantity: 5 };
     try {
       const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
         method: "POST",
