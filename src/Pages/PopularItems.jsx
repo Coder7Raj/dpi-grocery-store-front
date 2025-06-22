@@ -1,20 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { IoCartOutline } from "react-icons/io5";
+import { useAuth } from "../Components/Auth/AuthContext";
 
 export default function PopularItems({ item }) {
-  const { _id, title, image, stock, price, description } = item;
+  const { user } = useAuth();
+  console.log(user._id);
+  const { _id, title, image, price, description } = item;
   // console.log(item);
 
   // cart data
-  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+  // const cartData = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // logged in user data
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const userInfo = isLoggedIn
-    ? JSON.parse(localStorage.getItem("registeredUser"))
-    : null;
+  // // logged in user data
+  // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  // const userInfo = isLoggedIn
+  //   ? JSON.parse(localStorage.getItem("registeredUser"))
+  //   : null;
 
-  const email = userInfo?.userEmail;
+  // const email = userInfo?.userEmail;
 
   const fetchCart = async () => {
     return JSON.parse(localStorage.getItem("cart")) || [];
@@ -26,50 +29,9 @@ export default function PopularItems({ item }) {
     queryFn: fetchCart,
   });
 
-  // add to cart functionality
-  // const addCart = async () => {
-  //   if (!email) {
-  //     toast.warn("Please Login First!", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       closeOnClick: false,
-  //       pauseOnHover: true,
-  //       theme: "colored",
-  //     });
-  //     return;
-  //   }
-
-  //   // checking the item is exist or not
-  //   const exist = cartData.find(
-  //     (cartItem) => cartItem?.id === item?.id && cartItem?.email === email
-  //   );
-
-  //   if (exist) {
-  //     toast.warn("Product already in cart!", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       closeOnClick: false,
-  //       pauseOnHover: true,
-  //       theme: "colored",
-  //     });
-  //     return;
-  //   }
-
-  //   // adding data
-  //   cartData.push({ ...item, quantity: 1, email });
-  //   localStorage.setItem("cart", JSON.stringify(cartData));
-  //   // refetching
-  //   await refetch();
-
-  //   toast.success("Product added to cart!", {
-  //     position: "top-center",
-  //     autoClose: 3000,
-  //     theme: "colored",
-  //   });
-  // };
   const addCart = async (productId) => {
-    // console.log(id);
-    const details = { productId, quantity: 5 };
+    const userId = user?._id;
+    const details = { productId, userId };
     try {
       const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
         method: "POST",

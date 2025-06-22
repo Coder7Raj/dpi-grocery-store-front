@@ -55,6 +55,7 @@ export default function AdminProfile() {
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
     { icon: <BiSolidCartAdd />, label: "Add Product", to: "add_product" },
     { icon: <FaSitemap />, label: "Manage Products", to: "manage_products" },
+    { icon: <FaSitemap />, label: "Manage Orders", to: "manage_order" },
     { icon: <FaUsersGear />, label: "Manage Users", to: "manage_users" },
     { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AddProducts from "../Components/AdmonDashboard/AddProducts";
 import AdminBasics from "../Components/AdmonDashboard/AdminBasics";
 import AdminProfile from "../Components/AdmonDashboard/AdminProfile";
+import AdminOrders from "../Components/AdmonDashboard/OrderManage";
 import ProductManage from "../Components/AdmonDashboard/ProductManage";
 import UpdateProduct from "../Components/AdmonDashboard/UpdateProduct";
 import UserManage from "../Components/AdmonDashboard/UserManage";
@@ -10,6 +11,7 @@ import Login from "../Components/Auth/Login";
 import Register from "../Components/Auth/Register";
 import Home from "../Components/Home";
 import Root from "../Components/Root";
+import MyOrders from "../Components/UserDashboardData/myOrder";
 import UserAccounts from "../Components/UserDashboardData/UserAccounts";
 import UserBasics from "../Components/UserDashboardData/UserBasics";
 import UserBlogs from "../Components/UserDashboardData/UserBlogs";
@@ -80,6 +82,11 @@ const router = createBrowserRouter([
             path: "user_accounts",
             element: <UserAccounts></UserAccounts>,
           },
+
+          {
+            path: "myorder",
+            element: <MyOrders></MyOrders>,
+          },
           {
             path: "user_blogs",
             element: <UserBlogs></UserBlogs>,
@@ -108,6 +115,10 @@ const router = createBrowserRouter([
           {
             path: "manage_products",
             element: <ProductManage></ProductManage>,
+          },
+          {
+            path: "manage_order",
+            element: <AdminOrders></AdminOrders>,
           },
           {
             path: "manage_users",

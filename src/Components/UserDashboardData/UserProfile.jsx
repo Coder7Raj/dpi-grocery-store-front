@@ -52,6 +52,7 @@ export default function UserProfile() {
   const navItems = [
     { icon: <MdDashboardCustomize />, label: "My dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
+    { icon: <RiAccountBoxFill />, label: "My Order", to: "myOrder" },
     { icon: <ImBlogger2 />, label: "Blogs", to: "user_blogs" },
     { icon: <FaMoneyCheckAlt />, label: "Payments", to: "user_payments" },
     { icon: <FaCommentDots />, label: "Complaint", to: "user_complaints" },
