@@ -1,37 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { IoCartOutline } from "react-icons/io5";
-import { useAuth } from "../Components/Auth/AuthContext";
 
 export default function PopularItems({ item }) {
-  const { user } = useAuth();
-  console.log(user._id);
   const { _id, title, image, price, description } = item;
-  // console.log(item);
 
-  // cart data
-  // const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // // logged in user data
-  // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  // const userInfo = isLoggedIn
-  //   ? JSON.parse(localStorage.getItem("registeredUser"))
-  //   : null;
-
-  // const email = userInfo?.userEmail;
-
-  const fetchCart = async () => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-  };
-
-  // using tanstack query to refetch
-  const { data: cartItems = [], refetch } = useQuery({
-    queryKey: ["cart"],
-    queryFn: fetchCart,
-  });
+  const queryClient = useQueryClient();
 
   const addCart = async (productId) => {
-    const userId = user?._id;
+    const userId = _id;
     const details = { productId, userId };
+
     try {
       const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
         method: "POST",
@@ -41,8 +19,8 @@ export default function PopularItems({ item }) {
       });
 
       const data = await res.json();
-      console.log(data);
-      refetch();
+
+      queryClient.setQueryData(["cart"], data.cart);
     } catch (err) {
       console.log("Add to cart failed:", err.message);
     }

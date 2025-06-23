@@ -47,7 +47,7 @@ export default function AdminOrders() {
 
   if (loading) return <p className="text-center mt-10">Loading orders...</p>;
 
-  if (!orders.length)
+  if (!orders?.length)
     return <p className="text-center mt-10">No pending orders found.</p>;
 
   return (
@@ -57,7 +57,7 @@ export default function AdminOrders() {
       </h2>
 
       <ul className="space-y-6">
-        {orders.map((order) => (
+        {orders?.map((order) => (
           <li
             key={order?._id}
             className="border rounded-lg shadow-md p-5 bg-white space-y-4"
@@ -86,7 +86,7 @@ export default function AdminOrders() {
             <div>
               <h4 className="font-semibold mb-2">Items:</h4>
               <ul className="space-y-2">
-                {order.items.map((item, idx) => (
+                {order?.items?.map((item, idx) => (
                   <li key={idx} className="flex items-center gap-4">
                     <img
                       src={item.product?.image}

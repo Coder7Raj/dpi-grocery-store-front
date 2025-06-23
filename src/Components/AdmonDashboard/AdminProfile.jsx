@@ -9,11 +9,10 @@ import { RiAccountBoxFill } from "react-icons/ri";
 import { TbArrowBack } from "react-icons/tb";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import logo from "../../assets/logo-wev.png";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function AdminProfile() {
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  const name = userInfo?.name;
-  const image = userInfo?.image;
+  const { user } = useAuth();
 
   const location = useLocation();
 
@@ -157,7 +156,7 @@ export default function AdminProfile() {
               className="px-2 py-3 flex items-center space-x-2 hover:bg-green-500 border-none outline-none rounded-md cursor-pointer"
             >
               <img
-                src={image}
+                src={user?.image}
                 alt="User"
                 className="w-8 h-8 rounded-full object-cover"
               />

@@ -10,6 +10,9 @@ export default function UserCartItems() {
   const [address, setAddress] = useState("");
   const [loadingOrder, setLoadingOrder] = useState(false);
 
+  // New state to handle deleting items
+  const [loadingDelete, setLoadingDelete] = useState(false);
+
   // Extract fetchCart function so you can call it multiple times
   const fetchCart = async () => {
     setLoading(true);
@@ -78,12 +81,39 @@ export default function UserCartItems() {
     }
   };
 
+  // Delete item handler
+  const handleDeleteItem = async (productId) => {
+    console.log(productId);
+    if (
+      !window.confirm(
+        "Are you sure you want to remove this item from the cart?"
+      )
+    ) {
+      return;
+    }
+    setLoadingDelete(true);
+    try {
+      await axios.delete(
+        `http://localhost:5000/api/cart/delete/${productId}`, // Adjust your API endpoint accordingly
+        { withCredentials: true }
+      );
+      alert("Item removed from cart.");
+      // Refresh cart data after deletion
+      fetchCart();
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+      alert("Failed to remove item. Please try again.");
+    } finally {
+      setLoadingDelete(false);
+    }
+  };
+
   if (loading) return <p className="text-center mt-10">Loading cart...</p>;
   if (!cartData?.cart || cartData.cart.items.length === 0)
     return <p className="text-center mt-10">Your cart is empty.</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4 flex flex-col h-[calc(100vh-183px)]">
+    <div className="pt-24 max-w-4xl mx-auto p-4 flex flex-col h-[calc(100vh-183px)]">
       <h2 className="text-3xl font-semibold mb-6 text-center text-green-700">
         Your Cart Items
       </h2>
@@ -116,6 +146,15 @@ export default function UserCartItems() {
                 </p>
               </div>
             </div>
+
+            {/* Delete Button */}
+            <button
+              onClick={() => handleDeleteItem(item._id)}
+              disabled={loadingDelete}
+              className="absolute top-3 right-3 text-red-600 hover:text-red-800 font-bold px-3 py-1 border border-red-600 rounded transition disabled:opacity-50"
+            >
+              {loadingDelete ? "Removing..." : "Delete"}
+            </button>
           </li>
         ))}
       </ul>

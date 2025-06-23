@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
@@ -7,15 +6,20 @@ import { toast } from "react-toastify";
 import logo from "../assets/logo-wev.png";
 import { useAuth } from "./Auth/AuthContext";
 import { useAmount } from "./Custom/AmountContext";
+import { useCart } from "./Custom/useCart";
 
 export default function Navbar() {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
   const { amount, setAmount } = useAmount();
   const [showModal, setShowModal] = useState(false);
   const [newAmount, setNewAmount] = useState(amount);
+
   //
   const [users, setUser] = useState();
+  const { data: cart = [] } = useCart();
+  console.log(cart);
+  const navigate = useNavigate();
 
   //
   useEffect(() => {
@@ -23,49 +27,17 @@ export default function Navbar() {
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
-        console.log(data);
       })
       .catch((err) => console.log(err.message));
   }, []);
   //
-  const navigate = useNavigate();
 
-  const fetchCart = async () => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-  };
-
-  const { data: cartItems = [] } = useQuery({
-    queryKey: ["cart"],
-    queryFn: fetchCart,
-  });
   //
 
   const viewCart = () => {
     navigate("/cartItems");
   };
 
-  // //  user data _&_ logged in or not
-  // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  // const userInfo = isLoggedIn
-  //   ? JSON.parse(localStorage.getItem("registeredUser"))
-  //   : null;
-
-  // // Get all cart items
-  // const allCartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // // Filter cart items for the logged-in user only
-  // const filteredCartItems = allCartItems.filter(
-  //   (item) => item.email === userInfo?.userEmail
-  // );
-
-  // const totalAmount = filteredCartItems.reduce(
-  //   (sum, item) => sum + item.price * item.quantity,
-  //   0
-  // );
-  // const leastAmount = parseFloat(totalAmount.toFixed(3));
-  //
-  //
-  // account money function
   const handleOpenModal = () => {
     setNewAmount(amount);
     setShowModal(true);
@@ -83,7 +55,7 @@ export default function Navbar() {
   };
 
   //
-  //
+
   // logged out user
   const handleUserLogout = async () => {
     console.log("clicked");
@@ -97,7 +69,7 @@ export default function Navbar() {
         credentials: "include",
       });
 
-      navigate("/");
+      navigate("/user_login");
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -251,10 +223,7 @@ export default function Navbar() {
                 />
               </svg>
               <span className="badge bg-white text-black border-none outline-none badge-sm mr-2 indicator-item">
-                {/* {isLoggedIn && filteredCartItems
-                  ? filteredCartItems?.length
-                  : 0} */}
-                item.length
+                {cart?.length}
               </span>
             </div>
           </div>

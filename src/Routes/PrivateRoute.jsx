@@ -1,28 +1,16 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Components/Auth/AuthContext";
 
 export default function PrivateRoute({ children }) {
-  const { user } = useAuth();
-  console.log(user);
-  const navigate = useNavigate();
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/user_login");
-    } else {
-      setIsAuthChecked(true);
-    }
-  }, [navigate]);
-
-  if (!isAuthChecked) {
+  if (loading)
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-[900px] flex w-full m-auto items-center justify-center self-center">
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
-  }
+
+  if (!user) return <Navigate to="/login" replace />;
 
   return children;
 }
