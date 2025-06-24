@@ -20,13 +20,16 @@ export default function AddProducts() {
       stock,
     };
 
-    fetch("http://localhost:5000/api/product/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productData),
-    })
+    fetch(
+      "https://dpi-grocery-store-backend-1.onrender.com/api/product/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to add product");

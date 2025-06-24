@@ -24,7 +24,7 @@ export default function UserDashboard() {
 
     try {
       const res = await axios.put(
-        "http://localhost:5000/api/profile/update-profile",
+        "https://dpi-grocery-store-backend-1.onrender.com/api/profile/update-profile",
         formData,
         {
           headers: {
@@ -62,7 +62,7 @@ export default function UserDashboard() {
     const fetchBalance = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/wallet/balance",
+          "https://dpi-grocery-store-backend-1.onrender.com/api/wallet/balance",
           {
             withCredentials: true, // if cookies/session needed
           }
@@ -81,7 +81,7 @@ export default function UserDashboard() {
     const fetchPendingOrders = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/order/pendingOrder",
+          "https://dpi-grocery-store-backend-1.onrender.com/api/order/pendingOrder",
           {
             withCredentials: true,
           }
@@ -99,7 +99,7 @@ export default function UserDashboard() {
     const fetchCompletedOrders = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/order/completedOrder",
+          "https://dpi-grocery-store-backend-1.onrender.com/api/order/completedOrder",
           { withCredentials: true }
         );
         setCompletedOrders(res.data.orders);
@@ -121,7 +121,7 @@ export default function UserDashboard() {
           onClick={handleImageClick}
         >
           <img
-            src={`http://localhost:5000/uploads/${selectedImage}`}
+            src={`https://dpi-grocery-store-backend-1.onrender.com/uploads/${selectedImage}`}
             alt="Profile"
             className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
           />

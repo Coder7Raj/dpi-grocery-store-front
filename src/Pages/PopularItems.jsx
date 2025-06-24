@@ -10,12 +10,15 @@ export default function PopularItems({ item }) {
     const details = { productId };
 
     try {
-      const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(details),
-      });
+      const res = await fetch(
+        `https://dpi-grocery-store-backend-1.onrender.com/api/cart/addCart`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(details),
+        }
+      );
 
       const data = await res.json();
       getCart();

@@ -18,7 +18,7 @@ export default function MyAccount() {
   const fetchHistory = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/wallet/history",
+        "https://dpi-grocery-store-backend-1.onrender.com/api/wallet/history",
         {
           withCredentials: true,
         }
@@ -34,7 +34,7 @@ export default function MyAccount() {
       const numericAmount = Number(amount);
 
       const res = await axios.post(
-        "http://localhost:5000/api/wallet/useCoin",
+        "https://dpi-grocery-store-backend-1.onrender.com/api/wallet/useCoin",
         { coinsToUse: numericAmount },
         { withCredentials: true }
       );
@@ -54,7 +54,7 @@ export default function MyAccount() {
     try {
       const numericAmount = Number(balanceAmount);
       const res = await axios.post(
-        `http://localhost:5000/api/wallet/useBalance`,
+        `https://dpi-grocery-store-backend-1.onrender.com/api/wallet/useBalance`,
         { coinsToBuy: numericAmount },
         { withCredentials: true }
       );
@@ -79,7 +79,7 @@ export default function MyAccount() {
       }
 
       const res = await axios.post(
-        `http://localhost:5000/api/wallet/transfer`,
+        `https://dpi-grocery-store-backend-1.onrender.com/api/wallet/transfer`,
         {
           receiverPayId: transferEmail,
           amount: numericAmount,

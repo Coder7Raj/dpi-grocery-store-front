@@ -45,8 +45,12 @@ export default function AdminBasics() {
     const fetchData = async () => {
       try {
         const [productRes, userRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/product/all"),
-          axios.get("http://localhost:5000/api/user/alluser"),
+          axios.get(
+            "https://dpi-grocery-store-backend-1.onrender.com/api/product/all"
+          ),
+          axios.get(
+            "https://dpi-grocery-store-backend-1.onrender.com/api/user/alluser"
+          ),
         ]);
 
         setProducts(productRes.data?.products || []);

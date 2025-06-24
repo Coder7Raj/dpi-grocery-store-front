@@ -10,9 +10,12 @@ export const CartProvider = ({ children }) => {
 
   const getCart = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cart/getCart", {
-        withCredentials: true, // ✅ this is required to send the cookie
-      });
+      const res = await axios.get(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/cart/getCart",
+        {
+          withCredentials: true, // ✅ this is required to send the cookie
+        }
+      );
       setCart(res.data.cart.items);
     } catch (err) {
       console.error("Error fetching cart:", err);

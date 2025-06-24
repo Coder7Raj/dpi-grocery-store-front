@@ -20,14 +20,17 @@ export default function Register() {
       password,
     };
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(newUser),
-      });
+      const res = await fetch(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(newUser),
+        }
+      );
 
       if (!res.ok) {
         const errorText = await res.text();

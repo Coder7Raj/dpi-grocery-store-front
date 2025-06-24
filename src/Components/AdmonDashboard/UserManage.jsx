@@ -13,7 +13,7 @@ export default function UserManage() {
   // Function to fetch all users
   const fetchAllUsers = () => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/user/alluser`)
+    fetch(`https://dpi-grocery-store-backend-1.onrender.com/api/user/alluser`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -35,7 +35,9 @@ export default function UserManage() {
       return;
     }
 
-    fetch(`http://localhost:5000/api/user/search?search=${search}`)
+    fetch(
+      `https://dpi-grocery-store-backend-1.onrender.com/api/user/search?search=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
@@ -62,9 +64,12 @@ export default function UserManage() {
       });
 
       if (result.isConfirmed) {
-        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
-          method: "DELETE",
-        });
+        const response = await fetch(
+          `https://dpi-grocery-store-backend-1.onrender.com/api/user/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
         const data = await response.json();
 

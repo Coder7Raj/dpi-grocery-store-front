@@ -12,7 +12,7 @@ export default function PopularProducts() {
   // Function to fetch all products
   const fetchAllProducts = () => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/product/all`)
+    fetch(`https://dpi-grocery-store-backend-1.onrender.com/api/product/all`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products || []);
@@ -34,7 +34,9 @@ export default function PopularProducts() {
       return;
     }
 
-    fetch(`http://localhost:5000/api/product/search?q=${search}`)
+    fetch(
+      `https://dpi-grocery-store-backend-1.onrender.com/api/product/search?q=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
@@ -54,7 +56,7 @@ export default function PopularProducts() {
   const handleFilter = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/product/sort?order=${sortOrder}`
+        `https://dpi-grocery-store-backend-1.onrender.com/api/product/sort?order=${sortOrder}`
       );
       const data = await response.json();
       setProducts(data);

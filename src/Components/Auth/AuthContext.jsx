@@ -16,9 +16,12 @@ export const AuthProvider = ({ children }) => {
   // ✅ Move fetchUser here (outside useEffect)
   const fetchUser = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/me", {
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/me",
+        {
+          credentials: "include",
+        }
+      );
       if (res.ok) {
         const data = await res.json();
         setUser(data.user);
@@ -43,10 +46,13 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      await fetch(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
       setUser(null);
     } catch (err) {
       console.error("Logout failed:", err);

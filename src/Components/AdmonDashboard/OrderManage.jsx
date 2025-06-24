@@ -10,9 +10,12 @@ export default function AdminOrders() {
   // Fetch all pending orders
   const fetchPendingOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/order/pending", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/order/pending",
+        {
+          withCredentials: true,
+        }
+      );
       setOrders(res.data.orders);
     } catch (error) {
       console.error("Failed to fetch pending orders:", error);
@@ -30,7 +33,7 @@ export default function AdminOrders() {
     setUpdating(orderId);
     try {
       await axios.put(
-        `http://localhost:5000/api/order/status/${orderId}`,
+        `https://dpi-grocery-store-backend-1.onrender.com/api/order/status/${orderId}`,
         { status: "completed" },
         { withCredentials: true }
       );

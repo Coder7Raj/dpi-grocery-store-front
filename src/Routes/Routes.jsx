@@ -115,7 +115,7 @@ const router = createBrowserRouter([
             element: <UpdateProduct></UpdateProduct>,
             loader: async ({ params }) => {
               const res = await fetch(
-                `http://localhost:5000/api/product/${params.id}`
+                `https://dpi-grocery-store-backend-1.onrender.com/api/product/${params.id}`
               );
               const data = await res.json();
               return data; // or data.product or data.data based on API

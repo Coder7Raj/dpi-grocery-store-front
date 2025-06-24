@@ -46,13 +46,16 @@ export default function Navbar() {
   // logged out user
   const handleUserLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      await fetch(
+        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/logout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       navigate("/user_login");
     } catch (error) {
