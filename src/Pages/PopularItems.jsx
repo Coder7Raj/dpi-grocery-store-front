@@ -1,14 +1,13 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { IoCartOutline } from "react-icons/io5";
+import { useCart } from "../Components/Auth/CartContext";
 
 export default function PopularItems({ item }) {
   const { _id, title, image, price, description } = item;
 
-  const queryClient = useQueryClient();
+  const { getCart } = useCart();
 
   const addCart = async (productId) => {
-    const userId = _id;
-    const details = { productId, userId };
+    const details = { productId };
 
     try {
       const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
@@ -19,8 +18,8 @@ export default function PopularItems({ item }) {
       });
 
       const data = await res.json();
-
-      queryClient.setQueryData(["cart"], data.cart);
+      getCart();
+      console.log(data);
     } catch (err) {
       console.log("Add to cart failed:", err.message);
     }

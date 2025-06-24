@@ -58,11 +58,8 @@ const router = createBrowserRouter([
       },
       {
         path: "all_products",
-        element: (
-          <PrivateRoute>
-            <AllProducts></AllProducts>
-          </PrivateRoute>
-        ),
+
+        element: <AllProducts></AllProducts>,
       },
       // User Credentials
       {

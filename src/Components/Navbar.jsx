@@ -1,37 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo from "../assets/logo-wev.png";
 import { useAuth } from "./Auth/AuthContext";
+import { useCart } from "./Auth/CartContext";
 import { useAmount } from "./Custom/AmountContext";
-import { useCart } from "./Custom/useCart";
 
 export default function Navbar() {
   const { user } = useAuth();
-  console.log("user");
   const { amount, setAmount } = useAmount();
   const [showModal, setShowModal] = useState(false);
   const [newAmount, setNewAmount] = useState(amount);
-
-  //
-  // const [users, setUser] = useState([]);
-  const { data: cart = [] } = useCart();
   const navigate = useNavigate();
 
   //
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/api/user/alluser`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUser(data);
-  //     })
-  //     .catch((err) => console.log(err.message));
-  // }, []);
-  //
+  // const { data: cart = [] } = useCart();
+  // console.log(cart);
+  const { cart, getCart } = useCart();
+  console.log(cart);
 
-  //
+  useEffect(() => {
+    getCart();
+  }, []);
 
   const viewCart = () => {
     navigate("/cartItems");

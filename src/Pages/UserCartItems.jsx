@@ -83,22 +83,14 @@ export default function UserCartItems() {
 
   // Delete item handler
   const handleDeleteItem = async (productId) => {
-    console.log(productId);
-    if (
-      !window.confirm(
-        "Are you sure you want to remove this item from the cart?"
-      )
-    ) {
-      return;
-    }
     setLoadingDelete(true);
     try {
-      await axios.delete(
-        `http://localhost:5000/api/cart/delete/${productId}`, // Adjust your API endpoint accordingly
+      const response = await axios.delete(
+        `http://localhost:5000/api/cart/delete/${productId}`,
         { withCredentials: true }
       );
+      console.log("Delete response:", response.data);
       alert("Item removed from cart.");
-      // Refresh cart data after deletion
       fetchCart();
     } catch (error) {
       console.error("Failed to delete item:", error);
@@ -110,7 +102,7 @@ export default function UserCartItems() {
 
   if (loading) return <p className="text-center mt-10">Loading cart...</p>;
   if (!cartData?.cart || cartData.cart.items.length === 0)
-    return <p className="text-center mt-10">Your cart is empty.</p>;
+    return <p className="h-[730px] pt-20 text-center">Your cart is empty.</p>;
 
   return (
     <div className="pt-24 max-w-4xl mx-auto p-4 flex flex-col h-[calc(100vh-183px)]">
@@ -149,7 +141,7 @@ export default function UserCartItems() {
 
             {/* Delete Button */}
             <button
-              onClick={() => handleDeleteItem(item._id)}
+              onClick={() => handleDeleteItem(item.productId._id)}
               disabled={loadingDelete}
               className="absolute top-3 right-3 text-red-600 hover:text-red-800 font-bold px-3 py-1 border border-red-600 rounded transition disabled:opacity-50"
             >

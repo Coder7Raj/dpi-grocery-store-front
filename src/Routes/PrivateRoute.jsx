@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../Components/Auth/AuthContext";
 
 export default function PrivateRoute({ children }) {
@@ -10,7 +11,7 @@ export default function PrivateRoute({ children }) {
       </div>
     );
 
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/user_login" replace />;
 
   return children;
 }
