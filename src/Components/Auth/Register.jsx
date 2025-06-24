@@ -19,7 +19,6 @@ export default function Register() {
       email,
       password,
     };
-    console.log(newUser);
     try {
       const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
@@ -29,7 +28,6 @@ export default function Register() {
         credentials: "include",
         body: JSON.stringify(newUser),
       });
-      console.log("Response received:", res);
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -38,13 +36,11 @@ export default function Register() {
       }
 
       const result = await res.json();
-      console.log("Parsed result:", result);
 
       localStorage.setItem(
         "registeredUser",
         JSON.stringify({ name, email, password })
       );
-      console.log("Registration successful:", result.user);
       navigate("/");
     } catch (err) {
       console.error("Registration failed:", err.message);

@@ -1,11 +1,12 @@
 import { IoCartOutline } from "react-icons/io5";
+import { useCart } from "./Auth/CartContext";
 
 export default function Products({ item }) {
   const { _id, title, image, price, description } = item;
 
+  const { getCart } = useCart();
   const addCart = async (productId) => {
-    const userId = user?._id;
-    const details = { productId, userId };
+    const details = { productId };
     try {
       const res = await fetch(`http://localhost:5000/api/cart/addCart`, {
         method: "POST",
@@ -15,8 +16,8 @@ export default function Products({ item }) {
       });
 
       const data = await res.json();
-      console.log(data);
-      refetch();
+
+      getCart();
     } catch (err) {
       console.log("Add to cart failed:", err.message);
     }

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { BiSolidCartAdd } from "react-icons/bi";
-import { FaCommentDots, FaSitemap } from "react-icons/fa";
+import { FaSitemap } from "react-icons/fa";
 import { FaUsersGear } from "react-icons/fa6";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { MdDashboardCustomize } from "react-icons/md";
-import { RiAccountBoxFill } from "react-icons/ri";
 import { TbArrowBack } from "react-icons/tb";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-wev.png";
 import { useAuth } from "../Auth/AuthContext";
 
@@ -15,12 +14,30 @@ export default function AdminProfile() {
   const { user } = useAuth();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const mobile = window.innerWidth < 768;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showSidebar, setShowSidebar] = useState(true); // for mobile toggle
   const [collapseSidebar, setCollapseSidebar] = useState(false); // for desktop toggle
+
+  // logged out user
+  const handleUserLogout = async () => {
+    try {
+      await fetch("http://localhost:5000/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      navigate("/user_login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   // Update screen size info
   useEffect(() => {
@@ -51,12 +68,12 @@ export default function AdminProfile() {
 
   const navItems = [
     { icon: <MdDashboardCustomize />, label: "My Dashboard", to: "" },
-    { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
+
     { icon: <BiSolidCartAdd />, label: "Add Product", to: "add_product" },
     { icon: <FaSitemap />, label: "Manage Products", to: "manage_products" },
     { icon: <FaSitemap />, label: "Manage Orders", to: "manage_order" },
     { icon: <FaUsersGear />, label: "Manage Users", to: "manage_users" },
-    { icon: <FaCommentDots />, label: "Complaints", to: "user_complaints" },
+
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },
   ];
   //
@@ -160,14 +177,17 @@ export default function AdminProfile() {
                 alt="User"
                 className="w-8 h-8 rounded-full object-cover"
               />
-              <span className="font-medium">{name?.split(" ")[0]}</span>
+              <span className="font-medium">{user?.name?.split(" ")[0]}</span>
               {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </div>
 
             {isOpen && (
               <ul className="menu absolute right-0 mt-2 bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li>
-                  <button className="px-4 py-2 rounded-md hover:bg-green-400 outline-none border border-gray-500 my-2 w-full">
+                  <button
+                    onClick={handleUserLogout}
+                    className="px-4 py-2 rounded-md hover:bg-green-400 outline-none border border-gray-500 my-2 w-full"
+                  >
                     Logout
                   </button>
                 </li>
@@ -183,7 +203,7 @@ export default function AdminProfile() {
 
         <footer className="my-8">
           <marquee behavior="scroll" direction="left">
-            Welcome {name} to your dashboard
+            Welcome {user?.name} to your dashboard
           </marquee>
         </footer>
       </div>

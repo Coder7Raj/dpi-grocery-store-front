@@ -22,11 +22,9 @@ export default function ProductManage() {
       },
     })
       .then((res) => {
-        // console.log("STATUS:", res.status);
         return res.json();
       })
       .then((data) => {
-        // console.log("DATA RECEIVED:", data);
         setProducts(data.products);
       })
       .catch((err) => console.log("FETCH ERROR:", err.message));

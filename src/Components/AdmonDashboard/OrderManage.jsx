@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -13,7 +14,6 @@ export default function AdminOrders() {
         withCredentials: true,
       });
       setOrders(res.data.orders);
-      console.log(res);
     } catch (error) {
       console.error("Failed to fetch pending orders:", error);
     } finally {
@@ -39,7 +39,7 @@ export default function AdminOrders() {
       setOrders((prev) => prev.filter((order) => order._id !== orderId));
     } catch (error) {
       console.error("Failed to update order:", error);
-      alert("Failed to update order. Try again.");
+      toast.error("Failed to update order. Try again.");
     } finally {
       setUpdating(null);
     }

@@ -36,10 +36,10 @@ export default function MyOrders() {
       </h2>
 
       <ul className="space-y-6">
-        {orders.map((order) => (
+        {orders?.map((order) => (
           <li
             key={order._id}
-            className="border rounded-lg shadow p-4 space-y-3"
+            className="bg-white border rounded-lg shadow p-4 space-y-3"
           >
             <div className="flex justify-between items-center">
               <p>

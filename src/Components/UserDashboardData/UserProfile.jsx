@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { FaCommentDots, FaMoneyCheckAlt } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { ImBlogger2 } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { LuCircleUser } from "react-icons/lu";
 import { MdDashboardCustomize } from "react-icons/md";
 import { RiAccountBoxFill } from "react-icons/ri";
 import { TbArrowBack } from "react-icons/tb";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import logo from "../../assets/logo-wev.png";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function UserProfile() {
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  const name = userInfo?.name;
-  const image = userInfo?.image;
+  const { user, logout } = useAuth();
 
   const location = useLocation();
 
@@ -53,14 +51,15 @@ export default function UserProfile() {
     { icon: <MdDashboardCustomize />, label: "My dashboard", to: "" },
     { icon: <RiAccountBoxFill />, label: "My Account", to: "user_accounts" },
     { icon: <RiAccountBoxFill />, label: "My Order", to: "myOrder" },
-    { icon: <ImBlogger2 />, label: "Blogs", to: "user_blogs" },
-    { icon: <FaMoneyCheckAlt />, label: "Payments", to: "user_payments" },
-    { icon: <FaCommentDots />, label: "Complaint", to: "user_complaints" },
     { icon: <TbArrowBack className="text-lg" />, label: "Back", to: "/" },
   ];
   //
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const handleLogout = async () => {
+    logout();
+  };
 
   // Close dropdown on click outside the link
   useEffect(() => {
@@ -153,19 +152,26 @@ export default function UserProfile() {
               tabIndex={0}
               className="px-2 py-3 flex items-center space-x-2 hover:bg-green-500 border-none outline-none rounded-md cursor-pointer"
             >
-              <img
-                src={image}
-                alt="User"
-                className="w-8 h-8 rounded-full object-cover"
-              />
-              <span className="font-medium">{name?.split(" ")[0]}</span>
+              <div className="w-10 rounded-full">
+                {user?.email && user?.image?.trim() ? (
+                  <img alt="user image" src={user?.image} />
+                ) : (
+                  <div className="h-[80%] w-[80%] m-auto">
+                    <LuCircleUser className="h-full w-full" />
+                  </div>
+                )}
+              </div>
+              <span className="font-medium">{user?.name.split(" ")[0]}</span>
               {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </div>
 
             {isOpen && (
               <ul className="menu absolute right-0 mt-2 bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li>
-                  <button className="px-4 py-2 rounded-md hover:bg-green-400 outline-none border border-gray-500 my-2 w-full">
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 rounded-md hover:bg-green-400 outline-none border border-gray-500 my-2 w-full"
+                  >
                     Logout
                   </button>
                 </li>
@@ -181,7 +187,7 @@ export default function UserProfile() {
 
         <footer className="my-8">
           <marquee behavior="scroll" direction="left">
-            Welcome {name} to your dashboard
+            Welcome {user?.name} to your dashboard
           </marquee>
         </footer>
       </div>

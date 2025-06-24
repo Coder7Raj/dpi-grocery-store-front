@@ -19,7 +19,6 @@ export default function PopularItems({ item }) {
 
       const data = await res.json();
       getCart();
-      console.log(data);
     } catch (err) {
       console.log("Add to cart failed:", err.message);
     }

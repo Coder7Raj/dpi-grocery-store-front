@@ -102,7 +102,7 @@ export default function AdminBasics() {
           </div>
           <div>
             <p className="text-gray-600 text-sm">Total Purchased</p>
-            <h3 className="text-xl font-bold">1500</h3>
+            <h3 className="text-xl font-bold">400</h3>
           </div>
         </div>
       </div>

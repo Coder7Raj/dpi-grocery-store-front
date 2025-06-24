@@ -24,12 +24,10 @@ export default function Login() {
         { email, password },
         { withCredentials: true }
       );
-      console.log(res.status);
-      console.log(res.data.user);
+
       if (res.data.user) {
         setUser(res.data.user);
         navigate("/");
-        console.log("user,", user);
       }
 
       if (!res.ok) {
@@ -40,10 +38,8 @@ export default function Login() {
       const data = await res.json();
       navigate("/");
       if (res.status == 200) {
-        // login(data.user);
-        console.log(res);
+        console.log("Registration successful:", data);
       }
-      console.log("Registration successful:", data);
     } catch {
       (err) => console.error("Registration failed:", err.message);
     }

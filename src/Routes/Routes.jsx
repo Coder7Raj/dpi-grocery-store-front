@@ -14,9 +14,6 @@ import Root from "../Components/Root";
 import MyOrders from "../Components/UserDashboardData/myOrder";
 import UserAccounts from "../Components/UserDashboardData/UserAccounts";
 import UserBasics from "../Components/UserDashboardData/UserBasics";
-import UserBlogs from "../Components/UserDashboardData/UserBlogs";
-import UserComplaints from "../Components/UserDashboardData/UserComplaints";
-import UserPayments from "../Components/UserDashboardData/UserPayments";
 import UserProfile from "../Components/UserDashboardData/UserProfile";
 import AboutUs from "../Pages/AboutUS";
 import Blogs from "../Pages/Blogs";
@@ -83,18 +80,6 @@ const router = createBrowserRouter([
           {
             path: "myorder",
             element: <MyOrders></MyOrders>,
-          },
-          {
-            path: "user_blogs",
-            element: <UserBlogs></UserBlogs>,
-          },
-          {
-            path: "user_payments",
-            element: <UserPayments></UserPayments>,
-          },
-          {
-            path: "user_complaints",
-            element: <UserComplaints></UserComplaints>,
           },
         ],
       },

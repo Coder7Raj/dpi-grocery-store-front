@@ -1,122 +1,192 @@
-import { FaCheckCircle } from "react-icons/fa";
-import { FiEdit3 } from "react-icons/fi";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { FaCoins } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useAuth } from "../Auth/AuthContext";
 
-export default function UserBasics() {
-  // getting user info from local storage
-  const userInfo = JSON.parse(localStorage.getItem("registeredUser"));
-  const name = userInfo?.name;
-  const email = userInfo?.userEmail;
-  const image = userInfo?.image;
+export default function UserDashboard() {
+  const { user, updateUser, fetchUser } = useAuth();
+  console.log(user);
+  const [balance, setBalance] = useState(null);
+  const [pendingOrders, setPendingOrders] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState([]);
+
+  const [selectedImage, setSelectedImage] = useState(user?.profileImage);
+  const fileInputRef = useRef(null); // For handling image change
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file); // Must match `upload.single("image")`
+
+    try {
+      const res = await axios.put(
+        "http://localhost:5000/api/profile/update-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true, // if you use cookies or JWTs
+        }
+      );
+
+      const uploadedUrl = res.data.imageUrl;
+
+      setSelectedImage(uploadedUrl); // Update UI
+      updateUser({ profileImage: uploadedUrl });
+      await fetchUser();
+
+      // Optionally update AuthContext:
+      // updateUser({ image: uploadedUrl });
+    } catch (err) {
+      console.error("Upload failed", err);
+      toast.error("Upload failed");
+    }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current.click(); // Trigger hidden input
+  };
+  useEffect(() => {
+    if (user?.profileImage) {
+      setSelectedImage(user.profileImage);
+    }
+  }, [user?.profileImage]);
+
+  // balance
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/wallet/balance",
+          {
+            withCredentials: true, // if cookies/session needed
+          }
+        );
+        setBalance(response.data); // or response.data.balance if backend sends `{ balance: ... }`
+      } catch (err) {
+        console.log("Failed to fetch wallet balance", err);
+      }
+    };
+
+    fetchBalance();
+  }, []);
+  //
+  // pending orders
+  useEffect(() => {
+    const fetchPendingOrders = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/order/pendingOrder",
+          {
+            withCredentials: true,
+          }
+        );
+        setPendingOrders(res.data.orders);
+      } catch (err) {
+        console.error("Failed to fetch pending orders:", err);
+      }
+    };
+
+    fetchPendingOrders();
+  }, []);
+  // completed orders
+  useEffect(() => {
+    const fetchCompletedOrders = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/order/completedOrder",
+          { withCredentials: true }
+        );
+        setCompletedOrders(res.data.orders);
+      } catch (err) {
+        console.error("Failed to fetch completed orders:", err);
+      }
+    };
+
+    fetchCompletedOrders();
+  }, []);
 
   return (
-    <>
-      {/* Center Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <div className="flex flex-col items-center text-center">
-            <img
-              src={image}
-              alt="Profile"
-              className="w-[80%] h-[80%] object-cover mb-4"
-            />
-            <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
-            <p className="text-sm text-gray-500 mb-1">+1 - 856-589-099-1236</p>
-            <p className="text-sm text-gray-500 mb-2">{email}</p>
-            <div className="flex items-center text-green-500 mb-4">
-              <FaCheckCircle className="mr-1" />
-              <span className="text-sm">SMS alerts activation</span>
-            </div>
-            <button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-6 py-2 rounded-full">
-              Save
-            </button>
-          </div>
-          <div className="mt-6 text-xs text-gray-400 text-center">
-            Last login: 07 Aug 2018 14:14
-            <br />
-            Windows IP: New York, US
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10 space-y-8">
+      {/* Profile Section */}
+      <div className="flex flex-col items-center text-center space-y-4">
+        {/* Profile Image (clickable) */}
+        <div
+          className="relative group cursor-pointer"
+          onClick={handleImageClick}
+        >
+          <img
+            src={`http://localhost:5000/uploads/${selectedImage}`}
+            alt="Profile"
+            className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+          <div className="absolute inset-0 rounded-full bg-black bg-opacity-40 hidden group-hover:flex items-center justify-center text-white text-sm">
+            Change Photo
           </div>
         </div>
-        {/* user accounts and bills */}
-        <div className="flex flex-col gap-3 items-center justify-around">
-          {/* xPay Accounts */}
-          <div className="w-full h-full bg-white rounded-2xl shadow-md p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">My xPay accounts</h3>
-              <button className="text-gray-400 hover:text-gray-600">
-                <FiEdit3 />
-              </button>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Active account</p>
-              <p className="font-semibold">9048 5680 0258 4525</p>
-              <button className="mt-2 text-xs bg-red-500 text-white px-3 py-1 rounded-full">
-                Block Account
-              </button>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Blocked account</p>
-              <p className="font-semibold">1254 4456 9856 3214</p>
-              <button className="mt-2 text-xs bg-green-500 text-white px-3 py-1 rounded-full">
-                Unlock account
-              </button>
-            </div>
-          </div>
 
-          {/* My Bills */}
-          <div className="w-full h-full bg-white rounded-2xl shadow-md p-6">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">My bills</h3>
-              <button className="text-gray-400 text-sm">Filter by</button>
-            </div>
-            <ul className="mt-4 space-y-4">
-              <li className="flex justify-between items-center">
-                <span>Phone bill</span>
-                <span className="text-xs bg-green-500 text-white px-3 py-1 rounded-full">
-                  Bill paid
-                </span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>Instant bill</span>
-                <span className="text-xs bg-red-500 text-white px-3 py-1 rounded-full">
-                  Not paid
-                </span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>House rent</span>
-                <span className="text-xs bg-green-500 text-white px-3 py-1 rounded-full">
-                  Bill paid
-                </span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>Income tax</span>
-                <span className="text-xs bg-green-500 text-white px-3 py-1 rounded-full">
-                  Bill paid
-                </span>
-              </li>
-            </ul>
-          </div>
+        {/* Name & Email */}
+        <div>
+          <h2 className="text-2xl font-bold">{user?.name || "User Name"}</h2>
+          <p className="text-gray-500">{user?.email}</p>
         </div>
-        {/* products details */}
-        {/* products purchase num: */}
-        <div className="p-20 bg-white rounded-2xl shadow-md">
-          How many products that i purchased it's number and some other info.
+
+        {/* Edit Button */}
+      </div>
+
+      {/* Balance & Coin Section */}
+      <div className="grid grid-cols-2 gap-4 text-center">
+        <div className="bg-green-100 rounded-xl p-4">
+          <h3 className="text-xl font-semibold text-green-800">Balance</h3>
+          <p className="text-2xl font-bold text-green-700">
+            ${balance?.balance}
+          </p>
         </div>
-        {/* products added to cart num: */}
-        <div className="p-20 bg-white rounded-2xl shadow-md">
-          how many products are added to the cart right now it's number and some
-          other info
-        </div>
-        {/* products purchase num: */}
-        <div className="p-20 bg-white rounded-2xl shadow-md">
-          How many products that i purchased it's number and some other info.
-        </div>
-        {/* products added to cart num: */}
-        <div className="p-20 bg-white rounded-2xl shadow-md">
-          how many products are added to the cart right now it's number and some
-          other info
+        <div className="bg-yellow-100 rounded-xl p-4">
+          <h3 className="text-xl font-semibold flex items-center justify-center gap-2 text-yellow-700">
+            Coins <FaCoins />
+          </h3>
+          <p className="text-2xl font-bold text-yellow-600">{user?.coins}</p>
         </div>
       </div>
-    </>
+
+      {/* Order Status */}
+      <div className="grid grid-cols-2 gap-4 text-center">
+        <div className="bg-blue-100 rounded-xl p-4">
+          <h3 className="text-xl font-semibold text-blue-700">
+            Pending Orders
+          </h3>
+          <p className="text-3xl font-bold text-blue-700">
+            {pendingOrders?.length}
+          </p>
+        </div>
+        <div className="bg-indigo-100 rounded-xl p-4">
+          <h3 className="text-xl font-semibold text-indigo-700">
+            Completed Orders
+          </h3>
+          <p className="text-3xl font-bold text-indigo-700">
+            {completedOrders?.length}
+          </p>
+        </div>
+      </div>
+
+      {/* Badge Section */}
+      <div className="bg-gray-100 rounded-xl p-6 text-center">
+        <h3 className="text-xl font-semibold text-gray-700">Badges</h3>
+        <p className="italic text-gray-500 mt-1">Coming soon...</p>
+      </div>
+    </div>
   );
 }

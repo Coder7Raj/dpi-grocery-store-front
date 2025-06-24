@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useCart } from "../Components/Auth/CartContext";
 
 export default function UserCartItems() {
   const [cartData, setCartData] = useState(null);
@@ -12,6 +14,8 @@ export default function UserCartItems() {
 
   // New state to handle deleting items
   const [loadingDelete, setLoadingDelete] = useState(false);
+
+  const { getCart } = useCart();
 
   // Extract fetchCart function so you can call it multiple times
   const fetchCart = async () => {
@@ -45,7 +49,7 @@ export default function UserCartItems() {
   // Place order handler
   const handlePlaceOrder = async () => {
     if (!address.trim()) {
-      alert("Please enter delivery address");
+      toast.info("Please enter delivery address");
       return;
     }
 
@@ -67,15 +71,16 @@ export default function UserCartItems() {
         { withCredentials: true }
       );
 
-      alert("Order placed successfully!");
+      toast.success("Order placed successfully!");
       setIsModalOpen(false);
       setAddress("");
 
       // Fetch the cart again after successful order to update the UI
+      getCart();
       fetchCart();
     } catch (error) {
       console.error("Order failed:", error);
-      alert("Failed to place order. Please try again.");
+      toast.error("Failed to place order. Please try again.");
     } finally {
       setLoadingOrder(false);
     }
@@ -89,12 +94,11 @@ export default function UserCartItems() {
         `http://localhost:5000/api/cart/delete/${productId}`,
         { withCredentials: true }
       );
-      console.log("Delete response:", response.data);
-      alert("Item removed from cart.");
+      toast.info("Item removed from cart.");
       fetchCart();
     } catch (error) {
       console.error("Failed to delete item:", error);
-      alert("Failed to remove item. Please try again.");
+      toast.info("Failed to remove item. Please try again.");
     } finally {
       setLoadingDelete(false);
     }
@@ -105,16 +109,17 @@ export default function UserCartItems() {
     return <p className="h-[730px] pt-20 text-center">Your cart is empty.</p>;
 
   return (
-    <div className="pt-24 max-w-4xl mx-auto p-4 flex flex-col h-[calc(100vh-183px)]">
-      <h2 className="text-3xl font-semibold mb-6 text-center text-green-700">
+    <>
+      {/* <div className="pt-24 max-w-4xl mx-auto p-4 flex flex-col h-[calc(100vh-183px)]"> */}
+      <h2 className="pt-24 text-3xl font-semibold mb-6 text-center text-green-700">
         Your Cart Items
       </h2>
 
       <ul className="flex-1 overflow-y-auto space-y-6 mb-28">
-        {cartData.cart.items.map((item) => (
+        {cartData?.cart.items.map((item) => (
           <li
             key={item._id}
-            className="flex items-center gap-6 border rounded-lg p-4 shadow-sm hover:shadow-md transition relative"
+            className="flex items-center bg-white gap-6 border rounded-lg p-4 shadow-sm hover:shadow-md transition relative"
           >
             <img
               src={item.productId.image}
@@ -152,7 +157,7 @@ export default function UserCartItems() {
       </ul>
 
       {/* Footer with total and place order button */}
-      <div className="fixed bottom-20 left-0 right-0 bg-white border-t shadow-md p-4 flex justify-between items-center max-w-4xl mx-auto">
+      <div className="bg-white border-t shadow-md p-4 flex gap-3 justify-between items-center max-w-4xl mx-auto">
         <p className="text-xl font-bold text-gray-900">
           Total: ${totalPrice.toFixed(2)}
         </p>
@@ -194,6 +199,7 @@ export default function UserCartItems() {
           </div>
         </div>
       )}
-    </div>
+      {/* </div> */}
+    </>
   );
 }

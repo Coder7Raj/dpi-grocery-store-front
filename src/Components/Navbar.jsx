@@ -15,11 +15,7 @@ export default function Navbar() {
   const [newAmount, setNewAmount] = useState(amount);
   const navigate = useNavigate();
 
-  //
-  // const { data: cart = [] } = useCart();
-  // console.log(cart);
   const { cart, getCart } = useCart();
-  console.log(cart);
 
   useEffect(() => {
     getCart();
@@ -49,8 +45,6 @@ export default function Navbar() {
 
   // logged out user
   const handleUserLogout = async () => {
-    console.log("clicked");
-
     try {
       await fetch("http://localhost:5000/api/auth/logout", {
         method: "POST",
@@ -68,7 +62,6 @@ export default function Navbar() {
   const handleUserRegister = async () => {
     navigate("/user_register");
   };
-
   // login user
   const userLogin = () => {
     navigate("/user_login");
@@ -217,7 +210,7 @@ export default function Navbar() {
                 />
               </svg>
               <span className="badge bg-white text-black border-none outline-none badge-sm mr-2 indicator-item">
-                {cart?.length}
+                {cart?.length || 0}
               </span>
             </div>
           </div>
@@ -227,9 +220,7 @@ export default function Navbar() {
           >
             <div className="card-body">
               <span className="text-lg font-bold">
-                {/* {isLoggedIn && filteredCartItems
-                  ? filteredCartItems?.length
-                  : 0} */}
+                {cart?.length || 0}
                 _Items Added
               </span>
               <span className="text-info">
