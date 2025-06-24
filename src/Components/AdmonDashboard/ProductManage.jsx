@@ -228,7 +228,7 @@ export default function ProductManage() {
                         </div>
                         <div className="text-xs text-gray-500">
                           {item.category} <br />
-                          Price:{item.price}
+                          Price:${item.price}
                         </div>
                       </div>
                     </div>

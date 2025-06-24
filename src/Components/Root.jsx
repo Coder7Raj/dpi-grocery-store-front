@@ -15,7 +15,6 @@ export default function Root() {
   return (
     <>
       {!isProfilePage && <Navbar />}
-
       <main className="w-full sm:min-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto">
         <ToastContainer position="top-center" theme="colored" />
         <Outlet />

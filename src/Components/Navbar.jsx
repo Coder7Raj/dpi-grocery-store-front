@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { LuCircleUser } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -10,26 +10,25 @@ import { useCart } from "./Custom/useCart";
 
 export default function Navbar() {
   const { user } = useAuth();
-  // console.log(user);
+  console.log("user");
   const { amount, setAmount } = useAmount();
   const [showModal, setShowModal] = useState(false);
   const [newAmount, setNewAmount] = useState(amount);
 
   //
-  const [users, setUser] = useState();
+  // const [users, setUser] = useState([]);
   const { data: cart = [] } = useCart();
-  console.log(cart);
   const navigate = useNavigate();
 
   //
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/user/alluser`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log(err.message));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/api/user/alluser`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setUser(data);
+  //     })
+  //     .catch((err) => console.log(err.message));
+  // }, []);
   //
 
   //
@@ -73,6 +72,9 @@ export default function Navbar() {
     } catch (error) {
       console.error("Logout failed:", error);
     }
+  };
+  const handleUserRegister = async () => {
+    navigate("/user_register");
   };
 
   // login user
@@ -260,8 +262,8 @@ export default function Navbar() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              {user?.email && user.image?.trim() ? (
-                <img alt="user image" src={user.image} />
+              {user?.email && user?.image?.trim() ? (
+                <img alt="user image" src={user?.image} />
               ) : (
                 <div className="h-[80%] w-[80%] m-auto">
                   <LuCircleUser className="h-full w-full" />
@@ -274,12 +276,19 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-green-50 space-y-2 text-black rounded-box z-40 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <NavLink to="/user_profile" className="justify-between">
-                User Dahsboard
-              </NavLink>
-              <NavLink to="/admin_profile" className="justify-between">
-                Admin Dahsboard
-              </NavLink>
+              {user ? (
+                user.isAdmin ? (
+                  <NavLink to="/admin_profile" className="justify-between">
+                    Admin Dashboard
+                  </NavLink>
+                ) : (
+                  <NavLink to="/user_profile" className="justify-between">
+                    User Dashboard
+                  </NavLink>
+                )
+              ) : (
+                ""
+              )}
             </li>
             <li>
               {user?.email ? (
@@ -290,12 +299,20 @@ export default function Navbar() {
                   Logout
                 </button>
               ) : (
-                <button
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
-                  onClick={userLogin}
-                >
-                  Login
-                </button>
+                <div className="flex flex-col space-y-2 w-full">
+                  <button
+                    className="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
+                    onClick={userLogin}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition"
+                    onClick={handleUserRegister}
+                  >
+                    Register
+                  </button>
+                </div>
               )}
             </li>
           </ul>

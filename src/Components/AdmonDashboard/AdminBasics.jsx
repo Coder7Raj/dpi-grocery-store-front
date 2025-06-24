@@ -1,3 +1,6 @@
+import axios from "axios";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 import { FaBoxOpen, FaShoppingCart, FaUsers } from "react-icons/fa";
 import {
   ComposableMap,
@@ -20,14 +23,9 @@ import {
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 export default function AdminBasics() {
-  // Example data
-  const userData = [
-    { name: "Jan", users: 400 },
-    { name: "Feb", users: 300 },
-    { name: "Mar", users: 500 },
-    { name: "Apr", users: 200 },
-    { name: "May", users: 700 },
-  ];
+  const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [userActivity, setUserActivity] = useState([]);
 
   const productSalesData = [
     { name: "Week 1", sales: 100 },
@@ -43,6 +41,39 @@ export default function AdminBasics() {
     { name: "Product D", sales: 180 },
   ];
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productRes, userRes] = await Promise.all([
+          axios.get("http://localhost:5000/api/product/all"),
+          axios.get("http://localhost:5000/api/user/alluser"),
+        ]);
+
+        setProducts(productRes.data?.products || []);
+        const allUsers = userRes.data || [];
+        setUsers(allUsers);
+
+        // Generate monthly activity from user.createdAt
+        const monthlyData = {};
+        allUsers.forEach((user) => {
+          const month = dayjs(user.createdAt).format("MMM");
+          monthlyData[month] = (monthlyData[month] || 0) + 1;
+        });
+
+        const formatted = Object.keys(monthlyData).map((month) => ({
+          name: month,
+          users: monthlyData[month],
+        }));
+
+        setUserActivity(formatted);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="w-full h-full py-2">
       {/* Card Section */}
@@ -53,7 +84,7 @@ export default function AdminBasics() {
           </div>
           <div>
             <p className="text-gray-600 text-sm">User Count</p>
-            <h3 className="text-xl font-bold">5000</h3>
+            <h3 className="text-xl font-bold">{users?.length}</h3>
           </div>
         </div>
         <div className="bg-white shadow-md rounded-xl p-6 flex items-center gap-4">
@@ -62,7 +93,7 @@ export default function AdminBasics() {
           </div>
           <div>
             <p className="text-gray-600 text-sm">Products Count</p>
-            <h3 className="text-xl font-bold">120</h3>
+            <h3 className="text-xl font-bold">{products?.length}</h3>
           </div>
         </div>
         <div className="bg-white shadow-md rounded-xl p-6 flex items-center gap-4">
@@ -82,7 +113,7 @@ export default function AdminBasics() {
         <div className="w-full h-[300px] bg-white rounded-xl shadow p-4">
           <h2 className="text-lg font-semibold mb-2">User Activity</h2>
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={userData}>
+            <LineChart data={userActivity}>
               <Line type="monotone" dataKey="users" stroke="#8884d8" />
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="name" />
@@ -142,18 +173,9 @@ export default function AdminBasics() {
                         key={geo.rsmKey}
                         geography={geo}
                         style={{
-                          default: {
-                            fill: "#E0E0E0",
-                            outline: "none",
-                          },
-                          hover: {
-                            fill: "#F53",
-                            outline: "none",
-                          },
-                          pressed: {
-                            fill: "#E42",
-                            outline: "none",
-                          },
+                          default: { fill: "#E0E0E0", outline: "none" },
+                          hover: { fill: "#F53", outline: "none" },
+                          pressed: { fill: "#E42", outline: "none" },
                         }}
                       />
                     ))

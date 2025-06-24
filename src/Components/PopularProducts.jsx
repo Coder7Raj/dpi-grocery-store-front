@@ -67,26 +67,26 @@ export default function PopularProducts() {
       <div className="mt-20 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 my-6">
         {/* Search Input with Icon Button */}
         <div className="flex gap-1 px-2 w-auto">
-          <div className="relative w-64">
+          <div className="relative w-full max-w-md mx-auto">
             <input
               type="text"
-              placeholder="Search by name"
+              placeholder="Search Products..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="border border-gray-300 rounded px-4 py-2 w-full pr-10 focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full pl-5 pr-12 py-2.5 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition"
             />
             <button
               onClick={handleSearch}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500 hover:text-blue-600"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-green-500"
             >
-              <FaSearch />
+              <FaSearch className="text-lg" />
             </button>
           </div>
 
           {/* Reset Button */}
           <button
             onClick={fetchAllProducts}
-            className="md:w-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            className="md:w-auto bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full shadow-sm hover:bg-gray-300 transition duration-200"
           >
             Reset
           </button>
@@ -99,7 +99,7 @@ export default function PopularProducts() {
               setSortOrder(e.target.value);
               handleFilter();
             }}
-            className="border border-gray-300 outline-none rounded px-3 py-2"
+            className="border border-gray-300 rounded-full px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
             <option value="desc">Price: Low to High</option>
             <option value="asc">Price: High to Low</option>
