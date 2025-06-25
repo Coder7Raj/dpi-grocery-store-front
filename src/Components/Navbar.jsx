@@ -47,7 +47,7 @@ export default function Navbar() {
   const handleUserLogout = async () => {
     try {
       await fetch(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/logout",
+        "https://dpi-grocery-store-backend.vercel.app/api/auth/logout",
         {
           method: "POST",
           headers: {

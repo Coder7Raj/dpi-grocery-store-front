@@ -11,7 +11,7 @@ export default function PopularItems({ item }) {
 
     try {
       const res = await fetch(
-        `https://dpi-grocery-store-backend-1.onrender.com/api/cart/addCart`,
+        `https://dpi-grocery-store-backend.vercel.app/api/cart/addCart`,
         {
           method: "POST",
           credentials: "include",

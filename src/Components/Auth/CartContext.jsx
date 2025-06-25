@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   const getCart = async () => {
     try {
       const res = await axios.get(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/cart/getCart",
+        "https://dpi-grocery-store-backend.vercel.app/api/cart/getCart",
         {
           withCredentials: true, // ✅ this is required to send the cookie
         }

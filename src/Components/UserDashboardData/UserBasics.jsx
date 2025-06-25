@@ -24,7 +24,7 @@ export default function UserDashboard() {
 
     try {
       const res = await axios.put(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/profile/update-profile",
+        "https://dpi-grocery-store-backend.vercel.app/api/profile/update-profile",
         formData,
         {
           headers: {
@@ -62,7 +62,7 @@ export default function UserDashboard() {
     const fetchBalance = async () => {
       try {
         const response = await axios.get(
-          "https://dpi-grocery-store-backend-1.onrender.com/api/wallet/balance",
+          "https://dpi-grocery-store-backend.vercel.app/api/wallet/balance",
           {
             withCredentials: true, // if cookies/session needed
           }
@@ -81,7 +81,7 @@ export default function UserDashboard() {
     const fetchPendingOrders = async () => {
       try {
         const res = await axios.get(
-          "https://dpi-grocery-store-backend-1.onrender.com/api/order/pendingOrder",
+          "https://dpi-grocery-store-backend.vercel.app/api/order/pendingOrder",
           {
             withCredentials: true,
           }
@@ -99,7 +99,7 @@ export default function UserDashboard() {
     const fetchCompletedOrders = async () => {
       try {
         const res = await axios.get(
-          "https://dpi-grocery-store-backend-1.onrender.com/api/order/completedOrder",
+          "https://dpi-grocery-store-backend.vercel.app/api/order/completedOrder",
           { withCredentials: true }
         );
         setCompletedOrders(res.data.orders);
@@ -121,7 +121,7 @@ export default function UserDashboard() {
           onClick={handleImageClick}
         >
           <img
-            src={`https://dpi-grocery-store-backend-1.onrender.com/uploads/${selectedImage}`}
+            src={`https://dpi-grocery-store-backend.vercel.app/uploads/${selectedImage}`}
             alt="Profile"
             className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
           />

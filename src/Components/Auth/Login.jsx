@@ -20,7 +20,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/login",
+        "https://dpi-grocery-store-backend.vercel.app/api/auth/login",
         { email, password },
         { withCredentials: true }
       );

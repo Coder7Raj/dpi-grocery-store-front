@@ -22,7 +22,7 @@ export default function UserCartItems() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/cart/getCart",
+        "https://dpi-grocery-store-backend.vercel.app/api/cart/getCart",
         {
           withCredentials: true,
         }
@@ -62,7 +62,7 @@ export default function UserCartItems() {
       }));
 
       await axios.post(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/order/place",
+        "https://dpi-grocery-store-backend.vercel.app/api/order/place",
         {
           items: orderItems,
           totalPrice,
@@ -91,7 +91,7 @@ export default function UserCartItems() {
     setLoadingDelete(true);
     try {
       const response = await axios.delete(
-        `https://dpi-grocery-store-backend-1.onrender.com/api/cart/delete/${productId}`,
+        `https://dpi-grocery-store-backend.vercel.app/api/cart/delete/${productId}`,
         { withCredentials: true }
       );
       toast.info("Item removed from cart.");

@@ -21,7 +21,7 @@ export default function Register() {
     };
     try {
       const res = await fetch(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/register",
+        "https://dpi-grocery-store-backend.vercel.app/api/auth/register",
         {
           method: "POST",
           headers: {

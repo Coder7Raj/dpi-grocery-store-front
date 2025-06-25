@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const res = await fetch(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/me",
+        "https://dpi-grocery-store-backend.vercel.app/api/auth/me",
         {
           credentials: "include",
         }
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await fetch(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/auth/logout",
+        "https://dpi-grocery-store-backend.vercel.app/api/auth/logout",
         {
           method: "POST",
           credentials: "include",

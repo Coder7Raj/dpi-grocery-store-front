@@ -30,7 +30,7 @@ export default function UpdateProduct() {
 
       if (result.isConfirmed) {
         const response = await fetch(
-          `https://dpi-grocery-store-backend-1.onrender.com/api/product/update/${_id}`,
+          `https://dpi-grocery-store-backend.vercel.app/api/product/update/${_id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

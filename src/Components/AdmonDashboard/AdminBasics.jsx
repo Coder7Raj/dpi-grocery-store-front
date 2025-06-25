@@ -46,10 +46,10 @@ export default function AdminBasics() {
       try {
         const [productRes, userRes] = await Promise.all([
           axios.get(
-            "https://dpi-grocery-store-backend-1.onrender.com/api/product/all"
+            "https://dpi-grocery-store-backend.vercel.app/api/product/all"
           ),
           axios.get(
-            "https://dpi-grocery-store-backend-1.onrender.com/api/user/alluser"
+            "https://dpi-grocery-store-backend.vercel.app/api/user/alluser"
           ),
         ]);
 

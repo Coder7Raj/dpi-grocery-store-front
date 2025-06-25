@@ -11,7 +11,7 @@ export default function AllProducts() {
   // Function to fetch all products
   const fetchAllProducts = () => {
     setLoading(true);
-    fetch(`https://dpi-grocery-store-backend-1.onrender.com/api/product/all`)
+    fetch(`https://dpi-grocery-store-backend.vercel.app/api/product/all`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products || []);
@@ -34,7 +34,7 @@ export default function AllProducts() {
     }
 
     fetch(
-      `https://dpi-grocery-store-backend-1.onrender.com/api/product/search?q=${search}`
+      `https://dpi-grocery-store-backend.vercel.app/api/product/search?q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -55,7 +55,7 @@ export default function AllProducts() {
   const handleFilter = async () => {
     try {
       const response = await fetch(
-        `https://dpi-grocery-store-backend-1.onrender.com/api/product/sort?order=${sortOrder}`
+        `https://dpi-grocery-store-backend.vercel.app/api/product/sort?order=${sortOrder}`
       );
       const data = await response.json();
       setProducts(data);

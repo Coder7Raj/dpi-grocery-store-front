@@ -13,7 +13,7 @@ export default function UserManage() {
   // Function to fetch all users
   const fetchAllUsers = () => {
     setLoading(true);
-    fetch(`https://dpi-grocery-store-backend-1.onrender.com/api/user/alluser`)
+    fetch(`https://dpi-grocery-store-backend.vercel.app/api/user/alluser`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -36,7 +36,7 @@ export default function UserManage() {
     }
 
     fetch(
-      `https://dpi-grocery-store-backend-1.onrender.com/api/user/search?search=${search}`
+      `https://dpi-grocery-store-backend.vercel.app/api/user/search?search=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -65,7 +65,7 @@ export default function UserManage() {
 
       if (result.isConfirmed) {
         const response = await fetch(
-          `https://dpi-grocery-store-backend-1.onrender.com/api/user/${id}`,
+          `https://dpi-grocery-store-backend.vercel.app/api/user/${id}`,
           {
             method: "DELETE",
           }

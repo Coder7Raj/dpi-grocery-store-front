@@ -8,7 +8,7 @@ export default function MyOrders() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/order/myOrder",
+        "https://dpi-grocery-store-backend.vercel.app/api/order/myOrder",
         {
           withCredentials: true,
         }

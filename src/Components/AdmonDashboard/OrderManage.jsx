@@ -11,7 +11,7 @@ export default function AdminOrders() {
   const fetchPendingOrders = async () => {
     try {
       const res = await axios.get(
-        "https://dpi-grocery-store-backend-1.onrender.com/api/order/pending",
+        "https://dpi-grocery-store-backend.vercel.app/api/order/pending",
         {
           withCredentials: true,
         }
@@ -33,7 +33,7 @@ export default function AdminOrders() {
     setUpdating(orderId);
     try {
       await axios.put(
-        `https://dpi-grocery-store-backend-1.onrender.com/api/order/status/${orderId}`,
+        `https://dpi-grocery-store-backend.vercel.app/api/order/status/${orderId}`,
         { status: "completed" },
         { withCredentials: true }
       );
