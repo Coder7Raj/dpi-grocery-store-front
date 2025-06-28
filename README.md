@@ -49,10 +49,11 @@ If you have any suggestions or improvements, feel free to open an issue or submi
 
 ---
 
-📍 Live Demo - [https://effulgent-palmier-93c65c.netlify.app/]
+📍 Live Demo - [https://starlit-seahorse-c2a8ac.netlify.app/]
 
 
-## 📂 GitHub - [https://github.com/Coder7Raj/dpi-grocery-store-front]
+## 📂 GitHub-FRONT - [https://github.com/Coder7Raj/dpi-grocery-store-front]
+## 📂 GitHub-BACKEND - [https://github.com/Coder7Raj/dpi-grocery-store-backend/tree/main]
 
 
 Made with ❤️ by Md.Owarasur Rahman Raj
