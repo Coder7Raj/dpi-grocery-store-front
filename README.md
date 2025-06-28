@@ -53,7 +53,7 @@ If you have any suggestions or improvements, feel free to open an issue or submi
 
 
 ## 📂 GitHub-FRONT - [https://github.com/Coder7Raj/dpi-grocery-store-front]
-## 📂 GitHub-BACKEND - [https://github.com/Coder7Raj/dpi-grocery-store-backend/tree/main]
+## 📂 GitHub-BACKEND - [https://github.com/Coder7Raj/dpi-grocery-store-backend]
 
 
 Made with ❤️ by Md.Owarasur Rahman Raj
