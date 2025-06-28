@@ -18,13 +18,13 @@
 
 ## 🧰 Tech Stack
 
-- **Frontend Framework:** React (v19)
+- **Frontend Framework:** React (v18)
 - **Build Tool:** Vite
 - **Styling:** Tailwind CSS, DaisyUI
 - **Routing:** React Router DOM v7
 - **Data Management:** TanStack React Query
 - **Animations:** Lottie, Swiper, react-fast-marquee
-- **Storage:** localForage
+- **Storage:** MongoDB
 
 ---
 📁 Project Structure
